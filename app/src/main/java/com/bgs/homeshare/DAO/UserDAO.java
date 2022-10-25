@@ -15,14 +15,27 @@ public class UserDAO {
         Connection c = SqlConnection.GetConnection();
         User u = null;
         try {
-            //String SQL = "Exec usp_Login \'" + userName + "\', \'" + password + "\'";
-            String SQL = "{call dbo.usp_Login(?,?)}";
-            PreparedStatement stmt = c.prepareStatement (SQL);
+            String SQL = "Exec usp_Login \'" + userName + "\', \'" + password + "\'";
+            //String SQL = "{call dbo.usp_Login(?,?)}";
+            //String SQL = "Exec usp_Login \'adminUser\', \'password12345\'";
 
-            stmt.setString(1, userName);
-            stmt.setString(2, password);
+            PreparedStatement stmt = c.prepareStatement(SQL);
+
+            //stmt.setString(1, userName);
+            //stmt.setString(2, password);
+
             ResultSet rs = stmt.executeQuery();
-            System.out.println(rs.next());
+            rs.next();
+            /*
+            String row = "";
+            int count = 0;
+            while (rs.next()) {
+                for (int i = 1; i <= 10; i++) {
+                    row += rs.getString(i) + ", ";
+                    row += rs.getString("Username");
+                }
+                count++;
+            }*/
 
             String uName = rs.getString("Username");
             String email = rs.getString("Email");
@@ -34,7 +47,7 @@ public class UserDAO {
             byte[] imgBytes = rs.getBytes("ProfilePicture");
 
             u = new User(uName, DOB, email, phoneNumber, academicFocus, schoolYear, personalIntroduction, imgBytes);
-            ;
+
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());

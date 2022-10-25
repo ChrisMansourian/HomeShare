@@ -7,7 +7,7 @@ import java.io.ByteArrayOutputStream;
 
 public class Util {
     public static Bitmap ConvertBytesToImage(byte[] img) {
-        if (img != null) {
+        if (img != null && img.length > 0) {
             return BitmapFactory.decodeByteArray(img,0,img.length);
         }
         return null;
