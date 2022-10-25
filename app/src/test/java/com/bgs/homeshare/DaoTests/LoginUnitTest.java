@@ -15,6 +15,7 @@ public class LoginUnitTest {
         User t = UserDAO.CheckLogin("test", "1234");
         assertEquals(t, null);
     }
+
     @Test
     public void LoginSuccess() {
         User t = UserDAO.CheckLogin("adminUser", "password12345");
@@ -23,5 +24,11 @@ public class LoginUnitTest {
         assertEquals(t.getAcademicFocus(), "computer science");
         assertEquals(t.getSchoolYear(), "senior");
         assertEquals(t.getEmail(), "hello@gmail.com");
+    }
+
+    @Test
+    public void LoginWrongPassword() {
+        User t = UserDAO.CheckLogin("adminUser", "password");
+        assertEquals(t, null);
     }
 }
