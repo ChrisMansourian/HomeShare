@@ -37,6 +37,7 @@ public class UserDAO {
                 count++;
             }*/
 
+            int userId = rs.getInt("UserId");
             String uName = rs.getString("Username");
             String email = rs.getString("Email");
             String phoneNumber = rs.getString("PhoneNumber");
@@ -46,8 +47,42 @@ public class UserDAO {
             String personalIntroduction = rs.getString("PersonalIntroduction");
             byte[] imgBytes = rs.getBytes("ProfilePicture");
 
-            u = new User(uName, DOB, email, phoneNumber, academicFocus, schoolYear, personalIntroduction, imgBytes);
+            u = new User(userId, uName, DOB, email, phoneNumber, academicFocus, schoolYear, personalIntroduction, imgBytes);
 
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+
+        }
+        return u;
+    }
+
+    public static User GetUser(int userId) {
+        Connection c = SqlConnection.GetConnection();
+        User u = null;
+        try {
+            String SQL = "Exec usp_getUser " + userId + "";
+            PreparedStatement stmt = c.prepareStatement(SQL);
+
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            int uId = rs.getInt("UserId");
+            String uName = rs.getString("Username");
+            String email = rs.getString("Email");
+            String phoneNumber = rs.getString("PhoneNumber");
+            String DOB = rs.getString("DOB");
+            String academicFocus = rs.getString("AcademicFocus");
+            String schoolYear = rs.getString("SchoolYear");
+            String personalIntroduction = rs.getString("PersonalIntroduction");
+            byte[] imgBytes = rs.getBytes("ProfilePicture");
+
+            u = new User(uId, uName, DOB, email, phoneNumber, academicFocus, schoolYear, personalIntroduction, imgBytes);
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
