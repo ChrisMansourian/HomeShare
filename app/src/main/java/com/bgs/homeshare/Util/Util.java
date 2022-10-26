@@ -14,6 +14,9 @@ public class Util {
     }
 
     public static byte[] ConvertImageToBytes(Bitmap img) {
+        if (img == null) {
+            return new byte[0];
+        }
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         img.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
