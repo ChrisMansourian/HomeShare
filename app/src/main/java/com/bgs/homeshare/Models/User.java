@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.bgs.homeshare.Util.Util;
 
 public class User {
+    private int UserId = -1;
     private String UserName = "";
     private String DOB = "";
     private String Email = "";
@@ -16,7 +17,8 @@ public class User {
 
     private Bitmap ProfileImage = null;
 
-    public User(String userName, String dob, String email, String phoneNumber, String academicFocus, String schoolYear, String personalIntroduction, byte[] profileImageBytes) {
+    public User(int userId, String userName, String dob, String email, String phoneNumber, String academicFocus, String schoolYear, String personalIntroduction, byte[] profileImageBytes) {
+        UserId = userId;
         UserName = userName;
         DOB = dob;
         Email = email;
@@ -28,6 +30,10 @@ public class User {
         ProfileImageBytes = profileImageBytes;
 
         ProfileImage = Util.ConvertBytesToImage(profileImageBytes);
+    }
+
+    public int getUserId() {
+        return UserId;
     }
 
     public String getUserName() {
