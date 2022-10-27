@@ -40,6 +40,10 @@ public class User {
         return UserName;
     }
 
+    public void setUserName(String userName) {
+         UserName = userName;
+    }
+
     public String getDOB() {
         return DOB;
     }
@@ -95,5 +99,14 @@ public class User {
     public void setProfileImage(Bitmap profileImage) {
         ProfileImage = profileImage;
         ProfileImageBytes = Util.ConvertImageToBytes(profileImage);
+    }
+
+    public byte[] getProfileImageBytes() {
+        return ProfileImageBytes;
+    }
+
+    public void setProfileImageBytes(byte[] profileImageBytes) {
+        ProfileImageBytes = profileImageBytes;
+        ProfileImage = Util.ConvertBytesToImage(profileImageBytes);
     }
 }

@@ -1,9 +1,12 @@
 package com.bgs.homeshare.DaoTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.bgs.homeshare.DAO.UserDAO;
+import com.bgs.homeshare.Managers.UserManager;
 import com.bgs.homeshare.Models.User;
 
 import org.junit.Test;
@@ -12,13 +15,16 @@ public class LoginUnitTest {
 
     @Test
     public void LoginFail() {
-        User t = UserDAO.CheckLogin("test", "1234");
-        assertEquals(t, null);
+        boolean result = UserManager.Login("test", "1234");
+        assertFalse(result);
+        assertEquals(UserManager.LoggedInUser, null);
     }
 
     @Test
     public void LoginSuccess() {
-        User t = UserDAO.CheckLogin("adminUser", "password12345");
+        boolean result = UserManager.Login("adminUser", "password12345");
+        assertTrue(result);
+        User t = UserManager.LoggedInUser;
         assertNotEquals(t, null);
         assertEquals(t.getUserId(), 1);
         assertEquals(t.getUserName(), "adminUser");
@@ -29,7 +35,19 @@ public class LoginUnitTest {
 
     @Test
     public void LoginWrongPassword() {
-        User t = UserDAO.CheckLogin("adminUser", "password");
+        boolean result = UserManager.Login("adminUser", "password");
+        assertFalse(result);
+        User t = UserManager.LoggedInUser;
+        assertEquals(t, null);
+    }
+
+    @Test
+    public void CreateDuplicateUser() {
+        boolean result = UserManager.CreateAccount("hello2", "12345",
+                "1982-07-21", "hello1@gmail.com", "5555555555", "biology",
+                "sophomore", "I am a test", null);
+        assertFalse(result);
+        User t = UserManager.LoggedInUser;
         assertEquals(t, null);
     }
 }
