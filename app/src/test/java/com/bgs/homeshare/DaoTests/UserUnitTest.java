@@ -30,6 +30,7 @@ public class UserUnitTest {
         assertEquals(t.getAcademicFocus(), "computer science");
         assertEquals(t.getSchoolYear(), "senior");
         assertEquals(t.getEmail(), "hello@gmail.com");
+        assertEquals(t.getPersonalityQuestion1(), "");
 
         User t1 = UserManager.GetProfile(2);
         assertNotEquals(t1, null);
@@ -38,6 +39,7 @@ public class UserUnitTest {
         assertEquals(t1.getAcademicFocus(), "computer science");
         assertEquals(t1.getSchoolYear(), "senior");
         assertEquals(t1.getEmail(), "hello@gmail.com");
+        assertEquals(t.getPersonalityQuestion1(), "");
     }
 
     @Test
@@ -47,7 +49,7 @@ public class UserUnitTest {
 
         boolean result = UserManager.UpdateProfile("2022-10-26", "test@gmail.com",
                 "8888888888", "comp sci",
-                "junior", "hello world", null);
+                "junior", "hello world", null, "abcd", "efg", "hijk");
 
         assertTrue(result);
 
@@ -58,6 +60,9 @@ public class UserUnitTest {
         assertEquals(t.getAcademicFocus(), "comp sci");
         assertEquals(t.getSchoolYear(), "junior");
         assertEquals(t.getEmail(), "test@gmail.com");
+        assertEquals(t.getPersonalityQuestion1(), "abcd");
+        assertEquals(t.getPersonalityQuestion2(), "efg");
+        assertEquals(t.getPersonalityQuestion3(), "hijk");
 
         t = UserManager.LoggedInUser;
         assertNotEquals(t, null);
@@ -65,10 +70,13 @@ public class UserUnitTest {
         assertEquals(t.getAcademicFocus(), "comp sci");
         assertEquals(t.getSchoolYear(), "junior");
         assertEquals(t.getEmail(), "test@gmail.com");
+        assertEquals(t.getPersonalityQuestion1(), "abcd");
+        assertEquals(t.getPersonalityQuestion2(), "efg");
+        assertEquals(t.getPersonalityQuestion3(), "hijk");
 
         boolean result2 = UserManager.UpdateProfile("1999-03-23", "hello@gmail.com",
                 "8888888888", "computer science",
-                "senior", "hello world", null);
+                "senior", "hello world", null, "", "", "");
 
         assertTrue(result2);
 
@@ -79,6 +87,9 @@ public class UserUnitTest {
         assertEquals(t.getAcademicFocus(), "computer science");
         assertEquals(t.getSchoolYear(), "senior");
         assertEquals(t.getEmail(), "hello@gmail.com");
+        assertEquals(t.getPersonalityQuestion1(), "");
+        assertEquals(t.getPersonalityQuestion2(), "");
+        assertEquals(t.getPersonalityQuestion3(), "");
 
         t = UserManager.LoggedInUser;
         assertNotEquals(t, null);
@@ -86,6 +97,9 @@ public class UserUnitTest {
         assertEquals(t.getAcademicFocus(), "computer science");
         assertEquals(t.getSchoolYear(), "senior");
         assertEquals(t.getEmail(), "hello@gmail.com");
+        assertEquals(t.getPersonalityQuestion1(), "");
+        assertEquals(t.getPersonalityQuestion2(), "");
+        assertEquals(t.getPersonalityQuestion3(), "");
 
     }
 

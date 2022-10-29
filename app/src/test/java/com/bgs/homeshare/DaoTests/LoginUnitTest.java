@@ -31,6 +31,7 @@ public class LoginUnitTest {
         assertEquals(t.getAcademicFocus(), "computer science");
         assertEquals(t.getSchoolYear(), "senior");
         assertEquals(t.getEmail(), "hello@gmail.com");
+        assertEquals(t.getPersonalityQuestion1(), "");
     }
 
     @Test
@@ -43,9 +44,9 @@ public class LoginUnitTest {
 
     @Test
     public void CreateDuplicateUser() {
-        boolean result = UserManager.CreateAccount("hello2", "12345",
+        boolean result = UserManager.CreateAccount("hello3", "12345",
                 "1982-07-21", "hello1@gmail.com", "5555555555", "biology",
-                "sophomore", "I am a test", null);
+                "sophomore", "I am a test", null, "hello", "test1", "personality");
         assertFalse(result);
         User t = UserManager.LoggedInUser;
         assertEquals(t, null);
