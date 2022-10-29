@@ -2,6 +2,7 @@ package com.bgs.homeshare.Managers;
 
 import com.bgs.homeshare.DAO.InvitationDAO;
 import com.bgs.homeshare.Models.Invitation;
+import com.bgs.homeshare.Models.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -43,9 +44,18 @@ public class InvitationManager {
         return false; //means currently have an active invitation
     }
 
+    public static List<User> getPotentialRoomates(int postId){//roomates before we have finalized a post and reach maximum capacity
+        return InvitationDAO.getRoomates(postId);
+    }
+
+//    public static List<User> getRoomates(int postId){//to be implemented
+//
+//    }
+
     public static boolean deletePost(int postId){
         try{
             if(InvitationDAO.deletePost(postId)){
+                myInvitation = null;
                 return true;
             }
             else{

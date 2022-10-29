@@ -127,14 +127,13 @@ public class InvitationDAO {
         Boolean result = false;
 
         try {
-            String SQL = "Exec usp_managePostResponse";
+            String SQL = "Exec usp_managePostResponse ?, ?, ?";
             PreparedStatement stmt = c.prepareStatement(SQL);
             stmt.setInt(1, postId);
             stmt.setInt(2, userId);
             stmt.setInt(3, posterResponse);
             stmt.execute();
 
-            NotificationManager.SendNotification(userId,postId,"You have been matched with a roomate " + UserManager.GetProfile(ownerUserId).getUserName() + "!");
             result = true;
         }catch (Exception e) {
             return result;
@@ -153,7 +152,7 @@ public class InvitationDAO {
             stmt.setInt(2, userId);
             stmt.setInt(3, response);
             stmt.execute();
-            addQuestions(postId, responses);
+            addQuestionsResponses(postId, userId, responses);
             NotificationManager.SendNotification(userId, postId, "You have one response from user " + UserManager.GetProfile(userId).getUserName() + "!");
             result = true;
         } catch (Exception e) {
@@ -187,8 +186,8 @@ public class InvitationDAO {
         List<String> questionResponses = new ArrayList<>();
 
         try {
-            String sql = "Exec usp_getQuestionResponses '" + postId + "', '"
-                    +userId + "'";
+            String sql = "Exec usp_getQuestionResponses " + postId + ", "
+                    +userId;
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -310,7 +309,7 @@ public class InvitationDAO {
 
     public static boolean deletePost(int postId) throws SQLException {
         Connection c = SqlConnection.GetConnection();
-        String SQL = "Exec usp_deletePost ";
+        String SQL = "Exec usp_deletePost ?";
 
         PreparedStatement stmt = c.prepareStatement(SQL);
         stmt.setInt(1, postId);

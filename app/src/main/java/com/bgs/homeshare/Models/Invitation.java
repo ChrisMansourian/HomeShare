@@ -38,7 +38,7 @@ public class Invitation {
         return property;
     }
 
-    public List<Responses> getResponse(){
+    public List<Responses> getResponses(){
         return responses;
     }
 
