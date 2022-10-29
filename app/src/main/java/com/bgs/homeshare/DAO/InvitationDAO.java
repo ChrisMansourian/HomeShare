@@ -1,6 +1,11 @@
 package com.bgs.homeshare.DAO;
 
 
+import android.telecom.Call;
+
+import com.bgs.homeshare.Managers.InvitationManager;
+import com.bgs.homeshare.Managers.NotificationManager;
+import com.bgs.homeshare.Managers.UserManager;
 import com.bgs.homeshare.Models.*;
 import com.bgs.homeshare.SQL.*;
 import com.bgs.homeshare.Util.*;
@@ -8,12 +13,11 @@ import com.bgs.homeshare.Util.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class InvitationDAO {
     public static List<Invitation> getInvitations(int userId) {// gets all valid invitations that have not been
@@ -23,7 +27,7 @@ public class InvitationDAO {
         String dateNow = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
 
         try {
-            String SQL = "Exec usp_getPosts \'" + dateNow + "\', \'" + userId + "\'";
+            String SQL = "Exec usp_getPosts '" + dateNow + "', '" + userId + "'";
 
             PreparedStatement stmt = c.prepareStatement(SQL);
 
@@ -50,17 +54,17 @@ public class InvitationDAO {
         try {
             Invitation newInvite = null;
             String dateNow = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
-            String SQL = "Exec usp_getPost \'" + dateNow + "\', \'" + userId + "\'";
+            String SQL = "Exec usp_getPost '" + dateNow + "', '" + userId + "'";
             PreparedStatement stmt = c.prepareStatement(SQL);
 
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                Invitation invitation = getInvationFromRS(rs);
-                invitation.setResponses(getResponses(invitation.getPostId()));
-                invitation.setRoomates(getRoomates(invitation.getPostId()));
-                i = invitation;
-            }
+            rs.next();
+            Invitation invitation = getInvationFromRS(rs);
+            invitation.setResponses(getResponses(invitation.getPostId()));
+            invitation.setRoomates(getRoomates(invitation.getPostId()));
+            i = invitation;
+
         } catch (SQLException e) {
             return null;
         } catch (Exception e) {
@@ -80,28 +84,36 @@ public class InvitationDAO {
 
             String dateNow = (new SimpleDateFormat("yyyy-MM-dd")).format(invitation.getDateOfDeadline());
 
-            String SQL = "Exec usp_createPost \'" + invitation.getUserId() + "\', \'"
-                    + invitation.property.getStreetAddress1() + "\', \'" + invitation.property.getStreetAddress2()
-                    + "\', \'" + invitation.property.getCity() + "\', \'" + invitation.property.getState() + "\', \'"
-                    + invitation.property.getCountry() + "\', \'"
+            String SQL = "Exec usp_createPost '" + invitation.getUserId() + "', '"
+                    + invitation.property.getStreetAddress1() + "', '" + invitation.property.getStreetAddress2()
+                    + "', '" + invitation.property.getCity() + "', '" + invitation.property.getState() + "', '"
+                    + invitation.property.getCountry() + "', '"
                     + invitation.property.getSquareFeet()
-                    + "\', \'" + invitation.property.getDistanceToCampus() + "\', \'" + dateNow
-                    + "\', \'" + invitation.property.getMaximumCapacity() + "\', \'" + invitation.property.getRent()
-                    + "\', \'" +
-                    invitation.property.utilities.getPool().compareTo(false) + "\', \'"
-                    + invitation.property.utilities.getAC().compareTo(false) + "\', \'"
+                    + "', '" + invitation.property.getDistanceToCampus() + "', '" + dateNow
+                    + "', '" + invitation.property.getMaximumCapacity() + "', '" + invitation.property.getRent()
+                    + "', '" +
+                    invitation.property.utilities.getPool().compareTo(false) + "', '"
+                    + invitation.property.utilities.getAC().compareTo(false) + "', '"
                     + invitation.property.utilities.getLaundry().compareTo(false)
-                    + "\', \'" + invitation.property.utilities.getDishwasher().compareTo(false) + "\', \'"
-                    + invitation.property.utilities.getBalcony().compareTo(false) + "\', \'"
-                    + invitation.property.utilities.getFireplace().compareTo(false) + "\'";
+                    + "', '" + invitation.property.utilities.getDishwasher().compareTo(false) + "', '"
+                    + invitation.property.utilities.getBalcony().compareTo(false) + "', '"
+                    + invitation.property.utilities.getFireplace().compareTo(false) + "'";
 
-            PreparedStatement stmt = c.prepareStatement(SQL);
+            CallableStatement stmt = c.prepareCall(SQL);
 
-            result = stmt.execute();
-            if (result) {
-                Invitation newInvite = getInvitationForPosterFromID(invitation.getUserId());
-                result = addQuestions(newInvite.getPostId(), invitation.getQuestions());
+            stmt.execute();
+            ResultSet rs = stmt.getResultSet();
+            rs.next();
+            int postId = rs.getInt("result");
+            int created = rs.getInt("created");
+            if(created == 1){
+                addQuestions(postId, invitation.getQuestions());
             }
+            else{
+                return false;
+            }
+
+            result = true;
         } catch (Exception e) {
             return result;
         }
@@ -109,7 +121,7 @@ public class InvitationDAO {
         return result;
     }
 
-    public static Boolean manageResponse(int postId, int userId, int posterResponse) { // records responses from
+    public static Boolean manageResponse(int postId, int userId, int posterResponse, int ownerUserId) { // records responses from
         // invitation manager
         Connection c = SqlConnection.GetConnection();
         Boolean result = false;
@@ -120,7 +132,10 @@ public class InvitationDAO {
             stmt.setInt(1, postId);
             stmt.setInt(2, userId);
             stmt.setInt(3, posterResponse);
-            result = stmt.execute();
+            stmt.execute();
+
+            NotificationManager.SendNotification(userId,postId,"You have been matched with a roomate " + UserManager.GetProfile(ownerUserId).getUserName() + "!");
+            result = true;
         }catch (Exception e) {
             return result;
         }
@@ -137,10 +152,10 @@ public class InvitationDAO {
             stmt.setInt(1, postId);
             stmt.setInt(2, userId);
             stmt.setInt(3, response);
-            result = stmt.execute();
-            if (result) {
-                result = addQuestions(postId, responses);
-            }
+            stmt.execute();
+            addQuestions(postId, responses);
+            NotificationManager.SendNotification(userId, postId, "You have one response from user " + UserManager.GetProfile(userId).getUserName() + "!");
+            result = true;
         } catch (Exception e) {
             return result;
         }
@@ -152,7 +167,7 @@ public class InvitationDAO {
         List<Responses> responses = new ArrayList<>();
 
         try {
-            String SQL = "Exec usp_getPost \'" + postId + "\'";
+            String SQL = "Exec usp_getResponses '" + postId + "'";
 
             PreparedStatement stmt = c.prepareStatement(SQL);
 
@@ -172,8 +187,8 @@ public class InvitationDAO {
         List<String> questionResponses = new ArrayList<>();
 
         try {
-            String sql = "Exec usp_getQuestionResponses \'" + Integer.toString(postId) + "\', \'"
-                    + Integer.toString(userId) + "\'";
+            String sql = "Exec usp_getQuestionResponses '" + postId + "', '"
+                    +userId + "'";
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -193,7 +208,7 @@ public class InvitationDAO {
         List<User> roomates = new ArrayList<>();
 
         try {
-            String sql = "Exec usp_getCurrentRoomates \'" + Integer.toString(postId) + "\'";
+            String sql = "Exec usp_getCurrentRoomates '" + postId + "'";
             PreparedStatement stmt = c.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -220,14 +235,13 @@ public class InvitationDAO {
                 stmt.setInt(2, (i + 1));
                 stmt.setInt(3, userId);
                 stmt.setString(4, Questions.get(i));
-                if (result)
-                    result = stmt.execute();
+                stmt.execute();
             }
             catch(SQLException e){
-
+                e.printStackTrace();
             }
             catch(Exception e){
-
+                e.printStackTrace();
             }
         }
 
@@ -237,7 +251,6 @@ public class InvitationDAO {
     public static Boolean addQuestions(int postId, List<String> Questions) {
         Connection c = SqlConnection.GetConnection();
         String sql = "Exec usp_addQuestion ?,?,?";
-        Boolean result = true;
 
         for (int i = 0; i < Questions.size(); i++) {
             try {
@@ -245,18 +258,17 @@ public class InvitationDAO {
                 stmt.setInt(1, postId);
                 stmt.setInt(2, (i + 1));
                 stmt.setString(3, Questions.get(i));
-                if (result)
-                    result = stmt.execute();
+                stmt.execute();
             }
             catch(SQLException e){
-
+                return false;
             }
             catch(Exception e){
-
+                return false;
             }
         }
 
-        return result;
+        return true;
     }
 
     public static Invitation getInvationFromRS(ResultSet rs) {
@@ -287,10 +299,37 @@ public class InvitationDAO {
             Invitation invitation = new Invitation(postId, ownerId, property, date, null, null, numOfRoomates, splitQuestions);
             return invitation;
         }
+        catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
         catch(Exception e){
             return null;
         }
+    }
 
+    public static boolean deletePost(int postId) throws SQLException {
+        Connection c = SqlConnection.GetConnection();
+        String SQL = "Exec usp_deletePost ";
+
+        PreparedStatement stmt = c.prepareStatement(SQL);
+        stmt.setInt(1, postId);
+        stmt.execute();
+        return true;
+    }
+
+    public static boolean deletePostFromUser(int userId){
+        Invitation invitation = getInvitationForPosterFromID(userId);
+        if(invitation != null){
+            try{
+                deletePost(invitation.getPostId());
+            }
+            catch(Exception e){
+                return false;
+            }
+            return true;
+        }
+        return false; //user has no active post
     }
 
 }

@@ -3,6 +3,7 @@ package com.bgs.homeshare.Managers;
 import com.bgs.homeshare.DAO.InvitationDAO;
 import com.bgs.homeshare.Models.Invitation;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class InvitationManager {
@@ -18,12 +19,9 @@ public class InvitationManager {
     }
 
     public static boolean manageResponse(int postId, int userIdResponseTo, int userIdOwner, int posterResponse){
-        if(InvitationDAO.manageResponse(postId, userIdResponseTo, posterResponse)){
+        if(InvitationDAO.manageResponse(postId, userIdResponseTo, posterResponse, userIdOwner)){
             getInvitations(userIdOwner);
             getMyInvitation(userIdOwner);
-            if(myInvitation == null) {//do something
-
-            }
             return true;
         }
         return false;
@@ -38,11 +36,39 @@ public class InvitationManager {
     }
 
     public static boolean createAnInvitation(Invitation invitation){
-        if(InvitationDAO.createNewInvitation(invitation)){
+        if (InvitationDAO.createNewInvitation(invitation)) {
             getMyInvitation(invitation.getUserId());
             return true;
         }
+        return false; //means currently have an active invitation
+    }
+
+    public static boolean deletePost(int postId){
+        try{
+            if(InvitationDAO.deletePost(postId)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch(Exception e){//no post to delete
+            return false;
+        }
+    }
+
+    public static boolean deletePostFromUser(int userId){
+        Invitation invite = InvitationDAO.getInvitationForPosterFromID(userId);
+        try{
+            if(invite != null){
+                InvitationDAO.deletePost(invite.getPostId());
+                return true;
+            }
+        }catch(Exception e){
+            return false;
+        }
+
         return false;
+
     }
 
 }

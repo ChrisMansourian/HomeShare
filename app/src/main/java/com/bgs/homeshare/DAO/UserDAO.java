@@ -21,7 +21,7 @@ public class UserDAO {
         Connection c = SqlConnection.GetConnection();
         User u = null;
         try {
-            String SQL = "Exec usp_Login \'" + userName + "\', \'" + password + "\'";
+            String SQL = "Exec usp_Login '" + userName + "', '" + password + "'";
             //String SQL = "{call dbo.usp_Login(?,?)}";
 
             PreparedStatement stmt = c.prepareStatement(SQL);
@@ -64,7 +64,7 @@ public class UserDAO {
         Connection c = SqlConnection.GetConnection();
         User u = null;
         try {
-            String SQL = "Exec usp_getUserByName \'" + userName + "\'";
+            String SQL = "Exec usp_getUserByName '" + userName + "'";
             PreparedStatement stmt = c.prepareStatement(SQL);
 
             ResultSet rs = stmt.executeQuery();
@@ -83,7 +83,7 @@ public class UserDAO {
         Connection c = SqlConnection.GetConnection();
         boolean result = false;
         try {
-            String SQL = "Exec usp_checkUserNameExists \'" + userName + "\'";
+            String SQL = "Exec usp_checkUserNameExists '" + userName + "'";
             PreparedStatement stmt = c.prepareStatement(SQL);
 
             ResultSet rs = stmt.executeQuery();
@@ -102,7 +102,7 @@ public class UserDAO {
         Connection c = SqlConnection.GetConnection();
         boolean result = false;
         try {
-            String SQL = "Exec usp_changeUserName " + userId + ", \'" + userName + "\'";
+            String SQL = "Exec usp_changeUserName " + userId + ", '" + userName + "'";
             PreparedStatement stmt = c.prepareStatement(SQL);
 
             ResultSet rs = stmt.executeQuery();
@@ -124,13 +124,13 @@ public class UserDAO {
         try {
             java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            String SQL = "Exec usp_updateProfile \'" + userName + "\',"
+            String SQL = "Exec usp_updateProfile '" + userName + "',"
                     + " ?,"
-                    + " \'" + email + "\',"
-                    + " \'" + number + "\',"
-                    + " \'" + academicFocus + "\',"
-                    + " \'" + schoolYear + "\',"
-                    + " \'" + personalIntro + "\',"
+                    + " '" + email + "',"
+                    + " '" + number + "',"
+                    + " '" + academicFocus + "',"
+                    + " '" + schoolYear + "',"
+                    + " '" + personalIntro + "',"
                     + " ?";
             PreparedStatement stmt = c.prepareStatement(SQL);
             stmt.setDate(1, sqlDate);
@@ -156,14 +156,14 @@ public class UserDAO {
         try {
             java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            String SQL = "Exec usp_signUp \'" + userName + "\',"
-                    + " \'" + password + "\',"
+            String SQL = "Exec usp_signUp '" + userName + "',"
+                    + " '" + password + "',"
                     + " ?,"
-                    + " \'" + email + "\',"
-                    + " \'" + number + "\',"
-                    + " \'" + academicFocus + "\',"
-                    + " \'" + schoolYear + "\',"
-                    + " \'" + personalIntro + "\',"
+                    + " '" + email + "',"
+                    + " '" + number + "',"
+                    + " '" + academicFocus + "',"
+                    + " '" + schoolYear + "',"
+                    + " '" + personalIntro + "',"
                     + " ?";
             PreparedStatement stmt = c.prepareStatement(SQL);
             stmt.setDate(1, sqlDate);
@@ -182,7 +182,7 @@ public class UserDAO {
         return result;
     }
 
-    private static User GetUserFromResultSet(ResultSet rs) throws SQLException, Exception {
+    private static User GetUserFromResultSet(ResultSet rs) throws Exception {
         int uId = rs.getInt("UserId");
         String uName = rs.getString("Username");
         String email = rs.getString("Email");

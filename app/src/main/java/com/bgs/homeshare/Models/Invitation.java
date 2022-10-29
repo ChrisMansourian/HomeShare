@@ -10,7 +10,7 @@ public class Invitation {
     private List<Responses> responses; //only users who responded with a value of 1
     private List<User> roomates;
     private int numOfRoomates;
-    private List<String> Questions;
+    private final List<String> Questions;
 
     public Property property;
 
@@ -21,7 +21,7 @@ public class Invitation {
         this.dateOfDeadline = dateOfDeadline;
         this.responses = responses;
         this.roomates = roomates;
-        this.numOfRoomates = this.roomates.size();
+        this.numOfRoomates = numOfRoomates;
         this.Questions = Questions;
         this.numOfRoomates = numOfRoomates;
     }

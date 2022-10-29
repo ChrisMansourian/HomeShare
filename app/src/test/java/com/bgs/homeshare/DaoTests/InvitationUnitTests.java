@@ -1,53 +1,103 @@
 package com.bgs.homeshare.DaoTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import com.bgs.homeshare.DAO.UserDAO;
-import com.bgs.homeshare.Managers.UserManager;
-import com.bgs.homeshare.Models.User;
+import com.bgs.homeshare.Managers.*;
+import com.bgs.homeshare.Models.*;
+import com.bgs.homeshare.DAO.*;
+
 
 import org.junit.Test;
 
-public class LoginUnitTest {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+public class InvitationUnitTests {
 
     @Test
-    public void LoginFail() {
-        boolean result = UserManager.Login("test", "1234");
-        assertFalse(result);
-        assertEquals(UserManager.LoggedInUser, null);
+    public void createPost() {
+        User loggedInUser;
+        boolean result = UserManager.Login("Captain", "hello123");
+        if(result) {
+            loggedInUser = UserManager.LoggedInUser;
+        }
+        else{
+           assertFalse(result);
+           return;
+        }
+
+        String dateString = "2022-12-22";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        try{
+            date = formatter.parse(dateString);
+        }
+        catch (Exception e){
+            return;
+        }
+        PropertyUtilities utils = new PropertyUtilities(true,true,true,true,false,false);
+        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4);
+        List<String> questions = new ArrayList<>();
+        questions.add("Do you love chicken?");
+        questions.add("Do you love beef?");
+        questions.add("Do you love lahmajune?");
+        Invitation invitation = new Invitation(-1, loggedInUser.getUserId(), property, date, null, null, 1, questions);
+        if(InvitationManager.createAnInvitation(invitation))
+            assertNotEquals(InvitationManager.myInvitation, null);
     }
 
     @Test
-    public void LoginSuccess() {
-        boolean result = UserManager.Login("adminUser", "password12345");
-        assertTrue(result);
-        User t = UserManager.LoggedInUser;
-        assertNotEquals(t, null);
-        assertEquals(t.getUserId(), 1);
-        assertEquals(t.getUserName(), "adminUser");
-        assertEquals(t.getAcademicFocus(), "computer science");
-        assertEquals(t.getSchoolYear(), "senior");
-        assertEquals(t.getEmail(), "hello@gmail.com");
+    public void createPostFromUserWithAPost(){
+        String dateString = "2022-12-22";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        try{
+            date = formatter.parse(dateString);
+        }
+        catch (Exception e){
+            return;
+        }
+
+        PropertyUtilities utils = new PropertyUtilities(true,true,true,true,false,false);
+        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4);
+        List<String> questions = new ArrayList<>();
+        questions.add("Do you love chicken?");
+        questions.add("Do you love beef?");
+        questions.add("Do you love lahmajune?");
+        Invitation invitation = new Invitation(-1, 10, property, date, null, null, 1, questions);
+        assertFalse(InvitationManager.createAnInvitation(invitation));
     }
 
     @Test
-    public void LoginWrongPassword() {
-        boolean result = UserManager.Login("adminUser", "password");
-        assertFalse(result);
-        User t = UserManager.LoggedInUser;
-        assertEquals(t, null);
+    public void deletePost(){
+        InvitationManager.getMyInvitation(10);
+        assertNotEquals(InvitationManager.myInvitation, null);
+        InvitationManager.deletePost(InvitationManager.myInvitation.getPostId());
+        InvitationManager.getMyInvitation(10);
+        assertEquals(InvitationManager.myInvitation, null);
     }
 
     @Test
-    public void CreateDuplicateUser() {
-        boolean result = UserManager.CreateAccount("hello2", "12345",
-                "1982-07-21", "hello1@gmail.com", "5555555555", "biology",
-                "sophomore", "I am a test", null);
-        assertFalse(result);
-        User t = UserManager.LoggedInUser;
-        assertEquals(t, null);
+    public void createPostAgain(){
+
     }
+
+    @Test
+    public void respondToPost6Times(){
+
+    }
+
+    @Test
+    public void reject2Posts(){
+
+    }
+
+    @Test
+    public void accept3Posts(){
+
+    }
+
 }
