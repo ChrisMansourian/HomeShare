@@ -25,13 +25,16 @@ public class UserManager {
 
     public static boolean UpdateProfile(String dob, String email, String number,
                                      String academicFocus, String schoolYear,
-                                     String personalIntro, Bitmap img) {
+                                     String personalIntro, Bitmap img,
+                                        String personalityQuestion1, String personalityQuestion2,
+                                        String personalityQuestion3) {
         if (LoggedInUser == null) {
             return false;
         }
 
         if (UserDAO.UpdateProfile(LoggedInUser.getUserName(), dob, email, number, academicFocus,
-                                  schoolYear, personalIntro, Util.ConvertImageToBytes(img))) {
+                                  schoolYear, personalIntro, Util.ConvertImageToBytes(img), personalityQuestion1,
+                                  personalityQuestion2, personalityQuestion3)) {
             LoggedInUser.setDOB(dob);
             LoggedInUser.setEmail(email);
             LoggedInUser.setPhoneNumber(number);
@@ -39,6 +42,9 @@ public class UserManager {
             LoggedInUser.setSchoolYear(schoolYear);
             LoggedInUser.setPersonalIntroduction(personalIntro);
             LoggedInUser.setProfileImage(img);
+            LoggedInUser.setPersonalityQuestion1(personalityQuestion1);
+            LoggedInUser.setPersonalityQuestion2(personalityQuestion2);
+            LoggedInUser.setPersonalityQuestion3(personalityQuestion3);
             return true;
         }
         return false;
@@ -47,10 +53,12 @@ public class UserManager {
     public static boolean CreateAccount(String userName, String password,
                                         String dob, String email, String number,
                                         String academicFocus, String schoolYear,
-                                        String personalIntro, Bitmap img) {
+                                        String personalIntro, Bitmap img,
+                                        String personalityQuestion1, String personalityQuestion2,
+                                        String personalityQuestion3) {
 
         if (UserDAO.CreateAccount(userName, password, dob, email, number, academicFocus,
-                schoolYear, personalIntro, Util.ConvertImageToBytes(img))) {
+                schoolYear, personalIntro, Util.ConvertImageToBytes(img), personalityQuestion1, personalityQuestion2, personalityQuestion3)) {
             LoggedInUser = GetProfileByName(userName);
             return true;
         }

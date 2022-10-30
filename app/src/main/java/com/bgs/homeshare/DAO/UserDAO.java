@@ -118,7 +118,8 @@ public class UserDAO {
     }
 
     public static boolean UpdateProfile(String userName, String dob, String email, String number,
-                                     String academicFocus, String schoolYear, String personalIntro, byte[] img) {
+                                     String academicFocus, String schoolYear, String personalIntro, byte[] img,
+                                        String personalityQuestion1, String personalityQuestion2, String personalityQuestion3) {
         Connection c = SqlConnection.GetConnection();
         boolean result = false;
         try {
@@ -126,12 +127,16 @@ public class UserDAO {
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             String SQL = "Exec usp_updateProfile '" + userName + "',"
                     + " ?,"
-                    + " '" + email + "',"
-                    + " '" + number + "',"
-                    + " '" + academicFocus + "',"
-                    + " '" + schoolYear + "',"
-                    + " '" + personalIntro + "',"
-                    + " ?";
+                    + " \'" + email + "\',"
+                    + " \'" + number + "\',"
+                    + " \'" + academicFocus + "\',"
+                    + " \'" + schoolYear + "\',"
+                    + " \'" + personalIntro + "\',"
+                    + " ?,"
+                    + " \'" + personalityQuestion1 + "\'," 
+                    + " \'" + personalityQuestion2 + "\',"
+                    + " \'" + personalityQuestion3 + "\'";
+
             PreparedStatement stmt = c.prepareStatement(SQL);
             stmt.setDate(1, sqlDate);
             stmt.setBytes(2, img);
@@ -150,7 +155,8 @@ public class UserDAO {
     }
 
     public static boolean CreateAccount(String userName, String password, String dob, String email, String number,
-                                        String academicFocus, String schoolYear, String personalIntro, byte[] img) {
+                                        String academicFocus, String schoolYear, String personalIntro, byte[] img,
+                                        String personalityQuestion1, String personalityQuestion2, String personalityQuestion3) {
         Connection c = SqlConnection.GetConnection();
         boolean result = false;
         try {
@@ -159,12 +165,15 @@ public class UserDAO {
             String SQL = "Exec usp_signUp '" + userName + "',"
                     + " '" + password + "',"
                     + " ?,"
-                    + " '" + email + "',"
-                    + " '" + number + "',"
-                    + " '" + academicFocus + "',"
-                    + " '" + schoolYear + "',"
-                    + " '" + personalIntro + "',"
-                    + " ?";
+                    + " \'" + email + "\',"
+                    + " \'" + number + "\',"
+                    + " \'" + academicFocus + "\',"
+                    + " \'" + schoolYear + "\',"
+                    + " \'" + personalIntro + "\',"
+                    + " ?,"
+                    + " \'" + personalityQuestion1 + "\',"
+                    + " \'" + personalityQuestion2 + "\',"
+                    + " \'" + personalityQuestion3 + "\'"; 
             PreparedStatement stmt = c.prepareStatement(SQL);
             stmt.setDate(1, sqlDate);
             stmt.setBytes(2, img);
@@ -192,8 +201,11 @@ public class UserDAO {
         String schoolYear = rs.getString("SchoolYear");
         String personalIntroduction = rs.getString("PersonalIntroduction");
         byte[] imgBytes = rs.getBytes("ProfilePicture");
+        String personalityQuestion1 = rs.getString("PersonalityQuestion1");
+        String personalityQuestion2 = rs.getString("PersonalityQuestion2");
+        String personalityQuestion3 = rs.getString("PersonalityQuestion3");
 
-        return new User(uId, uName, DOB, email, phoneNumber, academicFocus, schoolYear, personalIntroduction, imgBytes);
+        return new User(uId, uName, DOB, email, phoneNumber, academicFocus, schoolYear, personalIntroduction, imgBytes, personalityQuestion1, personalityQuestion2, personalityQuestion3);
     }
 
 }
