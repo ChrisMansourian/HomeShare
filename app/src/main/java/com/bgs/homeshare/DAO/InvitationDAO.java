@@ -331,4 +331,18 @@ public class InvitationDAO {
         return false; //user has no active post
     }
 
+    public static boolean deleteRoomates(int propertyId){
+        Connection c = SqlConnection.GetConnection();
+
+        try{
+            String sql = "DELETE FROM RoomateTable Where PROPERTYID = " + propertyId;
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.execute();
+            return true;
+
+        }catch(Exception e){
+            return false;
+        }
+    }
+
 }

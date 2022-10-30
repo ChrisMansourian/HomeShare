@@ -19,11 +19,6 @@ public class InvitationUnitTests {
 
     @Test
     public void createPostAndDelete() {
-        User loggedInUser;
-        UserManager.Login("Captain", "hello123");
-        loggedInUser = UserManager.LoggedInUser;
-
-
         String dateString = "2022-12-22";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
@@ -39,9 +34,9 @@ public class InvitationUnitTests {
         questions.add("Do you love chicken?");
         questions.add("Do you love beef?");
         questions.add("Do you love lahmajune?");
-        Invitation invitation = new Invitation(-1, loggedInUser.getUserId(), property, date, null, null, 1, questions);
+        Invitation invitation = new Invitation(-1, 1, property, date, null, null, 1, questions);
         if(InvitationManager.createAnInvitation(invitation)) assertNotEquals(InvitationManager.myInvitation, null);
-        assertTrue(InvitationManager.deletePostFromUser(loggedInUser.getUserId()));
+        assertTrue(InvitationManager.deletePostFromUser(1));
     }
 
     @Test
@@ -89,6 +84,7 @@ public class InvitationUnitTests {
         questions.add("Do you love lahmajune?");
         Invitation invitation = new Invitation(-1, 10, property, date, null, null, 1, questions);
         assertTrue(InvitationManager.createAnInvitation(invitation));
+        int propId = InvitationManager.myInvitation.property.getPropertyID();
 
         List<String> questionsResponses = new ArrayList<>();
         questionsResponses.add("Chicken aint my favorite");
@@ -98,15 +94,17 @@ public class InvitationUnitTests {
         assertTrue(InvitationManager.respondToInvitation(InvitationManager.myInvitation.getPostId(), 2,1,questionsResponses));
         assertTrue(InvitationManager.respondToInvitation(InvitationManager.myInvitation.getPostId(), 1,1,questionsResponses));
 
-        assertTrue(InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId(), 2,10,1));
-        assertTrue(InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId(), 1,10,0));
+        assertTrue(InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId(), 2,10,1)); //user 10 accepting user 2
+        assertTrue(InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId(), 1,10,0)); //user 10 rejecting user 1
         assertTrue(InvitationManager.myInvitation.getNumOfRoomates() == 2);
 
-        assertTrue(InvitationManager.respondToInvitation(InvitationManager.myInvitation.getPostId(), 5,1,questionsResponses));
-        assertTrue(InvitationManager.respondToInvitation(InvitationManager.myInvitation.getPostId(), 11,1,questionsResponses));
-        assertTrue(InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId(), 5,10,1));
-        assertTrue(InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId(), 11,10,1));
+        assertTrue(InvitationManager.respondToInvitation(InvitationManager.myInvitation.getPostId(), 5,1,questionsResponses)); //user 5 accepting invitation
+        assertTrue(InvitationManager.respondToInvitation(InvitationManager.myInvitation.getPostId(), 11,1,questionsResponses)); //user 11 accepting invitation
+        assertTrue(InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId(), 5,10,1)); //user 10 accepting user 5
+        assertTrue(InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId(), 11,10,1)); //user 10 accepting user 11
         assertTrue(InvitationManager.myInvitation == null);
+        InvitationDAO.deleteRoomates(propId);
+
     }
 
     @Test
@@ -127,7 +125,7 @@ public class InvitationUnitTests {
         questions.add("Do you love chicken?");
         questions.add("Do you love beef?");
         questions.add("Do you love lahmajune?");
-        Invitation invitation = new Invitation(-1, 10, property, date, null, null, 1, questions);
+        Invitation invitation = new Invitation(-1, 1, property, date, null, null, 1, questions);
         assertTrue(InvitationManager.createAnInvitation(invitation));
 
         dateString = "2022-12-22";
@@ -145,15 +143,15 @@ public class InvitationUnitTests {
         questions.add("Do you love bamidor?");
         questions.add("Do you love beef?");
 
-        invitation = new Invitation(-1, 2, property, date, null, null, 1, questions);
+        invitation = new Invitation(-1, 3, property, date, null, null, 1, questions);
         assertTrue(InvitationManager.createAnInvitation(invitation));
 
-        InvitationManager.getInvitations(3);
+        InvitationManager.getInvitations(15);
         assertTrue(InvitationManager.invitations.size() == 2);
         assertTrue(InvitationManager.invitations.get(0).getQuestions().size() == 3);
         assertTrue(InvitationManager.invitations.get(1).getQuestions().size() == 2);
-        assertTrue(InvitationManager.deletePostFromUser(2));
-        assertTrue(InvitationManager.deletePostFromUser(10));
+        assertTrue(InvitationManager.deletePostFromUser(1));
+        assertTrue(InvitationManager.deletePostFromUser(3));
     }
 
 }
