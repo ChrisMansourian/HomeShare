@@ -23,4 +23,13 @@ public class Util {
 
         return byteArray;
     }
+
+    public static Boolean returnBoolFromInt(int i){
+        Boolean z = true;
+        if(i >= 1){
+            return z;
+        }
+        z = false;
+        return z;
+    }
 }

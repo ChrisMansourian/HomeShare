@@ -50,7 +50,7 @@ public class NotificationDAO {
     public static boolean CreateNewNotification(Notification n) {
         Connection c = SqlConnection.GetConnection();
         try {
-            String SQL = "Exec usp_createNotification " + n.getUserId() + ", " + n.getPostId() + ", \'" + n.getText() + "\'";
+            String SQL = "Exec usp_createNotification " + n.getUserId() + ", " + n.getPostId() + ", '" + n.getText() + "'";
 
             PreparedStatement stmt = c.prepareStatement(SQL);
 
