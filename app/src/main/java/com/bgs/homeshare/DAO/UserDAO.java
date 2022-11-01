@@ -1,9 +1,16 @@
 package com.bgs.homeshare.DAO;
 
 import android.graphics.Bitmap;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.bgs.homeshare.Models.User;
 import com.bgs.homeshare.SQL.SqlConnection;
+
+import org.json.JSONObject;
+
+import org.apache.commons.codec.binary.Base64;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -13,12 +20,14 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 
-import kotlin.jvm.Throws;
+import kotlinx.coroutines.Job;
+import okhttp3.OkHttpClient;
+import okhttp3.*;
 
 public class UserDAO {
 
     public static User CheckLogin(String userName, String password) {
-        Connection c = SqlConnection.GetConnection();
+        /*Connection c = SqlConnection.GetConnection();
         User u = null;
         try {
             String SQL = "Exec usp_Login '" + userName + "', '" + password + "'";
@@ -35,10 +44,36 @@ public class UserDAO {
             rs.close();
         }
         catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        return u;
+        return u;*/
+        OkHttpClient client = new OkHttpClient();
+
+        /*Request request = new Request.Builder()
+                .url("http://localhost:5256/Login/CheckLogin?username=" + userName + "&password=" + password)
+                .build();*/
+        Request request = new Request.Builder()
+                .url("https://homeshareapi.azurewebsites.net/Login/CheckLogin?username=" + userName + "&password=" + password)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+
+            String temp = response.body().string();
+            response.body().close();
+            JSONObject Jobject = new JSONObject(temp);
+
+            return GetUserFromJsonObject(Jobject);
+
+            // Do something with the response.
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public static User GetUser(int userId) {
@@ -204,6 +239,25 @@ public class UserDAO {
         String personalityQuestion1 = rs.getString("PersonalityQuestion1");
         String personalityQuestion2 = rs.getString("PersonalityQuestion2");
         String personalityQuestion3 = rs.getString("PersonalityQuestion3");
+
+        return new User(uId, uName, DOB, email, phoneNumber, academicFocus, schoolYear, personalIntroduction, imgBytes, personalityQuestion1, personalityQuestion2, personalityQuestion3);
+    }
+
+    private static User GetUserFromJsonObject(JSONObject obj) throws Exception {
+        int uId = Integer.parseInt(obj.get("userId").toString());
+        String uName = obj.getString("userName");
+        String email = obj.getString("email");
+        String phoneNumber = obj.getString("phoneNumber");
+        String DOB = obj.getString("dob");
+        String academicFocus = obj.getString("academicFocus");
+        String schoolYear = obj.getString("schoolYear");
+        String personalIntroduction = obj.getString("personalIntroduction");
+        Base64 codec = new Base64();
+        byte[] imgBytes = codec.decode(obj.getString("profileImageBytesString").getBytes());
+        //byte[] imgBytes = null;
+        String personalityQuestion1 = obj.getString("personalityQuestion1");
+        String personalityQuestion2 = obj.getString("personalityQuestion2");
+        String personalityQuestion3 = obj.getString("personalityQuestion3");
 
         return new User(uId, uName, DOB, email, phoneNumber, academicFocus, schoolYear, personalIntroduction, imgBytes, personalityQuestion1, personalityQuestion2, personalityQuestion3);
     }

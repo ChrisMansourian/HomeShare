@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        boolean loginResult = UserManager.Login(username, password);
+        /*boolean loginResult = UserManager.Login(username, password);
 
         if (!loginResult) {
             AlertDialog.Builder alert3 = new AlertDialog.Builder(LoginActivity.this);
@@ -58,6 +59,38 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         this.startActivity(new Intent(v.getContext(), TempActivity.class));
-        this.overridePendingTransition(0, 0);
+        this.overridePendingTransition(0, 0);*/
+        CheckLoginTask c = new CheckLoginTask();
+        c.v = v;
+        c.execute(username, password);
+    }
+
+    class CheckLoginTask extends AsyncTask<String, Void, Boolean> {
+        public View v;
+        private Exception exception;
+
+        protected Boolean doInBackground(String... urls) {
+            try {
+                boolean loginResult = UserManager.Login(urls[0], urls[1]);
+                return loginResult;
+            } catch (Exception e) {
+                this.exception = e;
+            }
+            return false;
+        }
+
+        protected void onPostExecute(Boolean result) {
+            if (!result) {
+                AlertDialog.Builder alert3 = new AlertDialog.Builder(LoginActivity.this);
+                alert3.setTitle("Invalid Credentials");
+                alert3.setMessage("Incorrect Username/Password Entered");
+                alert3.setPositiveButton("OK", null);
+                alert3.show();
+                return;
+            }
+
+            startActivity(new Intent(v.getContext(), TempActivity.class));
+            overridePendingTransition(0, 0);
+        }
     }
 }
