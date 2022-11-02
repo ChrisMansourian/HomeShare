@@ -19,7 +19,7 @@
         android:theme="@style/Theme.HomeShare"
         tools:targetApi="31">
         <activity
-            android:name=".TempActivity"
+            android:name=".FeedActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"

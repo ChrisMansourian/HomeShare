@@ -246,7 +246,7 @@ public class UserDAO {
                             + "&schoolYear=" + schoolYear + "&personalIntro=" + personalIntro + "&img=" + imgString + "&personalityQuestion1=" + personalityQuestion1
                             + "&personalityQuestion2=" + personalityQuestion2 + "&personalityQuestion3=" + personalityQuestion3)
                     .build();
-            
+
             Response response = client.newCall(request).execute();
 
             String temp = response.body().string();

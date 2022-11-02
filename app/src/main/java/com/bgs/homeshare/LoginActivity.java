@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            startActivity(new Intent(v.getContext(), TempActivity.class));
+            startActivity(new Intent(v.getContext(), FeedActivity.class));
             overridePendingTransition(0, 0);
         }
     }
