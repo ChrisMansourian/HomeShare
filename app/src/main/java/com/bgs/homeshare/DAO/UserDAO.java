@@ -192,7 +192,8 @@ public class UserDAO {
     public static boolean CreateAccount(String userName, String password, String dob, String email, String number,
                                         String academicFocus, String schoolYear, String personalIntro, byte[] img,
                                         String personalityQuestion1, String personalityQuestion2, String personalityQuestion3) {
-        Connection c = SqlConnection.GetConnection();
+
+        /*Connection c = SqlConnection.GetConnection();
         boolean result = false;
         try {
             java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
@@ -223,6 +224,41 @@ public class UserDAO {
         catch (Exception e) {
             result = false;
         }
+        return result;*/
+
+        OkHttpClient client = new OkHttpClient();
+
+        /*Request request = new Request.Builder()
+                .url("http://localhost:5256/Login/CheckLogin?username=" + userName + "&password=" + password)
+                .build();*/
+        Base64 codec = new Base64();
+
+        boolean result = false;
+
+        try {
+
+            String imgString = codec.encodeBase64String(img);
+            java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            Request request = new Request.Builder()
+                    .url("https://homeshareapi.azurewebsites.net/Login/SignUp?username=" + userName + "&password=" + password
+                            + "&dob=" + sqlDate.toString() + "&email=" + email + "&number=" + number + "&academicFocus=" + academicFocus
+                            + "&schoolYear=" + schoolYear + "&personalIntro=" + personalIntro + "&img=" + imgString + "&personalityQuestion1=" + personalityQuestion1
+                            + "&personalityQuestion2=" + personalityQuestion2 + "&personalityQuestion3=" + personalityQuestion3)
+                    .build();
+            
+            Response response = client.newCall(request).execute();
+
+            String temp = response.body().string();
+            response.body().close();
+
+            result = Boolean.parseBoolean(temp);
+
+            // Do something with the response.
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return result;
     }
 
