@@ -1,4 +1,4 @@
-package com.bgs.homeshare.ui.dashboard;
+package com.bgs.homeshare.ui.invites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bgs.homeshare.databinding.FragmentDashboardBinding;
+import com.bgs.homeshare.databinding.FragmentInvitesBinding;
 
-public class DashboardFragment extends Fragment {
+public class InvitationFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentInvitesBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        InvitationViewModel invitationViewModel =
+                new ViewModelProvider(this).get(InvitationViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentInvitesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textInvites;
+        invitationViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

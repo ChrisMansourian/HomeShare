@@ -44,7 +44,7 @@ public class LoginUnitTest {
 
     @Test
     public void CreateDuplicateUser() {
-        boolean result = UserManager.CreateAccount("hello5", "12345",
+        boolean result = UserManager.CreateAccount("aren76", "12345",
                 "1982-07-21", "hello1@gmail.com", "5555555555", "biology",
                 "sophomore", "I am a test", null, "hello", "test1", "personality");
         assertFalse(result);

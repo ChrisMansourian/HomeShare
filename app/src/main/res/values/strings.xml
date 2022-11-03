@@ -33,4 +33,27 @@
         <item>2031</item>
         <item>2032</item>
     </string-array>
+
+    <string-array name="personalityQuestion1Options">
+        <item>"I am up bright and early"</item>
+        <item>"I am pretty balanced"</item>
+        <item>"I sleep when the sun goes up"</item>
+    </string-array>
+
+    <string-array name="personalityQuestion2Options">
+        <item>"Neat and tidy is the only way"</item>
+        <item>"I clean up once in a while"</item>
+        <item>"I dont care how stuff are organized"</item>
+    </string-array>
+
+    <string-array name="personalityQuestion3Options">
+        <item>"I love guests and will be bringing many"</item>
+        <item>"I prefer to be asked before people come over"</item>
+        <item>"I don't want guests, almost ever"</item>
+    </string-array>
+
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

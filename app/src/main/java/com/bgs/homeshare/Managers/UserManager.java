@@ -66,6 +66,17 @@ public class UserManager {
         return false;
     }
 
+    public static boolean CreateAccount(User user, String password) {
+
+        if (UserDAO.CreateAccount(user.getUserName(), password, user.getDOB(), user.getEmail(), user.getPhoneNumber(), user.getAcademicFocus(),
+                user.getSchoolYear(), user.getPersonalIntroduction(), Util.ConvertImageToBytes(user.getProfileImage()), user.getPersonalityQuestion1(), user.getPersonalityQuestion2(), user.getPersonalityQuestion3())) {
+            LoggedInUser = GetProfileByName(user.getUserName());
+            return true;
+        }
+        LoggedInUser = null;
+        return false;
+    }
+
     public static boolean CheckUserNameExists(String userName) {
         return UserDAO.CheckUserNameExists(userName);
     }

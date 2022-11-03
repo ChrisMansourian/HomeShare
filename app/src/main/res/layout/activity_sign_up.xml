@@ -28,8 +28,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--ImageView to preview the selected image-->
+
+        <Button
+            android:id="@+id/profileImageButtonSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="CHOOSE PROFILE IMAGE"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalIntroductionTextSignUp" />
+
+        <!--ImageView to preview the selected image-->
+        <ImageView
+            android:id="@+id/profileViewImage"
+            android:layout_width="281dp"
+            android:layout_height="246dp"
+            android:layout_below="@id/profileImageButtonSignUp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileImageButtonSignUp"
+            app:layout_constraintVertical_bias="0.0" />
+
         <TextView
-            android:id="@+id/usernameViewSignUp2"
+            android:id="@+id/emailViewSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -43,7 +71,7 @@
             app:layout_constraintTop_toBottomOf="@+id/birthDatePickerSignUp" />
 
         <TextView
-            android:id="@+id/usernameViewSignUp3"
+            android:id="@+id/numberViewSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -51,10 +79,10 @@
             android:text="Number:"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameViewSignUp2" />
+            app:layout_constraintTop_toBottomOf="@+id/emailViewSignUp" />
 
         <TextView
-            android:id="@+id/usernameViewSignUp4"
+            android:id="@+id/majorViewSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -62,10 +90,10 @@
             android:text="Major:"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameViewSignUp3" />
+            app:layout_constraintTop_toBottomOf="@+id/numberViewSignUp" />
 
         <TextView
-            android:id="@+id/usernameViewSignUp5"
+            android:id="@+id/grauationYearViewSIgnUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -73,7 +101,52 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameViewSignUp4" />
+            app:layout_constraintTop_toBottomOf="@+id/majorViewSignUp" />
+
+        <TextView
+            android:id="@+id/personIntroductionViewSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Personal Introduction:"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/graduationYearSpinnerSignUp" />
+
+        <TextView
+            android:id="@+id/personalityQuestions1ViewSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Are you a morning person?"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileViewImage" />
+
+        <TextView
+            android:id="@+id/personalityQuestions2ViewSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="How do you like your spaces?"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalityQuestion1SpinnerSignUp" />
+
+        <TextView
+            android:id="@+id/personalityQuestions3ViewSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="What do you think about guests?"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalityQuestion2SpinnerSignUp" />
 
         <TextView
             android:id="@+id/textView8"
@@ -86,7 +159,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextSignUp" />
 
         <EditText
             android:id="@+id/userNameTextSignUp"
@@ -105,7 +178,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/majorTextSignUp"
             android:layout_width="239dp"
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
@@ -117,7 +190,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/passwordViewSignUp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+            app:layout_constraintTop_toBottomOf="@+id/numberTextSignUp" />
 
         <TextView
             android:id="@+id/passwordViewSignUp"
@@ -152,18 +225,20 @@
             android:id="@+id/backButtonSignUp"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="340dp"
-            android:layout_marginBottom="665dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:onClick="onBackClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@android:drawable/ic_menu_revert"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
-            android:id="@+id/editTextPhone"
+            android:id="@+id/numberTextSignUp"
             android:layout_width="239dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -171,12 +246,13 @@
             android:ems="10"
             android:hint="2134656775"
             android:inputType="phone"
+            android:maxLength="10"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+            app:layout_constraintTop_toBottomOf="@+id/emailTextSignUp" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/emailTextSignUp"
             android:layout_width="239dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -189,7 +265,7 @@
             app:layout_constraintTop_toBottomOf="@+id/birthDatePickerSignUp" />
 
         <EditText
-            android:id="@+id/editTextTextPassword2"
+            android:id="@+id/passwordTextSignUp"
             android:layout_width="239dp"
             android:layout_height="48dp"
             android:layout_marginTop="14dp"
@@ -201,13 +277,75 @@
             app:layout_constraintTop_toBottomOf="@+id/userNameTextSignUp" />
 
         <Spinner
-            android:id="@+id/graduationYear"
+            android:id="@+id/graduationYearSpinnerSignUp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameViewSignUp5" />
+            app:layout_constraintTop_toBottomOf="@+id/grauationYearViewSIgnUp" />
+
+        <Spinner
+            android:id="@+id/personalityQuestion1SpinnerSignUp"
+            android:layout_width="302dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalityQuestions1ViewSignUp" />
+
+        <Spinner
+            android:id="@+id/personalityQuestion2SpinnerSignUp"
+            android:layout_width="302dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalityQuestions2ViewSignUp" />
+
+        <Spinner
+            android:id="@+id/personalityQuestion3SpinnerSignUp"
+            android:layout_width="302dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalityQuestions3ViewSignUp" />
+
+        <EditText
+            android:id="@+id/personalIntroductionTextSignUp"
+            android:layout_width="342dp"
+            android:layout_height="117dp"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="I am a third year student at usc I love to take part in tailgates, research, and days by the beach"
+            android:inputType="textMultiLine"
+            android:maxLength="250"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personIntroductionViewSignUp" />
+
+        <Button
+            android:id="@+id/createAccountButtonSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="onCreateClick"
+            android:text="CREATE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalityQuestion3SpinnerSignUp"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
