@@ -10,7 +10,7 @@
         android:id="@+id/welcomeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_welcome"
+        android:text="HOMESHARE"
         android:textAlignment="center"
         android:textSize="48sp"
         android:textStyle="bold"
@@ -22,25 +22,25 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
         android:layout_marginStart="133dp"
         android:layout_marginTop="183dp"
         android:layout_marginEnd="133dp"
         android:layout_marginBottom="35dp"
         android:onClick="onLoginClick"
-        android:text="@string/text_login"
+        android:text="LogIn"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/signupButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeLabel" />
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="65dp"
         android:layout_marginStart="114dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="114dp"
@@ -50,7 +50,7 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
