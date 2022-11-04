@@ -16,6 +16,13 @@ import java.util.Date;
 import java.util.List;
 
 public class InvitationUnitTests {
+    @Test
+    public void GetPosts() {
+        InvitationManager.getInvitations(1, "bedrooms", 1);
+
+        assertNotNull(InvitationManager.invitations);
+        assertTrue(InvitationManager.invitations.size() > 0);
+    }
 
     @Test
     public void createPostAndDelete() {
@@ -29,7 +36,7 @@ public class InvitationUnitTests {
             return;
         }
         PropertyUtilities utils = new PropertyUtilities(true,true,true,true,false,false);
-        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4);
+        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4, 4, 5);
         List<String> questions = new ArrayList<>();
         questions.add("Do you love chicken?");
         questions.add("Do you love beef?");
@@ -52,7 +59,7 @@ public class InvitationUnitTests {
         }
 
         PropertyUtilities utils = new PropertyUtilities(true,true,true,true,false,false);
-        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4);
+        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4, 4, 5);
         List<String> questions = new ArrayList<>();
         questions.add("Do you love chicken?");
         questions.add("Do you love beef?");
@@ -77,7 +84,7 @@ public class InvitationUnitTests {
         }
 
         PropertyUtilities utils = new PropertyUtilities(true,true,true,true,false,false);
-        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4);
+        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4, 4, 5);
         List<String> questions = new ArrayList<>();
         questions.add("Do you love chicken?");
         questions.add("Do you love beef?");
@@ -120,7 +127,7 @@ public class InvitationUnitTests {
         }
 
         PropertyUtilities utils = new PropertyUtilities(true,true,true,true,false,false);
-        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4);
+        Property property = new Property(-1, "815 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4, 4, 5);
         List<String> questions = new ArrayList<>();
         questions.add("Do you love chicken?");
         questions.add("Do you love beef?");
@@ -138,7 +145,7 @@ public class InvitationUnitTests {
         }
 
         utils = new PropertyUtilities(true,true,true,true,false,false);
-        property = new Property(-1, "825 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4);
+        property = new Property(-1, "825 Saint Katherine Dr.", "", "La Canada", "CA", "USA", 3500,4,800, utils, 4.4, 4, 5);
         questions = new ArrayList<>();
         questions.add("Do you love bamidor?");
         questions.add("Do you love beef?");
@@ -146,7 +153,7 @@ public class InvitationUnitTests {
         invitation = new Invitation(-1, 3, property, date, null, null, 1, questions);
         assertTrue(InvitationManager.createAnInvitation(invitation));
 
-        InvitationManager.getInvitations(15);
+        InvitationManager.getInvitations(15, "bathrooms", 1);
         assertTrue(InvitationManager.invitations.size() == 2);
         assertTrue(InvitationManager.invitations.get(0).getQuestions().size() == 3);
         assertTrue(InvitationManager.invitations.get(1).getQuestions().size() == 2);
