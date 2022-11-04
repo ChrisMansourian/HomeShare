@@ -25,6 +25,13 @@ public class InvitationUnitTests {
     }
 
     @Test
+    public void GetPostsFromUserID() {
+        InvitationManager.getMyInvitation(2);
+
+        assertNotNull(InvitationManager.myInvitation);
+    }
+
+    @Test
     public void createPostAndDelete() {
         String dateString = "2022-12-22";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
