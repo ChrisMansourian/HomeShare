@@ -10,6 +10,9 @@ import com.bgs.homeshare.Models.*;
 import com.bgs.homeshare.SQL.*;
 import com.bgs.homeshare.Util.*;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -19,28 +22,35 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class InvitationDAO {
-    public static List<Invitation> getInvitations(int userId) {// gets all valid invitations that have not been
+    public static List<Invitation> getInvitations(int userId, String sortCriteria, int ascending) {// gets all valid invitations that have not been
         // responded to by user and are not expired
-        Connection c = SqlConnection.GetConnection();
         List<Invitation> invitations = new ArrayList<>();
-        String dateNow = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://homeshareapi.azurewebsites.net/Invitation/GetPosts?userId=" + userId + "&sortCriteria=" + sortCriteria + "&ascending" + ascending)
+                .build();
 
         try {
-            String SQL = "Exec usp_getPosts '" + dateNow + "', '" + userId + "'";
+            Response response = client.newCall(request).execute();
 
-            PreparedStatement stmt = c.prepareStatement(SQL);
+            String temp = response.body().string();
+            response.body().close();
 
-            ResultSet rs = stmt.executeQuery();
+            JSONArray jsonArray = new JSONArray(temp);
 
-            while (rs.next()) {
-                invitations.add(getInvationFromRS(rs));
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                invitations.add(getInvitationFromJsonObject(jsonObject));
             }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        }
+        catch (Exception e) {
+            return null;
         }
 
         return invitations;
@@ -97,9 +107,12 @@ public class InvitationDAO {
                     + invitation.property.utilities.getLaundry().compareTo(false)
                     + "', '" + invitation.property.utilities.getDishwasher().compareTo(false) + "', '"
                     + invitation.property.utilities.getBalcony().compareTo(false) + "', '"
-                    + invitation.property.utilities.getFireplace().compareTo(false) + "'";
+                    + invitation.property.utilities.getFireplace().compareTo(false) + "', ?, ?" ;
 
             CallableStatement stmt = c.prepareCall(SQL);
+
+            stmt.setInt(1,invitation.property.getNumOfBedrooms());
+            stmt.setDouble(1,invitation.property.getNumOfBathrooms());
 
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
@@ -291,10 +304,12 @@ public class InvitationDAO {
             int numOfRoomates = rs.getInt("NumberOfRoomates");
             int ownerId = rs.getInt("USERID");
             double distance = rs.getFloat("DistanceToCampus");
+            double bathrooms = rs.getFloat("Bathrooms");
+            int bedrooms = rs.getInt("Bedrooms");
             java.util.Date date = rs.getDate("DOD");
             List<String> splitQuestions = Arrays.asList((rs.getString("InvitationQuestions")).split(","));
             PropertyUtilities utilities = new PropertyUtilities(pool, ac, laundry, dishwasher, balcony, fireplace);
-            Property property = new Property(propertyID, streetAddress1, streetAddress2, city, state, country, rent, maxCap, squareFeet, utilities, distance);
+            Property property = new Property(propertyID, streetAddress1, streetAddress2, city, state, country, rent, maxCap, squareFeet, utilities, distance,bathrooms,bedrooms);
             Invitation invitation = new Invitation(postId, ownerId, property, date, null, null, numOfRoomates, splitQuestions);
             return invitation;
         }
@@ -306,6 +321,48 @@ public class InvitationDAO {
             return null;
         }
     }
+
+    public static Invitation getInvitationFromJsonObject(JSONObject rs) {
+        try {
+            int postId = rs.getInt("postId");
+            JSONObject propertyObject = rs.getJSONObject("property");
+            int propertyID = propertyObject.getInt("propertyID");
+            String streetAddress1 = propertyObject.getString("streetAddress1");
+            String streetAddress2 = propertyObject.getString("streetAddress2");
+            String state = propertyObject.getString("state");
+            String city = propertyObject.getString("city");
+            String country = propertyObject.getString("country");
+            JSONObject utilitiesObject = propertyObject.getJSONObject("utilities");
+            Boolean ac = utilitiesObject.getBoolean("ac");
+            Boolean balcony = utilitiesObject.getBoolean("balcony");
+            Boolean dishwasher = utilitiesObject.getBoolean("dishwasher");
+            Boolean fireplace = utilitiesObject.getBoolean(("fireplace"));
+            Boolean laundry = utilitiesObject.getBoolean(("laundry"));
+            Boolean pool = utilitiesObject.getBoolean(("pool"));
+            int rent = propertyObject.getInt("rent");
+            int squareFeet = propertyObject.getInt("squareFeet");
+            int maxCap = propertyObject.getInt("maximumCapacity");
+            int numOfRoomates = rs.getInt("numOfRoomates");
+            int ownerId = rs.getInt("userId");
+            double distance = propertyObject.getDouble("distanceToCampus");
+            double bathrooms = propertyObject.getDouble("bathrooms");
+            int bedrooms = propertyObject.getInt("bedrooms");
+            java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(rs.getString("dateOfDeadline"));
+            List<String> splitQuestions = new ArrayList<>();
+            JSONArray questions = rs.getJSONArray("questions");
+            for (int i = 0; i < questions.length(); i++) {
+                splitQuestions.add(questions.getString(i));
+            }
+            PropertyUtilities utilities = new PropertyUtilities(pool, ac, laundry, dishwasher, balcony, fireplace);
+            Property property = new Property(propertyID, streetAddress1, streetAddress2, city, state, country, rent, maxCap, squareFeet, utilities, distance, bathrooms, bedrooms);
+            Invitation invitation = new Invitation(postId, ownerId, property, date, null, null, numOfRoomates, splitQuestions);
+            return invitation;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
 
     public static boolean deletePost(int postId) throws SQLException {
         Connection c = SqlConnection.GetConnection();

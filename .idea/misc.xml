@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Owner/Documents/School/Fall 2022/CSCI 310/Android Projects/HomeShare/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/Owner/Documents/School/Fall 2022/CSCI 310/Android Projects/HomeShare/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/Owner/Documents/School/Fall 2022/CSCI 310/Android Projects/HomeShare/app/src/main/res/layout/activity_main.xml" value="0.131640625" />
+        <entry key="..\:/Users/Owner/Documents/School/Fall 2022/CSCI 310/Android Projects/HomeShare/app/src/main/res/layout/activity_sign_up.xml" value="0.1796875" />
+        <entry key="..\:/Users/Owner/Documents/School/Fall 2022/CSCI 310/Android Projects/HomeShare/app/src/main/res/layout/content_scrolling.xml" value="0.1" />
       </map>
     </option>
   </component>
