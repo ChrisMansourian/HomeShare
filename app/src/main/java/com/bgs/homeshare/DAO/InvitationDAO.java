@@ -20,16 +20,19 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 public class InvitationDAO {
-    public static List<Invitation> getInvitations(int userId) {// gets all valid invitations that have not been
+    public static List<Invitation> getInvitations(int userId, String sortCriteria, int ascending) {// gets all valid invitations that have not been
         // responded to by user and are not expired
         Connection c = SqlConnection.GetConnection();
         List<Invitation> invitations = new ArrayList<>();
         String dateNow = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
 
         try {
-            String SQL = "Exec usp_getPosts '" + dateNow + "', '" + userId + "'";
+            String SQL = "Exec usp_getPosts '" + dateNow + "', '" + userId + "', ?, ?";
 
             PreparedStatement stmt = c.prepareStatement(SQL);
+
+            stmt.setString(1, sortCriteria);
+            stmt.setInt(2, ascending);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -97,9 +100,12 @@ public class InvitationDAO {
                     + invitation.property.utilities.getLaundry().compareTo(false)
                     + "', '" + invitation.property.utilities.getDishwasher().compareTo(false) + "', '"
                     + invitation.property.utilities.getBalcony().compareTo(false) + "', '"
-                    + invitation.property.utilities.getFireplace().compareTo(false) + "'";
+                    + invitation.property.utilities.getFireplace().compareTo(false) + "', ?, ?" ;
 
             CallableStatement stmt = c.prepareCall(SQL);
+
+            stmt.setInt(1,invitation.property.getNumOfBedrooms());
+            stmt.setDouble(1,invitation.property.getNumOfBathrooms());
 
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
@@ -291,10 +297,12 @@ public class InvitationDAO {
             int numOfRoomates = rs.getInt("NumberOfRoomates");
             int ownerId = rs.getInt("USERID");
             double distance = rs.getFloat("DistanceToCampus");
+            double bathrooms = rs.getFloat("Bathrooms");
+            int bedrooms = rs.getInt("Bedrooms");
             java.util.Date date = rs.getDate("DOD");
             List<String> splitQuestions = Arrays.asList((rs.getString("InvitationQuestions")).split(","));
             PropertyUtilities utilities = new PropertyUtilities(pool, ac, laundry, dishwasher, balcony, fireplace);
-            Property property = new Property(propertyID, streetAddress1, streetAddress2, city, state, country, rent, maxCap, squareFeet, utilities, distance);
+            Property property = new Property(propertyID, streetAddress1, streetAddress2, city, state, country, rent, maxCap, squareFeet, utilities, distance,bathrooms,bedrooms);
             Invitation invitation = new Invitation(postId, ownerId, property, date, null, null, numOfRoomates, splitQuestions);
             return invitation;
         }

@@ -12,10 +12,12 @@ public class Property {
     private int rent;
     private int maximumCapacity;
     private int squareFeet;
+    private int numOfBedrooms;
+    private double numOfBathrooms;
     private final double distanceToCampus;
     public PropertyUtilities utilities;
 
-    public Property(int propertyID, String streetAddress1, String streetAddress2, String city, String state, String country, int rent, int maximumCapacity, int squareFeet, PropertyUtilities utilities, double distanceToCampus){
+    public Property(int propertyID, String streetAddress1, String streetAddress2, String city, String state, String country, int rent, int maximumCapacity, int squareFeet, PropertyUtilities utilities, double distanceToCampus, double bathrooms, int bedrooms){
         this.propertyID = propertyID;
         this.streetAddress1 = streetAddress1;
         this.streetAddress2 = streetAddress2;
@@ -27,6 +29,8 @@ public class Property {
         this.squareFeet = squareFeet;
         this.utilities = utilities;
         this.distanceToCampus = distanceToCampus;
+        this.numOfBathrooms = bathrooms;
+        this.numOfBedrooms = bedrooms;
     }
 
     public void setStreetAddress1(String val){
@@ -60,6 +64,14 @@ public class Property {
     public void setSquareFeet(int val){
         this.squareFeet = val;
     }
+
+    public void setNumOfBedrooms(int val){this.numOfBedrooms = val;}
+
+    public void setNumOfBathrooms(double val){this.numOfBathrooms = val;}
+
+    public int getNumOfBedrooms(){return this.numOfBedrooms;}
+
+    public double getNumOfBathrooms(){return this.numOfBathrooms;}
 
     public int getSquareFeet(){
         return this.squareFeet;

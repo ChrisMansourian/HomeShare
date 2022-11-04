@@ -20,4 +20,17 @@
     <string name="text_signup">Sign Up</string>
     <string name="option_password">Password:</string>
     <string name="text_password">Password</string>
+
+    <string-array name="years2023to2032">
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+        <item>2031</item>
+        <item>2032</item>
+    </string-array>
 </resources>
