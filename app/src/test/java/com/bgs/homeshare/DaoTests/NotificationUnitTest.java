@@ -26,7 +26,7 @@ public class NotificationUnitTest {
     @Test
     public void CreateNotification() {
 
-        boolean result = NotificationManager.SendNotification(1, 2, "This is a test");
+        boolean result = NotificationManager.SendNotification(1, 140, "This is a test");
 
         assertTrue(result);
 

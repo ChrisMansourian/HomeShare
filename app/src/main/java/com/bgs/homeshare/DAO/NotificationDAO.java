@@ -4,6 +4,9 @@ import com.bgs.homeshare.Models.Notification;
 import com.bgs.homeshare.Models.User;
 import com.bgs.homeshare.SQL.SqlConnection;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,34 +14,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class NotificationDAO {
 
     public static List<Notification> GetUserNotifications(int userId) {
-        Connection c = SqlConnection.GetConnection();
         List<Notification> list = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://homeshareapi.azurewebsites.net/Notification/GetNotifications?userId=" + userId)
+                .build();
+
         try {
-            String SQL = "Exec usp_getNotifications " + userId;
+            Response response = client.newCall(request).execute();
 
-            PreparedStatement stmt = c.prepareStatement(SQL);
+            String temp = response.body().string();
+            response.body().close();
 
-            ResultSet rs = stmt.executeQuery();
+            JSONArray jsonArray = new JSONArray(temp);
 
-            while (rs.next()) {
-                int uId = rs.getInt("USERID");
-                int pId = rs.getInt("POSTID");
-                int notified = rs.getInt("Notified");
-                if (rs.wasNull()) {
-                    notified = -1;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                int uId = jsonObject.getInt("userid");
+                int pId = jsonObject.getInt("postid");
+                int notified = -1;
+                if (!jsonObject.isNull("notified")) {
+                    notified = jsonObject.getInt("notified");
                 }
-                String text = rs.getString("Notification");
+                String text = jsonObject.getString("notification");
 
                 list.add(new Notification(uId, pId, text, notified));
             }
-
-            rs.close();
-        }
-        catch (SQLException e) {
-            return null;
         }
         catch (Exception e) {
             return null;
@@ -48,22 +56,25 @@ public class NotificationDAO {
     }
 
     public static boolean CreateNewNotification(Notification n) {
-        Connection c = SqlConnection.GetConnection();
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://homeshareapi.azurewebsites.net/Notification/CreateNewNotification?userId=" + n.getUserId() + "&postId=" + n.getPostId() + "&text=" + n.getText())
+                .build();
+
         try {
-            String SQL = "Exec usp_createNotification " + n.getUserId() + ", " + n.getPostId() + ", '" + n.getText() + "'";
+            Response response = client.newCall(request).execute();
 
-            PreparedStatement stmt = c.prepareStatement(SQL);
+            String temp = response.body().string();
+            response.body().close();
 
-            stmt.execute();
-        }
-        catch (SQLException e) {
-            return false;
-        }
-        catch (Exception e) {
-            return false;
+            return Boolean.parseBoolean(temp);
+
+            // Do something with the response.
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return true;
+        return false;
     }
 
 }
