@@ -40,6 +40,7 @@
         <entry key="app/src/main/res/layout/fragment_invites.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.278125" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/notifications_list.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/menu/menu_view_a_response.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/menu/menu_view_a_user.xml" value="0.4244791666666667" />

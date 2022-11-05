@@ -3,16 +3,20 @@ package com.bgs.homeshare.Managers;
 import com.bgs.homeshare.DAO.NotificationDAO;
 import com.bgs.homeshare.Models.Notification;
 
-import java.util.List;
+import java.util.*;
 
 public class NotificationManager {
+
+    public static List<Notification> notifications;
 
     public static boolean SendNotification(int userId, int postId, String msg) {
         return NotificationDAO.CreateNewNotification(new Notification(userId, postId, msg));
     }
 
-    public static List<Notification> GetNotifications(int userId) {
-        return NotificationDAO.GetUserNotifications(userId);
+    public static Boolean GetNotifications(int userId) {
+        notifications = NotificationDAO.GetUserNotifications(userId);
+        Collections.reverse(notifications);
+        return (notifications != null);
     }
 
 }
