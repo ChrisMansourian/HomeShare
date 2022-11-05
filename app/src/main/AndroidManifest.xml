@@ -21,6 +21,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".CreateInvite"
+            android:exported="false"
+            android:label="@string/title_activity_create_invite"
+            android:theme="@style/Theme.HomeShare.NoActionBar" />
+        <activity
+            android:name=".ViewAUser"
+            android:exported="false"
+            android:label="@string/title_activity_view_auser"
+            android:theme="@style/Theme.HomeShare.NoActionBar" />
+        <activity
+            android:name=".ViewAResponseActivity"
+            android:exported="false"
+            android:label="@string/title_activity_view_aresponse"
+            android:theme="@style/Theme.HomeShare.NoActionBar" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home" />
