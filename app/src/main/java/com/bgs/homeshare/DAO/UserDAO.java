@@ -279,7 +279,7 @@ public class UserDAO {
         return result;
     }
 
-    private static User GetUserFromJsonObject(JSONObject obj) throws Exception {
+    public static User GetUserFromJsonObject(JSONObject obj) throws Exception {
         int uId = Integer.parseInt(obj.get("userId").toString());
         String uName = obj.getString("userName");
         String email = obj.getString("email");
