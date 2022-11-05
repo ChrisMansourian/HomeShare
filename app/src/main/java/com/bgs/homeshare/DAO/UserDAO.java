@@ -222,7 +222,47 @@ public class UserDAO {
         return result;
     }
 
-    private static User GetUserFromJsonObject(JSONObject obj) throws Exception {
+
+    public static boolean CreateAccount(User user, String password) {
+
+        OkHttpClient client = new OkHttpClient();
+
+        boolean result = false;
+
+        try {
+            JSONObject jsonObject = new JSONObject();
+            String imgString = android.util.Base64.encodeToString(user.getProfileImageBytes(), Base64.NO_WRAP);
+
+            jsonObject.put("img", imgString );
+
+            java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(user.getDOB());
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+            Request request = new Request.Builder()
+                    .url("https://homeshareapi.azurewebsites.net/Login/SignUp?username=" + user.getUserName() + "&password=" + password
+                            + "&dob=" + sqlDate.toString() + "&email=" + user.getEmail() + "&number=" + user.getPhoneNumber() + "&academicFocus=" + user.getAcademicFocus()
+                            + "&schoolYear=" + user.getSchoolYear() + "&personalIntro=" + user.getPersonalIntroduction() + "&personalityQuestion1=" + user.getPersonalityQuestion1()
+                            + "&personalityQuestion2=" + user.getPersonalityQuestion2() + "&personalityQuestion3=" + user.getPersonalityQuestion3())
+                    .post(body)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+
+            String temp = response.body().string();
+            response.body().close();
+
+            result = Boolean.parseBoolean(temp);
+
+            // Do something with the response.
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static User GetUserFromJsonObject(JSONObject obj) throws Exception {
         int uId = Integer.parseInt(obj.get("userId").toString());
         String uName = obj.getString("userName");
         String email = obj.getString("email");
