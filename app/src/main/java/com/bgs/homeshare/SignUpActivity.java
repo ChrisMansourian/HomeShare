@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -36,9 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
     private String password;
     // One Preview Image
     private ImageView IVPreviewImage;
-
-    // constant to compare
-    // the activity result code
     private int SELECT_PICTURE = 200;
 
 
@@ -46,6 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
 
         //for date picker
         initDatePicker();
@@ -280,18 +279,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void onCreateClick(View v){
-        System.out.println("Username: " + user.getUserName());
-        System.out.println("Password: " + password);
-        System.out.println("Email: " + user.getEmail());
-        System.out.println("Number: " + user.getPhoneNumber());
-        System.out.println("Major: " + user.getAcademicFocus());
-        System.out.println("DOB: " + user.getDOB());
-        System.out.println("GraduationYear: " + user.getSchoolYear());
-        System.out.println("Personal Introduction: " + user.getPersonalIntroduction());
-        System.out.println("PersonalityQuestion1: " + user.getPersonalityQuestion1());
-        System.out.println("PersonalityQuestion2: " + user.getPersonalityQuestion2());
-        System.out.println("PersonalityQuestion3: " + user.getPersonalityQuestion3());
         if(!anyNull()) {
+
             SignUpActivity.CreateAccountTask c = new SignUpActivity.CreateAccountTask();
             c.v = v;
             User user2 = new User(-1, password, null, null, null, null, null, null, null, null, null, null);
@@ -306,20 +295,17 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+
     class CreateAccountTask extends AsyncTask<User, Void, Boolean> {
         public View v;
         private Exception exception;
 
+
         protected Boolean doInBackground(User... urls) {
             try {
-//                if(UserManager.CheckUserNameExists(urls[0].getUserName())){//switch activity
-//                    AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
-//                    alert.setTitle("UserName Already Exists");
-//                    alert.setMessage("Enter a new username");
-//                    alert.setPositiveButton("OK", null);
-//                    alert.show();
-//                    return false;
-//                }
+               if(UserManager.CheckUserNameExists(urls[0].getUserName())){//switch activity
+                   return false;
+               }
                 boolean createAccountResult = UserManager.CreateAccount(urls[0], (urls[1].getUserName()));
                 return createAccountResult;
             } catch (Exception e) {
@@ -330,11 +316,17 @@ public class SignUpActivity extends AppCompatActivity {
 
         protected void onPostExecute(Boolean result) {
             if (!result) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+                alert.setTitle("UserName Already Exists");
+                alert.setMessage("Enter a new username");
+                alert.setPositiveButton("OK", null);
+                alert.show();
                 return;
             }
 
             startActivity(new Intent(v.getContext(), HomeActivity.class));
             overridePendingTransition(0, 0);
+
         }
     }
 
@@ -415,7 +407,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String makeDateString(int day, int month, int year)
     {
 
-        String date = year+"-"+ getMonthFormat(month) + "-" + (new DecimalFormat("00")).format(day) ;
+        String date = year+"-"+ (new DecimalFormat("00")).format(month)  + "-" + (new DecimalFormat("00")).format(day) ;
         if(user != null){
             user.setDOB(date);
         }
@@ -430,37 +422,6 @@ public class SignUpActivity extends AppCompatActivity {
         month = month + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
         return makeDateString(day, month, year);
-    }
-
-    private String getMonthFormat(int month)
-    {
-        if(month == 1)
-            return "01";
-        if(month == 2)
-            return "02";
-        if(month == 3)
-            return "03";
-        if(month == 4)
-            return "04";
-        if(month == 5)
-            return "05";
-        if(month == 6)
-            return "06";
-        if(month == 7)
-            return "07";
-        if(month == 8)
-            return "08";
-        if(month == 9)
-            return "09";
-        if(month == 10)
-            return "10";
-        if(month == 11)
-            return "11";
-        if(month == 12)
-            return "12";
-
-        //default should never happen
-        return "01";
     }
 
     public void openDatePicker(View view)

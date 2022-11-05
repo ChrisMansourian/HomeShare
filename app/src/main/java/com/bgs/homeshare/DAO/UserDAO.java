@@ -1,26 +1,9 @@
 package com.bgs.homeshare.DAO;
 
-import android.graphics.Bitmap;
-import android.os.Build;
-import android.util.Base64;
-
-import androidx.annotation.RequiresApi;
-
-import com.bgs.homeshare.Models.User;
-import com.bgs.homeshare.SQL.SqlConnection;
-
+import android.util.*;
+import com.bgs.homeshare.Models.*;
 import org.json.JSONObject;
-
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
-
-import kotlinx.coroutines.Job;
-import okhttp3.OkHttpClient;
 import okhttp3.*;
 
 public class UserDAO {
@@ -163,7 +146,7 @@ public class UserDAO {
             RequestBody body = RequestBody.create(JSON, jsonObject.toString());
             Request request = new Request.Builder()
                     .url("https://homeshareapi.azurewebsites.net/Login/UpdateProfile?username=" + userName
-                            + "&dob=" + sqlDate.toString() + "&email=" + email + "&number=" + number + "&academicFocus=" + academicFocus
+                            + "&dob=" + sqlDate + "&email=" + email + "&number=" + number + "&academicFocus=" + academicFocus
                             + "&schoolYear=" + schoolYear + "&personalIntro=" + personalIntro + "&personalityQuestion1=" + personalityQuestion1
                             + "&personalityQuestion2=" + personalityQuestion2 + "&personalityQuestion3=" + personalityQuestion3)
                     .post(body)
@@ -239,52 +222,14 @@ public class UserDAO {
         return result;
     }
 
-
-    public static boolean CreateAccount(User user, String password) {
-
-        OkHttpClient client = new OkHttpClient();
-
-        boolean result = false;
-
-        try {
-            JSONObject jsonObject = new JSONObject();
-            String imgString = android.util.Base64.encodeToString(user.getProfileImageBytes(), Base64.NO_WRAP);
-
-            jsonObject.put("img", imgString );
-
-            java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(user.getDOB());
-            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-            RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-            Request request = new Request.Builder()
-                    .url("https://homeshareapi.azurewebsites.net/Login/SignUp?username=" + user.getUserName() + "&password=" + password
-                            + "&dob=" + sqlDate.toString() + "&email=" + user.getEmail() + "&number=" + user.getPhoneNumber() + "&academicFocus=" + user.getAcademicFocus()
-                            + "&schoolYear=" + user.getSchoolYear() + "&personalIntro=" + user.getPersonalIntroduction() + "&personalityQuestion1=" + user.getPersonalityQuestion1()
-                            + "&personalityQuestion2=" + user.getPersonalityQuestion2() + "&personalityQuestion3=" + user.getPersonalityQuestion3())
-                    .post(body)
-                    .build();
-
-            Response response = client.newCall(request).execute();
-
-            String temp = response.body().string();
-            response.body().close();
-
-            result = Boolean.parseBoolean(temp);
-
-            // Do something with the response.
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
-
     private static User GetUserFromJsonObject(JSONObject obj) throws Exception {
         int uId = Integer.parseInt(obj.get("userId").toString());
         String uName = obj.getString("userName");
         String email = obj.getString("email");
         String phoneNumber = obj.getString("phoneNumber");
         String DOB = obj.getString("dob");
+        DOB = DOB.substring(0,10);
+
         String academicFocus = obj.getString("academicFocus");
         String schoolYear = obj.getString("schoolYear");
         String personalIntroduction = obj.getString("personalIntroduction");

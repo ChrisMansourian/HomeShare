@@ -50,6 +50,40 @@ public class UserManager {
         return false;
     }
 
+    public static boolean UpdateProfile(User newChanges) {
+        if (LoggedInUser == null) {
+            return false;
+        }
+
+        String dob = newChanges.getDOB();
+        String email = newChanges.getEmail();
+        String number = newChanges.getPhoneNumber();
+        String academicFocus = newChanges.getAcademicFocus();
+        String schoolYear = newChanges.getSchoolYear();
+        String personalIntro = newChanges.getPersonalIntroduction();
+        String personalityQuestion1 = newChanges.getPersonalityQuestion1();
+        String personalityQuestion2 = newChanges.getPersonalityQuestion2();
+        String personalityQuestion3 = newChanges.getPersonalityQuestion3();
+        byte[] img = newChanges.getProfileImageBytes();
+
+        if (UserDAO.UpdateProfile(LoggedInUser.getUserName(), dob, email, number, academicFocus,
+                schoolYear, personalIntro, img, personalityQuestion1,
+                personalityQuestion2, personalityQuestion3)) {
+            LoggedInUser.setDOB(dob);
+            LoggedInUser.setEmail(email);
+            LoggedInUser.setPhoneNumber(number);
+            LoggedInUser.setAcademicFocus(academicFocus);
+            LoggedInUser.setSchoolYear(schoolYear);
+            LoggedInUser.setPersonalIntroduction(personalIntro);
+            LoggedInUser.setProfileImageBytes(img);
+            LoggedInUser.setPersonalityQuestion1(personalityQuestion1);
+            LoggedInUser.setPersonalityQuestion2(personalityQuestion2);
+            LoggedInUser.setPersonalityQuestion3(personalityQuestion3);
+            return true;
+        }
+        return false;
+    }
+
     public static boolean CreateAccount(String userName, String password,
                                         String dob, String email, String number,
                                         String academicFocus, String schoolYear,
