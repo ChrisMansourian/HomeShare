@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_invites" />
 
     <fragment
+        android:id="@+id/navigation_invite"
+        android:name="com.bgs.homeshare.ui.InviteFragment"
+        android:label="Invites"
+        tools:layout="@layout/fragment_invite" />
+
+    <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.bgs.homeshare.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"

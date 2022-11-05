@@ -8,6 +8,7 @@
         <entry key="..\:/Users/Owner/Documents/School/Fall 2022/CSCI 310/Android Projects/HomeShare/app/src/main/res/layout/activity_main.xml" value="0.131640625" />
         <entry key="..\:/Users/Owner/Documents/School/Fall 2022/CSCI 310/Android Projects/HomeShare/app/src/main/res/layout/activity_sign_up.xml" value="0.1796875" />
         <entry key="..\:/Users/Owner/Documents/School/Fall 2022/CSCI 310/Android Projects/HomeShare/app/src/main/res/layout/content_scrolling.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.2125" />
         <entry key="app/src/main/res/drawable-hdpi/ic_launcher_foreground.xml" value="0.3365" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1675" />
         <entry key="app/src/main/res/drawable/ic_account.xml" value="0.1675" />
@@ -19,6 +20,9 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.317" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2825" />
         <entry key="app/src/main/res/drawable/ic_secondLauncher_background.xml" value="0.3365" />
+        <entry key="app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.2484375" />
+        <entry key="app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.21721311475409835" />
+        <entry key="app/src/main/res/layout/activity_create_invite.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.24980316162109384" />
         <entry key="app/src/main/res/layout/activity_landing.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3582427536231884" />
@@ -26,12 +30,19 @@
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.2640625" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.30357142857142855" />
         <entry key="app/src/main/res/layout/activity_temp.xml" value="0.3582427536231884" />
+        <entry key="app/src/main/res/layout/activity_view_aresponse.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_view_auser.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_create_invite.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.28804347826086957" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.278125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.278125" />
+        <entry key="app/src/main/res/layout/fragment_invite.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_invites.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.278125" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.4244791666666667" />
+        <entry key="app/src/main/res/menu/menu_view_a_response.xml" value="0.4244791666666667" />
+        <entry key="app/src/main/res/menu/menu_view_a_user.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.316" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.316" />
       </map>
