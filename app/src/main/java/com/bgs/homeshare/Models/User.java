@@ -1,8 +1,15 @@
 package com.bgs.homeshare.Models;
 
 import android.graphics.Bitmap;
+import android.icu.text.SimpleDateFormat;
 
 import com.bgs.homeshare.Util.Util;
+
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 public class User {
     private int UserId = -1;
@@ -39,6 +46,25 @@ public class User {
         ProfileImage = Util.ConvertBytesToImage(profileImageBytes);
     }
 
+    public User(User user) {
+        UserId = user.getUserId();
+        UserName = user.getUserName();
+        DOB = user.getDOB();
+        Email = user.getEmail();
+        PhoneNumber = user.getPhoneNumber();
+        AcademicFocus = user.getAcademicFocus();
+        SchoolYear = user.getSchoolYear();
+
+        PersonalIntroduction = user.getPersonalIntroduction();
+        ProfileImageBytes = user.getProfileImageBytes();
+
+        PersonalityQuestion1 = user.getPersonalityQuestion1();
+        PersonalityQuestion2 = user.getPersonalityQuestion2();
+        PersonalityQuestion3 = user.getPersonalityQuestion3();
+
+        ProfileImage = Util.ConvertBytesToImage(ProfileImageBytes);
+    }
+
     public int getUserId() {
         return UserId;
     }
@@ -52,6 +78,11 @@ public class User {
     }
 
     public String getDOB() {
+        if(DOB.charAt(2) == '/'){
+            String [] date = DOB.split("/");
+            String actualDate =  date[2].substring(0,4) + "-" + (new DecimalFormat("00")).format(Integer.valueOf(date[1])) + "-" + (new DecimalFormat("00")).format(Integer.valueOf(date[0]));
+            return actualDate;
+        }
         return DOB;
     }
 

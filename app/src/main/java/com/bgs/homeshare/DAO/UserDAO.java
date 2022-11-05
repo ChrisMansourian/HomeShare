@@ -1,26 +1,9 @@
 package com.bgs.homeshare.DAO;
 
-import android.graphics.Bitmap;
-import android.os.Build;
-import android.util.Base64;
-
-import androidx.annotation.RequiresApi;
-
-import com.bgs.homeshare.Models.User;
-import com.bgs.homeshare.SQL.SqlConnection;
-
+import android.util.*;
+import com.bgs.homeshare.Models.*;
 import org.json.JSONObject;
-
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
-
-import kotlinx.coroutines.Job;
-import okhttp3.OkHttpClient;
 import okhttp3.*;
 
 public class UserDAO {
@@ -163,7 +146,7 @@ public class UserDAO {
             RequestBody body = RequestBody.create(JSON, jsonObject.toString());
             Request request = new Request.Builder()
                     .url("https://homeshareapi.azurewebsites.net/Login/UpdateProfile?username=" + userName
-                            + "&dob=" + sqlDate.toString() + "&email=" + email + "&number=" + number + "&academicFocus=" + academicFocus
+                            + "&dob=" + sqlDate + "&email=" + email + "&number=" + number + "&academicFocus=" + academicFocus
                             + "&schoolYear=" + schoolYear + "&personalIntro=" + personalIntro + "&personalityQuestion1=" + personalityQuestion1
                             + "&personalityQuestion2=" + personalityQuestion2 + "&personalityQuestion3=" + personalityQuestion3)
                     .post(body)
@@ -285,6 +268,8 @@ public class UserDAO {
         String email = obj.getString("email");
         String phoneNumber = obj.getString("phoneNumber");
         String DOB = obj.getString("dob");
+        DOB = DOB.substring(0,10);
+
         String academicFocus = obj.getString("academicFocus");
         String schoolYear = obj.getString("schoolYear");
         String personalIntroduction = obj.getString("personalIntroduction");
