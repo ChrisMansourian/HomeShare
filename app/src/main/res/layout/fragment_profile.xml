@@ -267,12 +267,26 @@
                 android:layout_marginStart="159dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="159dp"
-                android:layout_marginBottom="150dp"
                 android:text="SAVE CHANGES"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerPersonalityQuestion3Profile"
+                tools:onClick="onSaveClick" />
+
+            <Button
+                android:id="@+id/logOutButtonProfilePage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="159dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="159dp"
+                android:layout_marginBottom="150dp"
+                android:text="LOG OUT "
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerPersonalityQuestion3Profile"
+                app:layout_constraintTop_toBottomOf="@+id/saveChangesButtonProfilePage"
                 app:layout_constraintVertical_bias="1.0"
                 tools:onClick="onSaveClick" />
 

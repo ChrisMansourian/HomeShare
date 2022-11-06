@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/navigation_invite"
         android:name="com.bgs.homeshare.ui.InviteFragment"
-        android:label="Invites"
+        android:label="Create Invite"
         tools:layout="@layout/fragment_invite" />
 
     <fragment

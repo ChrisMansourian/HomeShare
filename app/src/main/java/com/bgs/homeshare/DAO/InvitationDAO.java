@@ -33,6 +33,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class InvitationDAO {
+    public static String usc = "&destinations=3607%20Trousdale%20Pkwy%2C%20Los%20Angeles%2C%20CA";
+
     public static List<Invitation> getInvitations(int userId, String sortCriteria, int ascending) {// gets all valid invitations that have not been
         // responded to by user and are not expired
         List<Invitation> invitations = new ArrayList<>();
@@ -98,6 +100,9 @@ public class InvitationDAO {
         JSONObject util = new JSONObject();
 
         try {
+
+            invitation.property.setDistanceToCampus(calculateDistance(invitation.property.getStreetAddress1(), invitation.property.getCity(), invitation.property.getState(), invitation.property.getCountry()));
+
             String dateNow = (new SimpleDateFormat("yyyy-MM-dd")).format(invitation.getDateOfDeadline());
 
             util.put("pool", invitation.property.utilities.getPool());
@@ -145,6 +150,42 @@ public class InvitationDAO {
         }
 
         return result;
+    }
+
+    public static double calculateDistance(String streetAddress, String city, String state, String country) throws Exception{
+        String origin;
+        origin = "?origins=";
+        origin += (streetAddress.replaceAll(" ", "%20"));
+        origin += "%2C%20" + city.replaceAll(" ", "%20");
+        origin += "%2C%20" + state + "%2C%20" + country;
+
+        String link = "https://maps.googleapis.com/maps/api/distancematrix/json" + origin + usc + "&units=imperial&key=AIzaSyAYm9ShSOeMArMLM2kNc9602033S0buzMY";
+
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url(link)
+                .method("POST", body)
+                .build();
+        Response response = client.newCall(request).execute();
+        String temp = response.body().string();
+        response.body().close();
+
+        JSONObject js = new JSONObject(temp);
+        JSONArray rows = js.getJSONArray("rows");
+        JSONObject elements = rows.getJSONObject(0);
+        JSONArray ray = elements.getJSONArray("elements");
+        JSONObject obj3  = ray.getJSONObject(0);
+        String result = obj3.getString("status");
+        if(result.equals("OK")){
+            JSONObject obj2 = obj3.getJSONObject("distance");
+            String value = obj2.getString("text");
+            value = value.substring(0, value.length()-3);
+            return Double.valueOf(value);
+        }
+        return -1;
     }
 
     public static Boolean manageResponse(int postId, int userId, int posterResponse, int ownerUserId) { // records responses from
