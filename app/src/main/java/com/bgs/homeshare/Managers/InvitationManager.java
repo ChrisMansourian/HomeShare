@@ -10,6 +10,7 @@ import java.util.List;
 public class InvitationManager {
     public static List<Invitation> invitations;
     public static Invitation myInvitation;
+    public static Invitation clickedInvitation = null;
 
     public static boolean respondToInvitation(int postId, int userId, int response, List<String> questionResponses){
         return InvitationDAO.respondToInvitation(postId, userId, response, questionResponses);
