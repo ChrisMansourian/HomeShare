@@ -26,9 +26,10 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.317" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2825" />
         <entry key="app/src/main/res/drawable/ic_secondLauncher_background.xml" value="0.3365" />
+        <entry key="app/src/main/res/drawable/remove.xml" value="0.1935" />
         <entry key="app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.21721311475409835" />
-        <entry key="app/src/main/res/layout/activity_create_invite.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_create_invite.xml" value="0.34846765039727584" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.24980316162109384" />
         <entry key="app/src/main/res/layout/activity_landing.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3582427536231884" />
@@ -36,6 +37,7 @@
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.2640625" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.30357142857142855" />
         <entry key="app/src/main/res/layout/activity_temp.xml" value="0.3582427536231884" />
+        <entry key="app/src/main/res/layout/activity_view_an_invitation.xml" value="0.20643363728470113" />
         <entry key="app/src/main/res/layout/activity_view_aresponse.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_view_auser.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_create_invite.xml" value="0.1" />
@@ -46,7 +48,9 @@
         <entry key="app/src/main/res/layout/fragment_invites.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.278125" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/invitation_list.xml" value="0.20643363728470113" />
         <entry key="app/src/main/res/layout/notifications_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/questions_add_list.xml" value="0.20643363728470113" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/menu/menu_view_a_response.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/menu/menu_view_a_user.xml" value="0.4244791666666667" />

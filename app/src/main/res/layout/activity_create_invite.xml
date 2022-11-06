@@ -1,9 +1,455 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateInvite">
+    android:fillViewport="true"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".CreateInvite">
+
+        <ImageView
+            android:id="@+id/backButtonCreateInvitePage"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:onClick="onBackClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@android:drawable/ic_menu_revert" />
+
+        <TextView
+            android:id="@+id/streeetAdressTextViewCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:text="Street Address 1:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createInviteTitleTextView" />
+
+        <TextView
+            android:id="@+id/streeetAdressTextViewCreateInvite3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:text="Street Address 2:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/streeetAdressTextViewCreateInvite" />
+
+        <TextView
+            android:id="@+id/textViewCityCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="132dp"
+            android:layout_marginTop="45dp"
+            android:text="City:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/streeetAdressTextViewCreateInvite3" />
+
+        <TextView
+            android:id="@+id/textViewStateCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="45dp"
+            android:text="State:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCityCreateInvite" />
+
+        <TextView
+            android:id="@+id/textViewCountryCreateInvite"
+            android:layout_width="77dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="32dp"
+            android:gravity="right"
+            android:text="Country:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewStateCreateInvite" />
+
+        <TextView
+            android:id="@+id/textViewMonthlyRentCreateInvite"
+            android:layout_width="133dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="45dp"
+            android:gravity="right"
+            android:text="Monthly Rent:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCountryCreateInvite" />
+
+        <TextView
+            android:id="@+id/textViewTotalRoomatesCreateInvite"
+            android:layout_width="152dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:gravity="right"
+            android:text="Total Roomates:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMonthlyRentCreateInvite" />
+
+        <TextView
+            android:id="@+id/textViewSquareFeetCreateInvite"
+            android:layout_width="152dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:gravity="right"
+            android:text="Square Feet:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTotalRoomatesCreateInvite" />
+
+        <TextView
+            android:id="@+id/textViewSquareFeetCreateInvite2"
+            android:layout_width="152dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:gravity="right"
+            android:text=" Bathrooms:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSquareFeetCreateInvite" />
+
+        <TextView
+            android:id="@+id/textViewSquareFeetCreateInvite3"
+            android:layout_width="152dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:gravity="right"
+            android:text="Bedrooms:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSquareFeetCreateInvite2" />
+
+        <TextView
+            android:id="@+id/deadlineTextViewCreateInvite"
+            android:layout_width="152dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="30dp"
+            android:gravity="right"
+            android:text="Deadline:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fireplaceCheckCreateInvite" />
+
+        <TextView
+            android:id="@+id/textViewQuestions"
+            android:layout_width="281dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Questions To Ask Invitees: \nAdd at least 2 questions"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+
+        <TextView
+            android:id="@+id/textViewSquareFeetCreateInvite5"
+            android:layout_width="152dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="Utilities:"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBedrooms" />
+
+        <TextView
+            android:id="@+id/createInviteTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Create Invitation"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextTextPostalAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:ems="10"
+            android:hint="3706 Trojan Pkwy."
+            android:inputType="textPostalAddress"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/streeetAdressTextViewCreateInvite"
+            app:layout_constraintTop_toBottomOf="@+id/createInviteTitleTextView" />
+
+        <EditText
+            android:id="@+id/editTextTextPostalAddress2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="12dp"
+            android:ems="10"
+            android:hint="SUITE 323"
+            android:inputType="textPostalAddress"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/streeetAdressTextViewCreateInvite3"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPostalAddress" />
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="12dp"
+            android:ems="10"
+            android:hint="Los Angeles"
+            android:inputType="textPostalAddress"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewCityCreateInvite"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPostalAddress2" />
+
+        <Spinner
+            android:id="@+id/spinnerStateCreateInvite"
+            android:layout_width="113dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp"
+            app:layout_constraintStart_toEndOf="@+id/textViewStateCreateInvite"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+
+        <Spinner
+            android:id="@+id/spinnerCountryCreateInvite"
+            android:layout_width="113dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toEndOf="@+id/textViewCountryCreateInvite"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerStateCreateInvite" />
+
+        <EditText
+            android:id="@+id/editTextRentCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="15dp"
+            android:ems="10"
+            android:hint="$4200.69"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewMonthlyRentCreateInvite"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCountryCreateInvite" />
+
+        <EditText
+            android:id="@+id/editTextNumberOfRoomatesCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:ems="10"
+            android:hint="4"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewTotalRoomatesCreateInvite"
+            app:layout_constraintTop_toBottomOf="@+id/editTextRentCreateInvite" />
+
+        <EditText
+            android:id="@+id/editTextSquareFeetCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="15dp"
+            android:ems="10"
+            android:hint="1236"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewSquareFeetCreateInvite"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumberOfRoomatesCreateInvite" />
+
+        <EditText
+            android:id="@+id/editTextBathrroms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:ems="10"
+            android:hint="3.5"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewSquareFeetCreateInvite2"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSquareFeetCreateInvite" />
+
+        <EditText
+            android:id="@+id/editTextBedrooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="15dp"
+            android:ems="10"
+            android:hint="4"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewSquareFeetCreateInvite3"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBathrroms" />
+
+        <CheckBox
+            android:id="@+id/poolCheckCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Pool"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSquareFeetCreateInvite5" />
+
+        <CheckBox
+            android:id="@+id/acCheckCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/poolCheckCreateInvite" />
+
+        <CheckBox
+            android:id="@+id/laundryCheckCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Laundry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/acCheckCreateInvite" />
+
+        <CheckBox
+            android:id="@+id/dishwasherCheckCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dishwasher"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/laundryCheckCreateInvite" />
+
+        <CheckBox
+            android:id="@+id/balconyCheckCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balcony"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dishwasherCheckCreateInvite" />
+
+        <CheckBox
+            android:id="@+id/fireplaceCheckCreateInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fireplace"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/balconyCheckCreateInvite" />
+
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="210dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/deadlineTextViewCreateInvite"
+            app:layout_constraintTop_toBottomOf="@+id/fireplaceCheckCreateInvite" />
+
+        <Button
+            android:id="@+id/createInviteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="150dp"
+            android:text="Create Invite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listOfQuestionsCreateInvite"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <RelativeLayout
+            android:id="@+id/inputLayout"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewQuestions">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems = "10"
+                android:hint = "Enter Question here"
+                android:maxLength="100"
+                android:layout_centerInParent="true"
+                android:id="@+id/inputQuestion"
+                />
+            <ImageView
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_toRightOf="@+id/inputQuestion"
+                android:id="@+id/addQuestionImg"
+                android:layout_marginLeft = "7sp"
+                android:layout_centerVertical = "true"
+                android:src="@drawable/ic_baseline_add_24"
+                />
+
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/listOfQuestionsCreateInvite"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
