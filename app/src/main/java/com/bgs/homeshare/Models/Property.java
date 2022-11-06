@@ -14,7 +14,7 @@ public class Property {
     private int squareFeet;
     private int numOfBedrooms;
     private double numOfBathrooms;
-    private final double distanceToCampus;
+    private double distanceToCampus;
     public PropertyUtilities utilities;
 
     public Property(int propertyID, String streetAddress1, String streetAddress2, String city, String state, String country, int rent, int maximumCapacity, int squareFeet, PropertyUtilities utilities, double distanceToCampus, double bathrooms, int bedrooms){
@@ -39,6 +39,10 @@ public class Property {
 
     public void setStreetAddress2(String val){
         this.streetAddress2 = val;
+    }
+
+    public void setDistanceToCampus(double val){
+        this.distanceToCampus = val;
     }
 
     public void setCity(String val){

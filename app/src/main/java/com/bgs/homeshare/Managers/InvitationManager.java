@@ -11,6 +11,8 @@ public class InvitationManager {
     public static List<Invitation> invitations;
     public static Invitation myInvitation;
     public static Invitation clickedInvitation = null;
+    public static double distance;
+
 
     public static boolean respondToInvitation(int postId, int userId, int response, List<String> questionResponses){
         return InvitationDAO.respondToInvitation(postId, userId, response, questionResponses);
@@ -54,6 +56,13 @@ public class InvitationManager {
 //
 //    }
 
+    public static void calculateDistanceBetween(String address1, String address2){
+        try{
+
+        }catch(Exception e){
+
+        }
+    }
     public static boolean deletePost(int postId){
         try{
             if(InvitationDAO.deletePost(postId)){
