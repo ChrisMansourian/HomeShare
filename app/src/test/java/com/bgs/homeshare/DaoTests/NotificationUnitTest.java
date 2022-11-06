@@ -17,7 +17,8 @@ public class NotificationUnitTest {
 
     @Test
     public void NoNotifications() {
-        List<Notification> n = NotificationManager.GetNotifications(-1);
+        NotificationManager.GetNotifications(-1);
+        List<Notification> n = NotificationManager.notifications;
 
         assertNotNull(n);
         assertTrue(n.size() == 0);
@@ -30,14 +31,16 @@ public class NotificationUnitTest {
 
         assertTrue(result);
 
-        List<Notification> notifications = NotificationManager.GetNotifications(1);
+        NotificationManager.GetNotifications(1);
+        List<Notification> notifications = NotificationManager.notifications;
 
         assertNotNull(notifications);
         assertTrue(notifications.size() > 0);
         assertEquals(notifications.get(notifications.size()-1).getNotified(), -1);
 
 
-        List<Notification> notifications2 = NotificationManager.GetNotifications(1);
+        NotificationManager.GetNotifications(1);
+        List<Notification> notifications2 = NotificationManager.notifications;
 
         assertNotNull(notifications2);
         assertTrue(notifications2.size() > 0);
@@ -46,7 +49,8 @@ public class NotificationUnitTest {
 
     @Test
     public void GetNotification() {
-        List<Notification> n = NotificationManager.GetNotifications(1);
+        NotificationManager.GetNotifications(1);
+        List<Notification> n = NotificationManager.notifications;
 
         assertNotNull(n);
         assertTrue(n.size() > 0);

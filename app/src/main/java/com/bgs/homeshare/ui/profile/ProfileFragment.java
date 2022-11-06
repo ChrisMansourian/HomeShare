@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.bgs.homeshare.HomeActivity;
+import com.bgs.homeshare.MainActivity;
 import com.bgs.homeshare.Models.User;
 import com.bgs.homeshare.R;
 import com.bgs.homeshare.Managers.*;
@@ -274,6 +275,17 @@ public class ProfileFragment extends Fragment {
                     alert.show();
                 }
             });
+
+        Button logOutButton = binding.logOutButtonProfilePage;
+
+        logOutButton.setOnClickListener(v->{
+            UserManager.LoggedInUser = null;
+            NotificationManager.notifications = null;
+            InvitationManager.invitations = null;
+            InvitationManager.myInvitation = null;
+            startActivity( new Intent(v.getContext(), MainActivity.class));
+            getActivity().overridePendingTransition(0, 0);
+        });
 
 
         return root;
