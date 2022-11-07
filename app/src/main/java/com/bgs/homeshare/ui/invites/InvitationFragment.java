@@ -92,28 +92,33 @@ public class InvitationFragment extends Fragment {
         }
 
         protected void onPostExecute(Boolean result) {
-            ListView listInvitations = binding.invitationListNotifications;
-            TextView textInvites = binding.textInvites;
+            try {
+                ListView listInvitations = binding.invitationListNotifications;
+                TextView textInvites = binding.textInvites;
 
-            if (result == true) {
-                if (InvitationManager.invitations.size() == 0) {
+                if (result == true) {
+                    if (InvitationManager.invitations.size() == 0) {
+                        textInvites.setText("No Invitations Found!");
+                        textInvites.setVisibility(View.VISIBLE);
+                        listInvitations.setAdapter(null);
+                        return;
+                    }
+
+                    textInvites.setVisibility(View.INVISIBLE);
+
+                    InvitationAdapter invitationAdapter = new InvitationAdapter(getContext(), InvitationManager.invitations);
+                    listInvitations.setAdapter(invitationAdapter);
+
+                    return;
+                } else {
+                    listInvitations.setAdapter(null);
                     textInvites.setText("No Invitations Found!");
                     textInvites.setVisibility(View.VISIBLE);
-                    listInvitations.setAdapter(null);
-                    return;
                 }
-
-                textInvites.setVisibility(View.INVISIBLE);
-
-                InvitationAdapter invitationAdapter = new InvitationAdapter(getContext(), InvitationManager.invitations);
-                listInvitations.setAdapter(invitationAdapter);
-
-                return;
             }
-            else {
-                listInvitations.setAdapter(null);
-                textInvites.setText("No Invitations Found!");
-                textInvites.setVisibility(View.VISIBLE);
+            catch(Exception e){
+                (new InvitationsTask()).execute("distance","1");
+                return;
             }
         }
     }

@@ -124,10 +124,11 @@
             android:layout_width="279dp"
             android:layout_height="27dp"
             android:layout_marginStart="12dp"
-            android:visibility="invisible"
             android:layout_marginTop="30dp"
             android:text="Address"
-            android:textSize="20sp"
+            android:visibility="invisible"
+            app:autoSizeMaxTextSize="20sp"
+            app:autoSizeMinTextSize="8sp"
             app:layout_constraintStart_toEndOf="@+id/textViewTitleAddress"
             app:layout_constraintTop_toBottomOf="@+id/textViewCreateandDeadline" />
 

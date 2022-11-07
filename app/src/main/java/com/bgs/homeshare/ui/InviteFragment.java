@@ -21,6 +21,7 @@ import com.bgs.homeshare.Managers.UserManager;
 import com.bgs.homeshare.Models.*;
 import com.bgs.homeshare.databinding.FragmentInviteBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -66,7 +67,9 @@ public class InviteFragment extends Fragment {
         else{//manage invite option
             createButton.setVisibility(View.INVISIBLE);
             title.setVisibility(View.VISIBLE);
-            title.setText("Invitation Deadline: " + activeInvitation.getDateOfDeadline().toString());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            title.setText("Deadline: " + formatter.format(activeInvitation.getDateOfDeadline()));
+
 
             TextView addressTitle = binding.textViewTitleAddress;
             TextView rentTitle = binding.textViewTitleRent;
@@ -90,19 +93,31 @@ public class InviteFragment extends Fragment {
             TextView bedroomContent = binding.textViewBedrooms;
             TextView bathroomContent = binding.textViewBathrooms;
             TextView utilitiesContent = binding.textViewUtilitiesList;
-
             addressContent.setText(activeInvitation.property.getAddress());
-            rentContent.setText(activeInvitation.property.getRent());
-            roomateContent.setText(activeInvitation.getNumOfRoomates());
-            capacityContent.setText(activeInvitation.property.getMaximumCapacity());
-            squareFeetContent.setText(activeInvitation.property.getSquareFeet() + " SqFt");
-            bedroomContent.setText(activeInvitation.property.getNumOfBedrooms() + " Bed");
-            bathroomContent.setText(activeInvitation.property.getNumOfBathrooms() + " Bath");
+            rentContent.setText(Integer.toString(activeInvitation.property.getRent()));
+            roomateContent.setText(Integer.toString(activeInvitation.getNumOfRoomates()));
+            capacityContent.setText(Integer.toString(activeInvitation.property.getMaximumCapacity()));
+            squareFeetContent.setText(Integer.toString(activeInvitation.property.getSquareFeet()) + " SqFt");
+            bedroomContent.setText(Integer.toString(activeInvitation.property.getNumOfBedrooms())+ " Bed");
+            bathroomContent.setText(Double.toString(activeInvitation.property.getNumOfBathrooms()) + " Bath");
             utilitiesContent.setText(activeInvitation.property.utilities.getUtilities());
+
+            addressContent.setVisibility(View.VISIBLE);
+            rentContent.setVisibility(View.VISIBLE);
+            roomateContent.setVisibility(View.VISIBLE);
+            capacityContent.setVisibility(View.VISIBLE);
+            squareFeetContent.setVisibility(View.VISIBLE);
+            bedroomContent.setVisibility(View.VISIBLE);
+            bedroomContent.setVisibility(View.VISIBLE);
+            bathroomContent.setVisibility(View.VISIBLE);
+            utilitiesContent.setVisibility(View.VISIBLE);
 
             //list initialization
             Responses = binding.listOfResponses;
             responsesList = (ArrayList<Responses>) activeInvitation.getResponses();
+            if(responsesList == null){
+                responsesList = new ArrayList<Responses>();
+            }
             adapter = new ListViewAdapter(getActivity().getApplicationContext(), responsesList);
             Responses.setAdapter(adapter);
 
@@ -220,7 +235,7 @@ public class InviteFragment extends Fragment {
                 alert.show();
             }
             else{
-                startActivity( new Intent(v.getContext(), HomeActivity.class));
+                startActivity( new Intent(getContext(), HomeActivity.class));
                 getActivity().overridePendingTransition(0, 0);
             }
         }

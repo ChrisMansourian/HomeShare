@@ -41,7 +41,7 @@ public class InvitationDAO {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://homeshareapi.azurewebsites.net/Invitation/GetPosts?userId=" + userId + "&sortCriteria=" + sortCriteria + "&ascending=" + ascending)
+                .url("http://homeshareapi.azurewebsites.net/Invitation/GetPosts?userId=" + userId + "&sortCriteria=" + sortCriteria + "&ascending=" + ascending)
                 .build();
 
         try {

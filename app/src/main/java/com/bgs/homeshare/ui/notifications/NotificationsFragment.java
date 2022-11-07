@@ -36,7 +36,6 @@ public class NotificationsFragment extends Fragment {
         NotificationsFragment.notificationTask c = new notificationTask();
         c.execute(UserManager.LoggedInUser.getUserId());
 
-
         return root;
     }
 
@@ -51,39 +50,43 @@ public class NotificationsFragment extends Fragment {
         }
 
         protected void onPostExecute(Boolean result) {
-            int newNotifications = 0;
-            if (NotificationManager.notifications != null) {
-                if (NotificationManager.notifications.size() != 0) {
-                    for (int i = 0; i < NotificationManager.notifications.size(); i++) {
-                        if (NotificationManager.notifications.get(i).getNotified() != 1) {
-                            newNotifications++;
-                        } else {
-                            break;
+            try {
+                int newNotifications = 0;
+                if (NotificationManager.notifications != null) {
+                    if (NotificationManager.notifications.size() != 0) {
+                        for (int i = 0; i < NotificationManager.notifications.size(); i++) {
+                            if (NotificationManager.notifications.get(i).getNotified() != 1) {
+                                newNotifications++;
+                            } else {
+                                break;
+                            }
                         }
                     }
                 }
-            }
 
-            TextView notificationTitle = binding.numberOfNotifications;
-            if (newNotifications == 1) {
-                notificationTitle.setText("You have " + newNotifications + " new notification!");
-            }else if(newNotifications == 0){
-                notificationTitle.setText("You have no new notifications!");
-            }
-            else {
-                notificationTitle.setText("You have " + newNotifications + " new notifications!");
-            }
-            notificationTitle.setVisibility(View.VISIBLE);
+                TextView notificationTitle = binding.numberOfNotifications;
+                if (newNotifications == 1) {
+                    notificationTitle.setText("You have " + newNotifications + " new notification!");
+                } else if (newNotifications == 0) {
+                    notificationTitle.setText("You have no new notifications!");
+                } else {
+                    notificationTitle.setText("You have " + newNotifications + " new notifications!");
+                }
+                notificationTitle.setVisibility(View.VISIBLE);
 
-            ListView listNotifications = binding.notificationListNotifications;
-            List<String> arrayList = new ArrayList<>();
-            for (int i = 0; i < NotificationManager.notifications.size(); i++) {
-                arrayList.add(NotificationManager.notifications.get(i).getText());
+                ListView listNotifications = binding.notificationListNotifications;
+                List<String> arrayList = new ArrayList<>();
+                for (int i = 0; i < NotificationManager.notifications.size(); i++) {
+                    arrayList.add(NotificationManager.notifications.get(i).getText());
+                }
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.notifications_list, arrayList);
+                listNotifications.setAdapter(arrayAdapter);
+                return;
             }
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.notifications_list, arrayList);
-            listNotifications.setAdapter(arrayAdapter);
-
-            return;
+            catch(Exception e){
+                (new notificationTask()).execute(UserManager.LoggedInUser.getUserId());
+                return;
+            }
         }
     }
 
