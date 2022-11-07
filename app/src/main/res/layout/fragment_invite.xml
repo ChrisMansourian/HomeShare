@@ -1,35 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.InviteFragment">
+    android:fillViewport="true"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
 
-    <ScrollView
-        android:id="@+id/manageInviteScroller"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        tools:context=".ui.InviteFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayoutInvitePage"
-            android:layout_width="match_parent"
-            android:layout_height="600dp">
+        <TextView
+            android:id="@+id/textViewTitleAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:text="Address:"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCreateandDeadline" />
 
+        <TextView
+            android:id="@+id/textViewTitleRent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:text="Rent:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleAddress" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        <TextView
+            android:id="@+id/textViewTitleRoomates"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="172dp"
+            android:layout_marginBottom="162dp"
+            android:text="Roomates:"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewResponsesTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textViewTitleCapacity"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="20dp"
+            android:gravity="right"
+            android:text="Capacity:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleRoomates" />
+
+        <TextView
+            android:id="@+id/textViewTitleUtilities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="right"
+            android:text="Utilities:"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSquareFeet" />
+
+        <TextView
+            android:id="@+id/textViewSquareFeet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:gravity="right"
+            android:text="4 Sqft"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/textViewBedrooms"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleCapacity" />
+
+        <TextView
+            android:id="@+id/textViewBedrooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="right"
+            android:text="4 bed"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCapacityContent" />
+
+        <TextView
+            android:id="@+id/textViewBathrooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:gravity="right"
+            android:text="3.5 bath"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textViewBedrooms"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCapacityContent" />
+
+        <TextView
+            android:id="@+id/textViewAddress"
+            android:layout_width="279dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="12dp"
+            android:visibility="invisible"
+            android:layout_marginTop="30dp"
+            android:text="Address"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/textViewTitleAddress"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCreateandDeadline" />
+
+        <TextView
+            android:id="@+id/textViewRentContent"
+            android:layout_width="279dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="Amount"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/textViewTitleRent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAddress" />
+
+        <TextView
+            android:id="@+id/textViewRoomateContent"
+            android:layout_width="279dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:visibility="invisible"
+            android:layout_marginTop="20dp"
+            android:text="Amount"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/textViewTitleRoomates"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRentContent" />
+
+        <TextView
+            android:id="@+id/textViewCapacityContent"
+            android:layout_width="279dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="12dp"
+            android:visibility="invisible"
+            android:layout_marginTop="20dp"
+            android:text="Amount"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/textViewTitleCapacity"
+            app:layout_constraintTop_toBottomOf="@+id/textViewRoomateContent" />
+
+        <TextView
+            android:id="@+id/textViewUtilitiesList"
+            android:layout_width="279dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="12dp"
+            android:visibility="invisible"
+            android:layout_marginTop="20dp"
+            android:text="list of utilities"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/textViewTitleUtilities"
+            app:layout_constraintTop_toBottomOf="@+id/textViewBedrooms" />
+
+        <TextView
+            android:id="@+id/textViewCreateandDeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Deadline: "
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="150dp"
+            android:text="Delete Invite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listOfResponses"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ListView
+            android:id="@+id/listOfResponses"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="284dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewUtilitiesList" />
+
+        <TextView
+            android:id="@+id/textViewResponsesTitle"
+            android:layout_width="287dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="63dp"
+            android:visibility="invisible"
+            android:layout_marginBottom="38dp"
+            android:gravity="center"
+            android:text="Responses:"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/listOfResponses"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewUtilitiesList" />
+
+        <Button
+            android:id="@+id/createInvitationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Create Invite"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCreateandDeadline" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

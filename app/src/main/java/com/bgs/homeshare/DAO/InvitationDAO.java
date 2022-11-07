@@ -157,7 +157,7 @@ public class InvitationDAO {
         origin = "?origins=";
         origin += (streetAddress.replaceAll(" ", "%20"));
         origin += "%2C%20" + city.replaceAll(" ", "%20");
-        origin += "%2C%20" + state + "%2C%20" + country;
+        origin += "%2C%20" + state + "%2C%20" + country.replaceAll(" ","%20");
 
         String link = "https://maps.googleapis.com/maps/api/distancematrix/json" + origin + usc + "&units=imperial&key=AIzaSyAYm9ShSOeMArMLM2kNc9602033S0buzMY";
 

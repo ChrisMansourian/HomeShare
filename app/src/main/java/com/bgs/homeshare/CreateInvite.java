@@ -22,7 +22,7 @@ public class CreateInvite extends AppCompatActivity {
     private EditText QuestionInput;
     private ImageView QuestionAdd;
     private ListView DisplayQuestions;
-    private List<String> Questions;
+    private ArrayList<String> Questions;
     private ListViewAdapter adapter;
 
     @Override
@@ -32,7 +32,7 @@ public class CreateInvite extends AppCompatActivity {
 
         //for date picker
         initDatePicker();
-        dateButton = findViewById(R.id.birthDatePickerSignUp);
+        dateButton = findViewById(R.id.deadlinePicker);
         dateButton.setText(getTodaysDate());
 
         Questions = new ArrayList<>();
@@ -201,7 +201,7 @@ public class CreateInvite extends AppCompatActivity {
                 if(insert.equals("")){
                     insert = null;
                 }
-                createInvite.property.setMaximumCapacity(Integer.parseInt(insert));
+                createInvite.property.setSquareFeet(Integer.parseInt(insert));
             }
         });
 
@@ -221,7 +221,7 @@ public class CreateInvite extends AppCompatActivity {
                 if(insert.equals("")){
                     insert = null;
                 }
-                createInvite.property.setNumOfBathrooms(Integer.parseInt(insert));
+                createInvite.property.setNumOfBathrooms(Double.parseDouble(insert));
             }
         });
 
@@ -273,7 +273,7 @@ public class CreateInvite extends AppCompatActivity {
 
         QuestionInput = findViewById(R.id.inputQuestion);
         QuestionAdd = findViewById(R.id.addQuestionImg);
-        adapter = (ListViewAdapter) new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, Questions);
+        adapter = new ListViewAdapter(getApplicationContext(), Questions);
         DisplayQuestions.setAdapter(adapter);
 
         QuestionAdd.setOnClickListener(view -> {
@@ -291,11 +291,7 @@ public class CreateInvite extends AppCompatActivity {
             }
         });
 
-
-
-
         //create Invite implementation
-
         Button creatingInvite = findViewById(R.id.createInviteButton);
         creatingInvite.setOnClickListener(v->{
             if(!anyNull()) {
@@ -372,7 +368,7 @@ public class CreateInvite extends AppCompatActivity {
     private String makeDateString(int day, int month, int year)
     {
         String date = year+"-"+ (new DecimalFormat("00")).format(month)  + "-" + (new DecimalFormat("00")).format(day) ;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         if(createInvite != null){
             try{
                 createInvite.setDateOfDeadline(formatter.parse(date));
