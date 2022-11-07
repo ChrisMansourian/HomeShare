@@ -119,6 +119,19 @@ public class InvitationFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        View root = binding.getRoot();
+
+        Spinner sortOptions = (Spinner)root.findViewById(R.id.SortOptionsSpinner);
+        Spinner sortOrder = (Spinner)root.findViewById(R.id.SortOrderSpinner);
+
+        InvitationsTask i = new InvitationsTask();
+        i.execute(sortOptions.getSelectedItem().toString(), sortOrder.getSelectedItem().toString().equals("asc") ? "1" : "0");
+
+        super.onResume();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
