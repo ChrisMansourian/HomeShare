@@ -126,11 +126,22 @@ public class InvitationDAO {
             prop.put("bathrooms", invitation.property.getNumOfBathrooms());
             prop.put("bedrooms", invitation.property.getNumOfBedrooms());
 
+            JSONArray questions = new JSONArray();
+
+            for (int i = 0; i < invitation.getQuestions().size(); i++) {
+                questions.put(invitation.getQuestions().get(i));
+            }
+
             invit.put("property", prop);
-            invit.put("questions", invitation.getQuestions());
             invit.put("numOfRoomates", invitation.getNumOfRoomates());
             invit.put("dateOfDeadline", dateNow);
             invit.put("userId", invitation.getUserId());
+            invit.put("postId", 0);
+            invit.put("roomates", null);
+            invit.put("responses", null);
+            invit.put("questions", questions);
+
+            String text = invit.toString();
 
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             RequestBody body = RequestBody.create(JSON, invit.toString());
