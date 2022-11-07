@@ -10,6 +10,8 @@ public class UserManager {
 
     public static User LoggedInUser = null;
 
+    public static User ClickedUser = null;
+
     public static User GetProfile(int userId) {
         return UserDAO.GetUser(userId);
     }
