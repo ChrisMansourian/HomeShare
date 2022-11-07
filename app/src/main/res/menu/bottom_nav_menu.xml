@@ -14,7 +14,7 @@
     <item
         android:id="@+id/navigation_invite"
         android:icon="@drawable/ic_action_name"
-        android:title="Invite" />
+        android:title="Create Invite" />
 
     <item
         android:id="@+id/navigation_notifications"
