@@ -2,6 +2,7 @@ package com.bgs.homeshare.Managers;
 
 import com.bgs.homeshare.DAO.InvitationDAO;
 import com.bgs.homeshare.Models.Invitation;
+import com.bgs.homeshare.Models.Responses;
 import com.bgs.homeshare.Models.User;
 
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ public class InvitationManager {
     public static Invitation myInvitation;
     public static Invitation clickedInvitation = null;
     public static double distance;
+    public static Responses clickedResponse = null;
 
 
     public static boolean respondToInvitation(int postId, int userId, int response, List<String> questionResponses){
