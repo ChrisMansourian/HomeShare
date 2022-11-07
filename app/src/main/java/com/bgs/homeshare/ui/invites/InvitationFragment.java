@@ -32,6 +32,11 @@ public class InvitationFragment extends Fragment {
 
     private FragmentInvitesBinding binding;
 
+    String sortBy = "distance";
+    String sortOrdering = "1";
+
+    boolean refresh = false;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         InvitationViewModel invitationViewModel =
@@ -53,6 +58,8 @@ public class InvitationFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 InvitationsTask i = new InvitationsTask();
+                sortOrdering = sortOrder.getSelectedItem().toString();
+                sortBy = sortOrder.getSelectedItem().toString().equals("asc") ? "1" : "0";
                 i.execute(sortOptions.getSelectedItem().toString(), sortOrder.getSelectedItem().toString().equals("asc") ? "1" : "0");
             }
 
@@ -67,6 +74,10 @@ public class InvitationFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 InvitationsTask i = new InvitationsTask();
+
+                sortOrdering = sortOrder.getSelectedItem().toString();
+                sortBy = sortOrder.getSelectedItem().toString().equals("asc") ? "1" : "0";
+
                 i.execute(sortOptions.getSelectedItem().toString(), sortOrder.getSelectedItem().toString().equals("asc") ? "1" : "0");
             }
 
@@ -92,42 +103,52 @@ public class InvitationFragment extends Fragment {
         }
 
         protected void onPostExecute(Boolean result) {
-            ListView listInvitations = binding.invitationListNotifications;
-            TextView textInvites = binding.textInvites;
+            try {
+                ListView listInvitations = binding.invitationListNotifications;
+                TextView textInvites = binding.textInvites;
 
-            if (result == true) {
-                if (InvitationManager.invitations.size() == 0) {
+                if (result == true) {
+                    if (InvitationManager.invitations.size() == 0) {
+                        textInvites.setText("No Invitations Found!");
+                        textInvites.setVisibility(View.VISIBLE);
+                        listInvitations.setAdapter(null);
+                        return;
+                    }
+
+                    textInvites.setVisibility(View.INVISIBLE);
+
+                    InvitationAdapter invitationAdapter = new InvitationAdapter(getContext(), InvitationManager.invitations);
+                    listInvitations.setAdapter(invitationAdapter);
+
+                    return;
+                } else {
+                    listInvitations.setAdapter(null);
                     textInvites.setText("No Invitations Found!");
                     textInvites.setVisibility(View.VISIBLE);
-                    listInvitations.setAdapter(null);
-                    return;
                 }
-
-                textInvites.setVisibility(View.INVISIBLE);
-
-                InvitationAdapter invitationAdapter = new InvitationAdapter(getContext(), InvitationManager.invitations);
-                listInvitations.setAdapter(invitationAdapter);
-
-                return;
             }
-            else {
-                listInvitations.setAdapter(null);
-                textInvites.setText("No Invitations Found!");
-                textInvites.setVisibility(View.VISIBLE);
+            catch (NullPointerException e) {
+                InvitationsTask i = new InvitationsTask();
+                i.execute(sortBy, sortOrdering);
             }
         }
     }
 
     @Override
     public void onResume() {
-        View root = binding.getRoot();
+        if (refresh == true) {
+            View root = binding.getRoot();
 
-        Spinner sortOptions = (Spinner)root.findViewById(R.id.SortOptionsSpinner);
-        Spinner sortOrder = (Spinner)root.findViewById(R.id.SortOrderSpinner);
+            Spinner sortOptions = (Spinner) root.findViewById(R.id.SortOptionsSpinner);
+            Spinner sortOrder = (Spinner) root.findViewById(R.id.SortOrderSpinner);
 
-        InvitationsTask i = new InvitationsTask();
-        i.execute(sortOptions.getSelectedItem().toString(), sortOrder.getSelectedItem().toString().equals("asc") ? "1" : "0");
+            InvitationsTask i = new InvitationsTask();
 
+            sortOrdering = sortOrder.getSelectedItem().toString();
+            sortBy = sortOrder.getSelectedItem().toString().equals("asc") ? "1" : "0";
+            i.execute(sortOptions.getSelectedItem().toString(), sortOrder.getSelectedItem().toString().equals("asc") ? "1" : "0");
+        }
+        refresh = true;
         super.onResume();
     }
 

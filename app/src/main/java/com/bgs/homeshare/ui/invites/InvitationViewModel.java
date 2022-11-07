@@ -10,7 +10,7 @@ public class InvitationViewModel extends ViewModel {
 
     public InvitationViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("Loading Invitations");
     }
 
     public LiveData<String> getText() {
