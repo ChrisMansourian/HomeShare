@@ -9,24 +9,17 @@ import android.os.Bundle;
 import com.bgs.homeshare.Managers.InvitationManager;
 import com.bgs.homeshare.Managers.UserManager;
 import com.bgs.homeshare.Models.Responses;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bgs.homeshare.databinding.ActivityViewAresponseBinding;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ViewAResponseActivity extends AppCompatActivity {
@@ -54,12 +47,12 @@ public class ViewAResponseActivity extends AppCompatActivity {
         img.setImageBitmap(curr.user.getProfileImage());
 
         LinearLayout responseList = (LinearLayout) findViewById(R.id.ResponseList);
+        List<String> questions = InvitationManager.myInvitation.getQuestions();
 
         for (int i = 0; i < curr.questionResponses.size(); i++) {
-
             View view = LayoutInflater.from(this).inflate(R.layout.response_text_list, null);
             TextView question = (TextView) view.findViewById(R.id.ResponseView);
-            question.setText("Response " + Integer.toString(i) + ": " + curr.questionResponses.get(i));
+            question.setText((i+1) + ". "  + questions.get(i)+ ": " + curr.questionResponses.get(i));
             responseList.addView(view);
         }
     }
@@ -144,7 +137,7 @@ public class ViewAResponseActivity extends AppCompatActivity {
     }
 
     public void onAcceptClick(View v) {
-       new acceptPostTask().execute();
+        new acceptPostTask().execute();
         Button b = (Button) findViewById(R.id.AcceptResponseButton);
         Button c = (Button) findViewById(R.id.RejectResponseButton);
         b.setEnabled(false);

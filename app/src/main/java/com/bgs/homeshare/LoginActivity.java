@@ -51,19 +51,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        /*boolean loginResult = UserManager.Login(username, password);
-
-        if (!loginResult) {
-            AlertDialog.Builder alert3 = new AlertDialog.Builder(LoginActivity.this);
-            alert3.setTitle("Invalid Credentials");
-            alert3.setMessage("Incorrect Username/Password Entered");
-            alert3.setPositiveButton("OK", null);
-            alert3.show();
-            return;
-        }
-
-        this.startActivity(new Intent(v.getContext(), TempActivity.class));
-        this.overridePendingTransition(0, 0);*/
         loginButton.setEnabled(false);
         CheckLoginTask c = new CheckLoginTask();
         c.v = v;

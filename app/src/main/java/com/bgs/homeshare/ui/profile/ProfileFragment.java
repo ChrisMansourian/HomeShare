@@ -1,32 +1,21 @@
 package com.bgs.homeshare.ui.profile;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
+import android.app.*;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.Spinner;
+import android.os.*;
+import android.text.*;
+import android.view.*;
+import android.widget.*;
 
-import com.bgs.homeshare.HomeActivity;
-import com.bgs.homeshare.MainActivity;
+import com.bgs.homeshare.*;
 import com.bgs.homeshare.Models.User;
 import com.bgs.homeshare.R;
 import com.bgs.homeshare.Managers.*;
+import com.bgs.homeshare.Managers.NotificationManager;
+import com.bgs.homeshare.Managers.UserManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
