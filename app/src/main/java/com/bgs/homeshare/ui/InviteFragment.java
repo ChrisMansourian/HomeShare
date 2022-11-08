@@ -166,7 +166,11 @@ public class InviteFragment extends Fragment {
                 removeItem(position, 1);
             });
             name.setOnClickListener(v->{
-                InvitationManager.ClickedResponse = responsesList.get(position);
+                InvitationManager.clickedResponse = responsesList.get(position);
+
+                Intent intent = new Intent(binding.getRoot().getContext(), ViewAResponseActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
             });
             Responses.addView(view);
         }
@@ -281,8 +285,11 @@ public class InviteFragment extends Fragment {
         public View v;
         private Exception exception;
 
+        User u;
+
         protected Boolean doInBackground(User... urls) {
             try {
+                u = urls[0];
                 InvitationManager.getMyInvitation(urls[0].getUserId());
                 return true;
             } catch (Exception e) {
@@ -292,8 +299,23 @@ public class InviteFragment extends Fragment {
         }
 
         protected void onPostExecute(Boolean result) {
-            activeInvitation = InvitationManager.myInvitation;
-            initializeScreen();
+            try {
+                activeInvitation = InvitationManager.myInvitation;
+                initializeScreen();
+            }
+            catch (Exception e) {
+                new GetInvitation().execute(u);
+            }
         }
+    }
+
+    @Override
+    public void onResume() {
+        if (InvitationManager.myInvitation != null) {
+            activeInvitation = InvitationManager.myInvitation;
+            createReponsesList();
+        }
+
+        super.onResume();
     }
 }
