@@ -127,9 +127,9 @@ public class InvitationFragment extends Fragment {
                     textInvites.setVisibility(View.VISIBLE);
                 }
             }
-            catch (NullPointerException e) {
-                InvitationsTask i = new InvitationsTask();
-                i.execute(sortBy, sortOrdering);
+            catch(Exception e){
+                (new InvitationsTask()).execute("distance","1");
+                return;
             }
         }
     }

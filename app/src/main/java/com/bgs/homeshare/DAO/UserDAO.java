@@ -12,10 +12,6 @@ public class UserDAO {
 
     public static User CheckLogin(String userName, String password) {
         OkHttpClient client = new OkHttpClient();
-
-        /*Request request = new Request.Builder()
-                .url("http://localhost:5256/Login/CheckLogin?username=" + userName + "&password=" + password)
-                .build();*/
         Request request = new Request.Builder()
                 .url("https://homeshareapi.azurewebsites.net/Login/CheckLogin?username=" + userName + "&password=" + password)
                 .build();

@@ -21,22 +21,14 @@
         android:layout_marginLeft="28sp"
         android:textColor="#000"
         android:textSize="20sp" />
+
     <ImageView
-        android:id="@+id/reject"
+        android:id="@+id/remove"
         android:layout_width="22sp"
         android:layout_height="22sp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="18sp"
-        android:src="@drawable/cancel" />
-
-    <ImageView
-        android:id="@+id/approve"
-        android:layout_width="22sp"
-        android:layout_height="22sp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="45sp"
-        android:src="@drawable/check" />
+        android:src="@drawable/remove" />
 
 </RelativeLayout>

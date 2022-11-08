@@ -42,7 +42,7 @@ public class InvitationDAO {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://homeshareapi.azurewebsites.net/Invitation/GetPosts?userId=" + userId + "&sortCriteria=" + sortCriteria + "&ascending=" + ascending)
+                .url("http://homeshareapi.azurewebsites.net/Invitation/GetPosts?userId=" + userId + "&sortCriteria=" + sortCriteria + "&ascending=" + ascending)
                 .build();
 
         try {
@@ -130,11 +130,22 @@ public class InvitationDAO {
             prop.put("bathrooms", invitation.property.getNumOfBathrooms());
             prop.put("bedrooms", invitation.property.getNumOfBedrooms());
 
+            JSONArray questions = new JSONArray();
+
+            for (int i = 0; i < invitation.getQuestions().size(); i++) {
+                questions.put(invitation.getQuestions().get(i));
+            }
+
             invit.put("property", prop);
-            invit.put("questions", invitation.getQuestions());
             invit.put("numOfRoomates", invitation.getNumOfRoomates());
             invit.put("dateOfDeadline", dateNow);
             invit.put("userId", invitation.getUserId());
+            invit.put("postId", 0);
+            invit.put("roomates", null);
+            invit.put("responses", null);
+            invit.put("questions", questions);
+
+            String text = invit.toString();
 
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             RequestBody body = RequestBody.create(JSON, invit.toString());
@@ -161,7 +172,7 @@ public class InvitationDAO {
         origin = "?origins=";
         origin += (streetAddress.replaceAll(" ", "%20"));
         origin += "%2C%20" + city.replaceAll(" ", "%20");
-        origin += "%2C%20" + state + "%2C%20" + country;
+        origin += "%2C%20" + state + "%2C%20" + country.replaceAll(" ","%20");
 
         String link = "https://maps.googleapis.com/maps/api/distancematrix/json" + origin + usc + "&units=imperial&key=AIzaSyAYm9ShSOeMArMLM2kNc9602033S0buzMY";
 
@@ -445,7 +456,7 @@ public class InvitationDAO {
                     List<String> qR = new ArrayList<>();
                     JSONArray arr2 = resp.getJSONArray("questionResponses");
                     for (int j = 0; j < arr2.length(); j++) {
-                        qR.add(arr2.getString(i));
+                        qR.add(arr2.getString(j));
                     }
                     responses.add(new Responses(u, qR));
                 }
@@ -453,7 +464,7 @@ public class InvitationDAO {
 
             PropertyUtilities utilities = new PropertyUtilities(pool, ac, laundry, dishwasher, balcony, fireplace);
             Property property = new Property(propertyID, streetAddress1, streetAddress2, city, state, country, rent, maxCap, squareFeet, utilities, distance, bathrooms, bedrooms);
-            Invitation invitation = new Invitation(postId, ownerId, property, date, null, roomates, numOfRoomates, splitQuestions);
+            Invitation invitation = new Invitation(postId, ownerId, property, date, responses, roomates, numOfRoomates, splitQuestions);
             return invitation;
         }
         catch (Exception e){
