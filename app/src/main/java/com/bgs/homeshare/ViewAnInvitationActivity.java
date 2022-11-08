@@ -18,6 +18,7 @@ import com.bgs.homeshare.Managers.UserManager;
 import com.bgs.homeshare.Models.Invitation;
 import com.bgs.homeshare.Models.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class ViewAnInvitationActivity extends AppCompatActivity {
         firePlace.setText("Fire Place? " + (curr.property.getUtilities().getFireplace() == true ? "yes" : "no"));
         balcony.setText("Balcony? " + (curr.property.getUtilities().getPool() == true ? "yes" : "no"));
         roomatesNum.setText(curr.getNumOfRoomates() + " current roommate");
-        deadlineText.setText(curr.getDateOfDeadline().toString());
+        deadlineText.setText(new SimpleDateFormat("yyyy-MM-dd").format(curr.getDateOfDeadline()));
 
         LinearLayout questionsList = (LinearLayout) findViewById(R.id.QuestionsList);
 
@@ -90,15 +91,21 @@ public class ViewAnInvitationActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(User result) {
-            if (result == null) {
-                finish();
-                return;
+            try {
+                if (result == null) {
+                    //finish();
+                    new getUserTask().execute(InvitationManager.clickedInvitation.getUserId());
+                    return;
+                }
+
+                UserManager.ClickedUser = result;
+
+                TextView tv = (TextView) findViewById(R.id.CreatedByText);
+                tv.setText("Created By: " + result.getUserName());
             }
-
-            UserManager.ClickedUser = result;
-
-            TextView tv = (TextView) findViewById(R.id.CreatedByText);
-            tv.setText("Created By: " + result.getUserName());
+            catch (Exception e) {
+                new getUserTask().execute(InvitationManager.clickedInvitation.getUserId());
+            }
         }
     }
 

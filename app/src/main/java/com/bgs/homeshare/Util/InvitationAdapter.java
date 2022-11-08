@@ -9,20 +9,23 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bgs.homeshare.Managers.InvitationManager;
 import com.bgs.homeshare.Models.Invitation;
 import com.bgs.homeshare.R;
 import com.bgs.homeshare.ViewAnInvitationActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InvitationAdapter extends BaseAdapter {
-    ArrayList<Invitation> invitationList = new ArrayList<>();
+    List<Invitation> invitationList = new ArrayList<>();
     Context context;
 
     public InvitationAdapter(Context context, List<Invitation> list) {
-        invitationList.addAll(list);
+        invitationList = list;
         this.context = context;
     }
 
@@ -44,32 +47,36 @@ public class InvitationAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
-            Invitation inv = invitationList.get(i);
-            view = LayoutInflater.from(context).inflate(R.layout.invitation_list, viewGroup, false);
-            TextView address = view.findViewById(R.id.Address);
-            TextView deadline = view.findViewById(R.id.DateOfDeadline);
-            TextView bedrooms = view.findViewById(R.id.BedroomsText);
-            TextView bathrooms = view.findViewById(R.id.BathroomsText);
-            TextView distance = view.findViewById(R.id.DistanceText);
-            TextView squarefeet = view.findViewById(R.id.SquareFeetText);
-            Button viewInvitations = view.findViewById(R.id.ViewInvitationButton);
-
-            address.setText(inv.property.getAddress());
-            deadline.setText("Deadline: "+inv.getDateOfDeadline().toString());
-            bedrooms.setText(inv.property.getNumOfBedrooms() + " beds");
-            bathrooms.setText(String.valueOf(inv.property.getNumOfBathrooms()) + " bath");
-            distance.setText(String.valueOf(inv.property.getDistanceToCampus()) + " miles");
-            squarefeet.setText(inv.property.getSquareFeet() + " square feet");
-
-            viewInvitations.setOnClickListener(new Button.OnClickListener() {
-                public void onClick(View v) {
-                    InvitationManager.clickedInvitation = inv;
-                    Intent intent = new Intent(context, ViewAnInvitationActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    context.startActivity(intent);
-                }
-            });
+            LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.invitation_list,null);
         }
+
+        Invitation inv = invitationList.get(i);
+        view = LayoutInflater.from(context).inflate(R.layout.invitation_list, viewGroup, false);
+        TextView address = view.findViewById(R.id.Address);
+        TextView deadline = view.findViewById(R.id.DateOfDeadline);
+        TextView bedrooms = view.findViewById(R.id.BedroomsText);
+        TextView bathrooms = view.findViewById(R.id.BathroomsText);
+        TextView distance = view.findViewById(R.id.DistanceText);
+        TextView squarefeet = view.findViewById(R.id.SquareFeetText);
+        Button viewInvitations = view.findViewById(R.id.ViewInvitationButton);
+
+        address.setText(inv.property.getAddress());
+        deadline.setText("Deadline: "+ new SimpleDateFormat("yyyy-MM-dd").format(inv.getDateOfDeadline()));
+        bedrooms.setText(inv.property.getNumOfBedrooms() + " beds");
+        bathrooms.setText(String.valueOf(inv.property.getNumOfBathrooms()) + " bath");
+        distance.setText(String.valueOf(inv.property.getDistanceToCampus()) + " miles");
+        squarefeet.setText(inv.property.getSquareFeet() + " square feet");
+
+        viewInvitations.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                InvitationManager.clickedInvitation = inv;
+                Intent intent = new Intent(context, ViewAnInvitationActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                context.startActivity(intent);
+            }
+        });
+
 
         return view;
     }

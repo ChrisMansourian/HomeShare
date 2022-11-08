@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -56,6 +57,9 @@ public class InvitationDAO {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 invitations.add(getInvitationFromJsonObject(jsonObject));
             }
+        }
+        catch (UnknownHostException e) {
+            return getInvitations(userId, sortCriteria, ascending);
         }
         catch (Exception e) {
             return null;

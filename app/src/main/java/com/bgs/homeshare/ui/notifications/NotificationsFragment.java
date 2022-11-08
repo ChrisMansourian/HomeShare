@@ -36,12 +36,6 @@ public class NotificationsFragment extends Fragment {
         NotificationsFragment.notificationTask c = new notificationTask();
         c.execute(UserManager.LoggedInUser.getUserId());
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         return root;
     }
 
