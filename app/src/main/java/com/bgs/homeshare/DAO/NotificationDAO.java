@@ -7,6 +7,7 @@ import com.bgs.homeshare.SQL.SqlConnection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,6 +49,9 @@ public class NotificationDAO {
                 list.add(new Notification(uId, pId, text, notified));
             }
         }
+        catch (UnknownHostException e) {
+            return GetUserNotifications(userId);
+        }
         catch (Exception e) {
             return null;
         }
@@ -70,7 +74,11 @@ public class NotificationDAO {
             return Boolean.parseBoolean(temp);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return CreateNewNotification(n);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 

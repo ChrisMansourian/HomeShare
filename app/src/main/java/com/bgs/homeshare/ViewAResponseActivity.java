@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,8 +56,8 @@ public class ViewAResponseActivity extends AppCompatActivity {
         LinearLayout responseList = (LinearLayout) findViewById(R.id.ResponseList);
 
         for (int i = 0; i < curr.questionResponses.size(); i++) {
-            View view = LayoutInflater.from(this).inflate(R.layout.responses_list, null);
-            TextView question = view.findViewById(R.id.ResponsesTextView);
+            View view = LayoutInflater.from(this).inflate(R.layout.response_text_list, null);
+            TextView question = (TextView) view.findViewById(R.id.ResponseView);
             question.setText("Response " + Integer.toString(i) + ": " + curr.questionResponses.get(i));
             responseList.addView(view);
         }
@@ -66,7 +67,7 @@ public class ViewAResponseActivity extends AppCompatActivity {
 
         protected Boolean doInBackground(String... urls) {
             try {
-                boolean result = InvitationManager.manageResponse(InvitationManager.clickedInvitation.getPostId()
+                boolean result = InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId()
                         , InvitationManager.clickedResponse.user.getUserId(), UserManager.LoggedInUser.getUserId(), 0);
                 return result;
             } catch (Exception e) {
@@ -87,6 +88,7 @@ public class ViewAResponseActivity extends AppCompatActivity {
                     }
                 });
                 alert.show();
+                InvitationManager.myInvitation.getResponses().remove(InvitationManager.clickedResponse);
                 return;
             }
         }
@@ -96,10 +98,11 @@ public class ViewAResponseActivity extends AppCompatActivity {
 
         protected Boolean doInBackground(String... urls) {
             try {
-                boolean result = InvitationManager.manageResponse(InvitationManager.clickedInvitation.getPostId()
+                boolean result = InvitationManager.manageResponse(InvitationManager.myInvitation.getPostId()
                         , InvitationManager.clickedResponse.user.getUserId(), UserManager.LoggedInUser.getUserId(), 1);
                 return result;
             } catch (Exception e) {
+                e.printStackTrace();
             }
             return false;
         }
@@ -117,6 +120,8 @@ public class ViewAResponseActivity extends AppCompatActivity {
                     }
                 });
                 alert.show();
+
+                InvitationManager.myInvitation.getResponses().remove(InvitationManager.clickedResponse);
                 return;
             }
             else {
@@ -131,10 +136,18 @@ public class ViewAResponseActivity extends AppCompatActivity {
 
     public void onRejectClick(View v) {
         new rejectPostTask().execute();
+        Button b = (Button) findViewById(R.id.AcceptResponseButton);
+        Button c = (Button) findViewById(R.id.RejectResponseButton);
+        b.setEnabled(false);
+        c.setEnabled(false);
     }
 
     public void onAcceptClick(View v) {
        new acceptPostTask().execute();
+        Button b = (Button) findViewById(R.id.AcceptResponseButton);
+        Button c = (Button) findViewById(R.id.RejectResponseButton);
+        b.setEnabled(false);
+        c.setEnabled(false);
     }
 
     public void onViewProfileClick(View v) {
