@@ -67,27 +67,27 @@ public class PropertyUtilities {
 
     public String getUtilities() {
         String utilities = "";
-        if (pool ) {
+        if (pool){
             utilities += "Pool";
         }
-        if (ac ) {
-            utilities += ", AC";
+        if (ac){
+            utilities += ",AC";
         }
         if (laundry ) {
-            utilities += ", Laundry, ";
+            utilities += ",Laundry";
         }
         if (dishwasher) {
-            utilities += ", Dishwasher, ";
+            utilities += ",Dishwasher";
         }
         if (balcony) {
-            utilities += ", Balcony";
+            utilities += ",Balcony";
         }
         if (fireplace ) {
-            utilities += ", Fireplace";
+            utilities += ",Fireplace";
         }
 
         if((!pool) && (utilities.length() != 0)){//removing trailing ", " if it exists
-            utilities = utilities.substring(2, utilities.length()-1);
+            utilities = utilities.substring(1);
         }
         return utilities;
     }

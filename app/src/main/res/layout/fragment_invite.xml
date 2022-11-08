@@ -43,11 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="162dp"
             android:text="Roomates:"
             android:textSize="20sp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/textViewResponsesTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitleRent" />
 
@@ -170,13 +168,14 @@
 
         <TextView
             android:id="@+id/textViewUtilitiesList"
-            android:layout_width="279dp"
-            android:layout_height="27dp"
+            android:layout_width="290dp"
+            android:layout_height="47dp"
             android:layout_marginStart="12dp"
-            android:visibility="invisible"
             android:layout_marginTop="20dp"
             android:text="list of utilities"
-            android:textSize="20sp"
+            android:visibility="invisible"
+            app:autoSizeMaxTextSize="20sp"
+            app:autoSizeMinTextSize="8sp"
             app:layout_constraintStart_toEndOf="@+id/textViewTitleUtilities"
             app:layout_constraintTop_toBottomOf="@+id/textViewBedrooms" />
 

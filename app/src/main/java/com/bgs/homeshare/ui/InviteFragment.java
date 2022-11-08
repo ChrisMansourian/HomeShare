@@ -174,45 +174,6 @@ public class InviteFragment extends Fragment {
             Responses.addView(view);
         }
     }
-//
-//    class ListViewAdapter extends ArrayAdapter<Responses> {
-//        ArrayList<Responses> list;
-//        Context context;
-//
-//        public ListViewAdapter(Context context, ArrayList<Responses> items) {
-//            super(context, R.layout.responses_list, items);
-//            this.context = context;
-//            list = items;
-//        }
-//
-//        @NonNull
-//        @Override
-//        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//            if (convertView == null) {
-//                LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-//                convertView = mInflater.inflate(R.layout.responses_list, null);
-//                TextView name = convertView.findViewById(R.id.name);
-//                ImageView reject = convertView.findViewById(R.id.reject);
-//                ImageView accept = convertView.findViewById(R.id.approve);
-//                TextView number = convertView.findViewById(R.id.number);
-//                number.setText(position + 1 + ".");
-//                name.setText(list.get(position).user.getUserName());
-//                reject.setOnClickListener(view->{
-//                    RespondToUser c = new RespondToUser();
-//                    c.execute(activeInvitation.getPostId(), list.get(position).user.getUserId(), activeInvitation.getUserId(), 0, position);
-//                });
-//                accept.setOnClickListener(view->{
-//                    RespondToUser c = new RespondToUser();
-//                    c.execute(activeInvitation.getPostId(), list.get(position).user.getUserId(), activeInvitation.getUserId(), 1, position);
-//                });
-//                name.setOnClickListener(view->{
-//                    InvitationManager.ClickedResponse = list.get(position);
-//
-//                });
-//            }
-//            return convertView;
-//        }
-//    }
 
     public void removeItem(int i, int accept) {
         responsesList.remove(i);

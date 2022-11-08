@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,18 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bgs.homeshare.Managers.InvitationManager;
-import com.bgs.homeshare.Managers.NotificationManager;
-import com.bgs.homeshare.Managers.UserManager;
-import com.bgs.homeshare.Models.Invitation;
+import com.bgs.homeshare.Managers.*;
 import com.bgs.homeshare.R;
 import com.bgs.homeshare.Util.InvitationAdapter;
 import com.bgs.homeshare.databinding.FragmentInvitesBinding;
-import com.bgs.homeshare.ui.notifications.NotificationsFragment;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class InvitationFragment extends Fragment {
 
