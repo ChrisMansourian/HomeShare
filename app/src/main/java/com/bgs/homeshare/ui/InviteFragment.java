@@ -166,7 +166,7 @@ public class InviteFragment extends Fragment {
                 removeItem(position, 1);
             });
             name.setOnClickListener(v->{
-                InvitationManager.ClickedResponse = responsesList.get(position);
+                InvitationManager.clickedResponse = responsesList.get(position);
             });
             Responses.addView(view);
         }
