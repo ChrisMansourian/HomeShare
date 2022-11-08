@@ -218,6 +218,16 @@
     <string name="text_view_invitation">View Invitation</string>
     <string name="text_created_by">Created By:</string>
     <string name="text_sort_by">Sort By:</string>
+    <string name="text_utilities">Utilities:</string>
+    <string name="text_view_profile">View Profile</string>
+    <string name="text_questions">Questions:</string>
+    <string name="text_reject">Reject</string>
+    <string name="text_approve">Approve</string>
+    <string name="text_personal_introduction">Personal Introduction:</string>
+    <string name="text_are_you_a_morning_person">Are you a morning person?</string>
+    <string name="text_how_do_you_like_your_spaces">How do you like your spaces?</string>
+    <string name="text_what_do_you_think_about_guests">What do you think about guests?</string>
+    <string name="text_responses">Responses:</string>
 
     <string-array name="invitation_sort_options">
         <item>distance</item>

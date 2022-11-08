@@ -3,6 +3,8 @@ package com.bgs.homeshare.DAO;
 import android.util.*;
 import com.bgs.homeshare.Models.*;
 import org.json.JSONObject;
+
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import okhttp3.*;
 
@@ -24,7 +26,11 @@ public class UserDAO {
             return GetUserFromJsonObject(Jobject);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return CheckLogin(userName, password);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 

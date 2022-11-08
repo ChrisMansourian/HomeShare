@@ -7,16 +7,20 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.bgs.homeshare.Managers.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
+    Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        loginButton = findViewById(R.id.button2);
     }
 
     public void onBackClick(View v) {
@@ -60,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
         this.startActivity(new Intent(v.getContext(), TempActivity.class));
         this.overridePendingTransition(0, 0);*/
+        loginButton.setEnabled(false);
         CheckLoginTask c = new CheckLoginTask();
         c.v = v;
         c.execute(username, password);
@@ -86,8 +91,10 @@ public class LoginActivity extends AppCompatActivity {
                 alert3.setMessage("Incorrect Username/Password Entered");
                 alert3.setPositiveButton("OK", null);
                 alert3.show();
+                loginButton.setEnabled(true);
                 return;
             }
+            loginButton.setEnabled(true);
             startActivity( new Intent(v.getContext(), HomeActivity.class));
             overridePendingTransition(0, 0);
         }
