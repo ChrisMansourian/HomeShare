@@ -86,6 +86,9 @@ public class InvitationDAO {
             JSONObject jsonObject = new JSONObject(temp);
             i = getInvitationFromJsonObject(jsonObject);
         }
+        catch (UnknownHostException e) {
+            return getInvitationForPosterFromID(userId);
+        }
         catch (Exception e) {
             return null;
         }
@@ -160,7 +163,11 @@ public class InvitationDAO {
             response.body().close();
 
             result = Boolean.parseBoolean(temp);
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return createNewInvitation(invitation);
+        }
+        catch (Exception e) {
             return result;
         }
 
@@ -218,7 +225,11 @@ public class InvitationDAO {
             response.body().close();
 
             result = Boolean.parseBoolean(temp);
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return manageResponse(postId, userId, posterResponse, ownerUserId);
+        }
+        catch (Exception e) {
             return result;
         }
 
@@ -248,7 +259,11 @@ public class InvitationDAO {
             callResponse.body().close();
 
             result = Boolean.parseBoolean(temp);
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return respondToInvitation(postId, userId, response, responses);
+        }
+        catch (Exception e) {
             return result;
         }
 
@@ -283,6 +298,9 @@ public class InvitationDAO {
                 responses.add(new Responses(u, qR));
             }
         }
+        catch (UnknownHostException e) {
+            return getResponses(postId);
+        }
         catch (Exception e) {
             return null;
         }
@@ -308,6 +326,9 @@ public class InvitationDAO {
             for (int i = 0; i < jsonArray.length(); i++) {
                 questionResponses.add(jsonArray.getString(i));
             }
+        }
+        catch (UnknownHostException e) {
+            return GetUserQuestionResponses(userId, postId);
         }
         catch (Exception e) {
             return null;
@@ -335,6 +356,9 @@ public class InvitationDAO {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 roomates.add(UserDAO.GetUserFromJsonObject(jsonObject));
             }
+        }
+        catch (UnknownHostException e) {
+            return getRoomates(postId);
         }
         catch (Exception e) {
             return null;
@@ -366,7 +390,11 @@ public class InvitationDAO {
             response.body().close();
 
             result = Boolean.parseBoolean(temp);
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return addQuestionsResponses(postId, userId, Questions);
+        }
+        catch (Exception e) {
             return result;
         }
 
@@ -396,7 +424,11 @@ public class InvitationDAO {
             response.body().close();
 
             result = Boolean.parseBoolean(temp);
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return addQuestions(postId, Questions);
+        }
+        catch (Exception e) {
             return result;
         }
 
@@ -484,6 +516,9 @@ public class InvitationDAO {
 
             return true;
         }
+        catch (UnknownHostException e) {
+            return deletePost(postId);
+        }
         catch (Exception e) {
             return false;
         }
@@ -513,6 +548,9 @@ public class InvitationDAO {
                 Response response = client.newCall(request).execute();
 
                 return true;
+            }
+            catch (UnknownHostException e) {
+                return deleteRoomates(propertyId);
             }
             catch (Exception e) {
                 return false;

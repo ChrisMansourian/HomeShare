@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +33,9 @@ public class ViewAnInvitationActivity extends AppCompatActivity {
         if (InvitationManager.clickedInvitation == null) {
             finish();
         }
+
+        Button b = (Button)findViewById(R.id.ViewCreatorButton);
+        b.setEnabled(false);
 
         TextView address = (TextView) findViewById(R.id.AddressText);
         TextView rent = (TextView) findViewById(R.id.RentText);
@@ -99,6 +103,8 @@ public class ViewAnInvitationActivity extends AppCompatActivity {
                 }
 
                 UserManager.ClickedUser = result;
+                Button b = (Button) findViewById(R.id.ViewCreatorButton);
+                b.setEnabled(true);
 
                 TextView tv = (TextView) findViewById(R.id.CreatedByText);
                 tv.setText("Created By: " + result.getUserName());

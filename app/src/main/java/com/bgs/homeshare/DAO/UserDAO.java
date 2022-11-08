@@ -2,6 +2,8 @@ package com.bgs.homeshare.DAO;
 
 import android.util.*;
 import com.bgs.homeshare.Models.*;
+import com.bgs.homeshare.Util.Util;
+
 import org.json.JSONObject;
 
 import java.net.UnknownHostException;
@@ -53,7 +55,11 @@ public class UserDAO {
             return GetUserFromJsonObject(Jobject);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return GetUser(userId);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -77,7 +83,11 @@ public class UserDAO {
             return GetUserFromJsonObject(Jobject);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return GetUserByName(userName);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -99,7 +109,11 @@ public class UserDAO {
             return Boolean.parseBoolean(temp);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return CheckUserNameExists(userName);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -121,7 +135,11 @@ public class UserDAO {
             return Boolean.parseBoolean(temp);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return ChangeUserName(userId, userName);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -169,7 +187,13 @@ public class UserDAO {
             result = Boolean.parseBoolean(temp);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return UpdateProfile(userName, dob, email, number, academicFocus,
+                    schoolYear, personalIntro, img, personalityQuestion1,
+                    personalityQuestion2, personalityQuestion3);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -217,7 +241,12 @@ public class UserDAO {
             result = Boolean.parseBoolean(temp);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return CreateAccount(userName, password, dob, email, number, academicFocus,
+                    schoolYear, personalIntro, img, personalityQuestion1, personalityQuestion2, personalityQuestion3);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -257,7 +286,11 @@ public class UserDAO {
             result = Boolean.parseBoolean(temp);
 
             // Do something with the response.
-        } catch (Exception e) {
+        }
+        catch (UnknownHostException e) {
+            return CreateAccount(user, password);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
