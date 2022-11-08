@@ -42,18 +42,20 @@
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.2640625" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.30357142857142855" />
         <entry key="app/src/main/res/layout/activity_temp.xml" value="0.3582427536231884" />
+        <entry key="app/src/main/res/layout/activity_view_an_invitation.xml" value="0.19814814814814816" />
         <entry key="app/src/main/res/layout/activity_view_aresponse.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_view_auser.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_create_invite.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.28804347826086957" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.278125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.278125" />
-        <entry key="app/src/main/res/layout/fragment_invite.xml" value="0.31567028985507245" />
+        <entry key="app/src/main/res/layout/fragment_invite.xml" value="0.3816901408450704" />
         <entry key="app/src/main/res/layout/fragment_invites.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.278125" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/notifications_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/questions_add_list.xml" value="0.19814814814814816" />
+        <entry key="app/src/main/res/layout/responses_list.xml" value="0.19814814814814816" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/menu/menu_view_a_response.xml" value="0.4244791666666667" />
         <entry key="app/src/main/res/menu/menu_view_a_user.xml" value="0.4244791666666667" />

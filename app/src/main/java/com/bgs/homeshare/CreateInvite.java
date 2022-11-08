@@ -178,7 +178,7 @@ public class CreateInvite extends AppCompatActivity {
                 // Fires right after the text has changed
                 String insert = s.toString();
                 if(insert.equals("")){
-                    insert = null;
+                    insert = "0";
                 }
                 createInvite.property.setMaximumCapacity(Integer.parseInt(insert));
             }
@@ -199,7 +199,7 @@ public class CreateInvite extends AppCompatActivity {
                 // Fires right after the text has changed
                 String insert = s.toString();
                 if(insert.equals("")){
-                    insert = null;
+                    insert = "0";
                 }
                 createInvite.property.setSquareFeet(Integer.parseInt(insert));
             }
@@ -219,7 +219,7 @@ public class CreateInvite extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String insert = s.toString();
                 if(insert.equals("")){
-                    insert = null;
+                    insert = "0";
                 }
                 createInvite.property.setNumOfBathrooms(Double.parseDouble(insert));
             }
@@ -240,7 +240,7 @@ public class CreateInvite extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String insert = s.toString();
                 if(insert.equals("")){
-                    insert = null;
+                    insert = "0";
                 }
                 createInvite.property.setNumOfBedrooms(Integer.parseInt(insert));
             }

@@ -31,9 +31,9 @@ public class InviteFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private FragmentInviteBinding binding;
     private Invitation activeInvitation;
-    private ListView Responses;
+    private LinearLayout Responses;
     private ArrayList<Responses> responsesList;
-    private ListViewAdapter adapter;
+
 
     public InviteFragment() {
         // Required empty public constructor
@@ -113,13 +113,8 @@ public class InviteFragment extends Fragment {
             utilitiesContent.setVisibility(View.VISIBLE);
 
             //list initialization
-            Responses = binding.listOfResponses;
-            responsesList = (ArrayList<Responses>) activeInvitation.getResponses();
-            if(responsesList == null){
-                responsesList = new ArrayList<Responses>();
-            }
-            adapter = new ListViewAdapter(getActivity().getApplicationContext(), responsesList);
-            Responses.setAdapter(adapter);
+            createReponsesList();
+
 
             //delete button initialization
             Button deleteButton = binding.deleteButton;
@@ -141,50 +136,92 @@ public class InviteFragment extends Fragment {
         }
     }
 
-    class ListViewAdapter extends ArrayAdapter<Responses> {
-        ArrayList<Responses> list;
-        Context context;
 
-        public ListViewAdapter(Context context, ArrayList<Responses> items) {
-            super(context, R.layout.responses_list, items);
-            this.context = context;
-            list = items;
+    private void createReponsesList(){
+        Responses = binding.listOfResponses;
+        Responses.removeAllViewsInLayout();
+        Responses.setVisibility(View.VISIBLE);
+        responsesList = (ArrayList<Responses>) activeInvitation.getResponses();
+        if(responsesList == null){
+            responsesList = new ArrayList<Responses>();
         }
 
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            if (convertView == null) {
-                LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-                convertView = mInflater.inflate(R.layout.responses_list, null);
-                TextView name = convertView.findViewById(R.id.name);
-                ImageView reject = convertView.findViewById(R.id.reject);
-                ImageView accept = convertView.findViewById(R.id.approve);
-                TextView number = convertView.findViewById(R.id.number);
-                number.setText(position + 1);
-                name.setText(list.get(position).user.getUserName());
-                reject.setOnClickListener(view->{
-                    RespondToUser c = new RespondToUser();
-                    InvitationManager.ClickedResponse = list.get(position);
-                    c.execute(activeInvitation.getPostId(), list.get(position).user.getUserId(), activeInvitation.getUserId(), 0, position);
-                });
-
-            }
-            return convertView;
+        for(int i = 0; i < responsesList.size();i++){
+            int position = i;
+            View view = LayoutInflater.from(binding.getRoot().getContext()).inflate(R.layout.responses_list, null);
+            TextView name = view.findViewById(R.id.name);
+            ImageView reject = view.findViewById(R.id.reject);
+            ImageView accept = view.findViewById(R.id.approve);
+            TextView number = view.findViewById(R.id.number);
+            number.setText(i + 1 + ".");
+            name.setText(responsesList.get(i).user.getUserName());
+            reject.setOnClickListener(v->{
+                RespondToUser c = new RespondToUser();
+                c.execute(activeInvitation.getPostId(), responsesList.get(position).user.getUserId(), activeInvitation.getUserId(), 0, position);
+                removeItem(position, 0);
+            });
+            accept.setOnClickListener(v->{
+                RespondToUser c = new RespondToUser();
+                c.execute(activeInvitation.getPostId(), responsesList.get(position).user.getUserId(), activeInvitation.getUserId(), 1, position);
+                removeItem(position, 1);
+            });
+            name.setOnClickListener(v->{
+                InvitationManager.ClickedResponse = responsesList.get(position);
+            });
+            Responses.addView(view);
         }
     }
+//
+//    class ListViewAdapter extends ArrayAdapter<Responses> {
+//        ArrayList<Responses> list;
+//        Context context;
+//
+//        public ListViewAdapter(Context context, ArrayList<Responses> items) {
+//            super(context, R.layout.responses_list, items);
+//            this.context = context;
+//            list = items;
+//        }
+//
+//        @NonNull
+//        @Override
+//        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//            if (convertView == null) {
+//                LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+//                convertView = mInflater.inflate(R.layout.responses_list, null);
+//                TextView name = convertView.findViewById(R.id.name);
+//                ImageView reject = convertView.findViewById(R.id.reject);
+//                ImageView accept = convertView.findViewById(R.id.approve);
+//                TextView number = convertView.findViewById(R.id.number);
+//                number.setText(position + 1 + ".");
+//                name.setText(list.get(position).user.getUserName());
+//                reject.setOnClickListener(view->{
+//                    RespondToUser c = new RespondToUser();
+//                    c.execute(activeInvitation.getPostId(), list.get(position).user.getUserId(), activeInvitation.getUserId(), 0, position);
+//                });
+//                accept.setOnClickListener(view->{
+//                    RespondToUser c = new RespondToUser();
+//                    c.execute(activeInvitation.getPostId(), list.get(position).user.getUserId(), activeInvitation.getUserId(), 1, position);
+//                });
+//                name.setOnClickListener(view->{
+//                    InvitationManager.ClickedResponse = list.get(position);
+//
+//                });
+//            }
+//            return convertView;
+//        }
+//    }
 
     public void removeItem(int i, int accept) {
         responsesList.remove(i);
-        Responses.setAdapter(adapter);
+        createReponsesList();
         if(accept == 1){
             TextView textview = binding.textViewRoomateContent;
             String text = textview.getText().toString();
             Integer w = Integer.valueOf(text);
-            textview.setText(w++);
+            w++;
+            textview.setText(Integer.toString(w));
             if(w == activeInvitation.property.getMaximumCapacity()){
-                //refresh page with new invitiation
-
+                initializeScreen();
             }
         }
     }
@@ -196,7 +233,6 @@ public class InviteFragment extends Fragment {
         protected Boolean doInBackground(Integer...urls) {
             try {
                 if(InvitationManager.manageResponse(urls[0], urls[1], urls[2],urls[3])){
-                    removeItem(urls[4], 0);
                     return true;
                 }
                 return false;

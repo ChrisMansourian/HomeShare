@@ -452,7 +452,7 @@ public class InvitationDAO {
                     List<String> qR = new ArrayList<>();
                     JSONArray arr2 = resp.getJSONArray("questionResponses");
                     for (int j = 0; j < arr2.length(); j++) {
-                        qR.add(arr2.getString(i));
+                        qR.add(arr2.getString(j));
                     }
                     responses.add(new Responses(u, qR));
                 }
@@ -460,7 +460,7 @@ public class InvitationDAO {
 
             PropertyUtilities utilities = new PropertyUtilities(pool, ac, laundry, dishwasher, balcony, fireplace);
             Property property = new Property(propertyID, streetAddress1, streetAddress2, city, state, country, rent, maxCap, squareFeet, utilities, distance, bathrooms, bedrooms);
-            Invitation invitation = new Invitation(postId, ownerId, property, date, null, roomates, numOfRoomates, splitQuestions);
+            Invitation invitation = new Invitation(postId, ownerId, property, date, responses, roomates, numOfRoomates, splitQuestions);
             return invitation;
         }
         catch (Exception e){
