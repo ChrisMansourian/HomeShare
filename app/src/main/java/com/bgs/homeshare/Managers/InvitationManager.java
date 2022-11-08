@@ -13,7 +13,6 @@ public class InvitationManager {
     public static Invitation myInvitation;
     public static Invitation clickedInvitation = null;
     public static double distance;
-
     public static Responses clickedResponse = null;
 
 

@@ -56,6 +56,7 @@ public class ViewAResponseActivity extends AppCompatActivity {
         LinearLayout responseList = (LinearLayout) findViewById(R.id.ResponseList);
 
         for (int i = 0; i < curr.questionResponses.size(); i++) {
+
             View view = LayoutInflater.from(this).inflate(R.layout.response_text_list, null);
             TextView question = (TextView) view.findViewById(R.id.ResponseView);
             question.setText("Response " + Integer.toString(i) + ": " + curr.questionResponses.get(i));

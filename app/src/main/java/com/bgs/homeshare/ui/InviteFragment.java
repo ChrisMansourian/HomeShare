@@ -167,7 +167,6 @@ public class InviteFragment extends Fragment {
             });
             name.setOnClickListener(v->{
                 InvitationManager.clickedResponse = responsesList.get(position);
-
                 Intent intent = new Intent(binding.getRoot().getContext(), ViewAResponseActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
