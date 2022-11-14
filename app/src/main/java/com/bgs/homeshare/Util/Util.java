@@ -2,7 +2,6 @@ package com.bgs.homeshare.Util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
 import java.io.ByteArrayOutputStream;
 
 public class Util {

@@ -11,7 +11,24 @@ import com.bgs.homeshare.Models.User;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 public class LoginUnitTest {
+
+    @Test
+    public void CreateAccount(){
+        Random rd = new Random();
+        int j = rd.nextInt();
+        int l = (rd.nextInt() % j);
+        int q = j-l;
+        String username = String.valueOf(q);
+        boolean result = UserManager.CreateAccount(username, "12345",
+                "1982-07-21", "hello1@gmail.com", "5555555555", "biology",
+                "sophomore", "I am a test", null, "hello", "test1", "personality");
+        assertTrue(result);
+        User t = UserManager.LoggedInUser;
+        assertEquals(t.getUserName(), username);
+    }
 
     @Test
     public void LoginFail() {
@@ -44,7 +61,7 @@ public class LoginUnitTest {
 
     @Test
     public void CreateDuplicateUser() {
-        boolean result = UserManager.CreateAccount("aren76", "12345",
+        boolean result = UserManager.CreateAccount("adminUser", "12345",
                 "1982-07-21", "hello1@gmail.com", "5555555555", "biology",
                 "sophomore", "I am a test", null, "hello", "test1", "personality");
         assertFalse(result);
