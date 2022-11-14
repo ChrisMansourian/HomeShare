@@ -14,10 +14,10 @@ import org.junit.Test;
 public class UserUnitTest {
     @Test
     public void GetUserFail() {
-        User t = UserDAO.GetUser(-1);
+        User t = UserDAO.GetUser(-120123453);
         assertEquals(t, null);
 
-        User t1 = UserDAO.GetUser(100000000);
+        User t1 = UserDAO.GetUser(100000353);
         assertEquals(t1, null);
     }
 

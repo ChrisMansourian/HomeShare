@@ -24,15 +24,17 @@ public class InvitationUnitTests {
         assertTrue(InvitationManager.invitations.size() > 0);
     }
 
+
+
     @Test
     public void GetPostByUserId() {
-        InvitationManager.getMyInvitation(3);
+        InvitationManager.getMyInvitation(15);
 
         assertNotNull(InvitationManager.myInvitation);
     }
 
     @Test
-    public void createPostAndDelete() {
+    public void CreatePostAndDelete() {
         String dateString = "2022-12-22";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
@@ -56,7 +58,7 @@ public class InvitationUnitTests {
     }
 
     @Test
-    public void createPostFromUserWithAPost(){
+    public void CreatePostFromUserWithAPost(){
         String dateString = "2022-12-22";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
@@ -83,7 +85,7 @@ public class InvitationUnitTests {
 
 
     @Test
-    public void responseSystem(){
+    public void ResponseSystem(){
         String dateString = "2022-12-22";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date;

@@ -1,15 +1,8 @@
 package com.bgs.homeshare.Models;
 
 import android.graphics.Bitmap;
-import android.icu.text.SimpleDateFormat;
-
 import com.bgs.homeshare.Util.Util;
-
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 
 public class User {
     private int UserId = -1;
@@ -43,7 +36,12 @@ public class User {
         PersonalityQuestion2 = personalityQuestion2;
         PersonalityQuestion3 = personalityQuestion3;
 
-        ProfileImage = Util.ConvertBytesToImage(profileImageBytes);
+        try{//for junit testing not in android environment
+            ProfileImage = Util.ConvertBytesToImage(profileImageBytes);
+        }
+        catch(Exception e){
+            ProfileImage = null;
+        }
     }
 
     public User(User user) {
