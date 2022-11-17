@@ -7,13 +7,21 @@ import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.anyOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import android.view.View;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.action.ScrollToAction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.espresso.matcher.RootMatchers;
@@ -28,6 +36,7 @@ import com.bgs.homeshare.MainActivity;
 import com.bgs.homeshare.Managers.UserManager;
 import com.bgs.homeshare.R;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
@@ -96,7 +105,7 @@ public class LoginTests {
     }
 
     @Test
-    public void Logout()
+    public void ProfilePageDisplaysUserInfo()
     {
         String username = "hello";
         boolean loginResult = Login(username, "12345");
@@ -109,15 +118,7 @@ public class LoginTests {
 
         onView(withText(username))
                 .check(matches(isDisplayed()));
-        
-        //onView(withId(R.id.logOutButtonProfilePage)).perform(ViewActions.scrollTo(), ViewActions.click());
 
-        onView(withId(R.id.logOutButtonProfilePage))
-                .perform(ViewActions.click());
-
-        assertEquals(null, UserManager.LoggedInUser);
-
-        intended(hasComponent(MainActivity.class.getName()));
     }
 
     public static boolean Login(String userName, String password) {
