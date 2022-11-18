@@ -1,20 +1,15 @@
 package com.bgs.homeshare.BlackBoxTests;
 
 import static androidx.test.espresso.Espresso.*;
-import static androidx.test.espresso.assertion.ViewAssertions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static org.hamcrest.Matchers.*;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 
 import static org.junit.Assert.*;
 
-import androidx.test.espresso.*;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
-import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -64,7 +59,7 @@ public class InvitationTests {
     }
 
     @Test
-    public void changeSortingCondition(){
+    public void ChangeSortingCondition(){
         boolean loginResult = LoginTests.Login("hello", "12345");
         assertTrue(loginResult);
         onView(withId(R.id.invitationListNotifications)).check(matches(isDisplayed()));
@@ -91,7 +86,7 @@ public class InvitationTests {
     }
 
     @Test
-    public void changeSortingOrder(){
+    public void ChangeSortingOrder(){
 
         boolean loginResult = LoginTests.Login("hello", "12345");
         assertTrue(loginResult);
@@ -123,7 +118,7 @@ public class InvitationTests {
     }
 
     @Test
-    public void rejectAnInvite(){
+    public void RejectAnInvite(){
         ViewInvitation();
         onView(withId(R.id.scrollViewInvitePage)).perform(ViewActions.swipeUp());
 
@@ -137,7 +132,7 @@ public class InvitationTests {
     }
 
     @Test
-    public void viewAddAnInvite(){
+    public void ViewAddAnInvite(){
         boolean loginResult = LoginTests.Login("hello", "12345");
         assertTrue(loginResult);
 
@@ -148,15 +143,15 @@ public class InvitationTests {
     }
 
     @Test
-    public void viewCreateAnInvitePage(){
-        viewAddAnInvite();
+    public void ViewCreateAnInvitePage(){
+        ViewAddAnInvite();
         onView(withId(R.id.createInvitationButton)).perform(ViewActions.click());
         onView(withId(R.id.layoutCreateInvite)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void addAQuestionOnCreateInvite(){
-        viewAddAnInvite();
+    public void AddAQuestionOnCreateInvite(){
+        ViewAddAnInvite();
         onView(withId(R.id.createInvitationButton)).perform(ViewActions.click());
         onView(withId(R.id.layoutCreateInvite)).check(matches(isDisplayed()));
 
