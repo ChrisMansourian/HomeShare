@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewCreateInvitation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -9,6 +10,7 @@
     tools:layout_editor_absoluteY="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutCreateInvite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".CreateInvite">
@@ -395,13 +397,13 @@
             android:layout_height="61dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
             android:onClick="openDatePicker"
             android:text="JAN 01 2020"
             android:textColor="#8C8C8C"
-            android:layout_marginEnd="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/deadlineTextViewCreateInvite"
-            app:layout_constraintTop_toBottomOf="@+id/fireplaceCheckCreateInvite"/>
+            app:layout_constraintTop_toBottomOf="@+id/fireplaceCheckCreateInvite" />
 
         <Button
             android:id="@+id/createInviteButton"
@@ -424,24 +426,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewQuestions">
+
             <EditText
+                android:id="@+id/inputQuestion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems = "10"
-                android:hint = "Enter Question here"
-                android:maxLength="100"
                 android:layout_centerInParent="true"
-                android:id="@+id/inputQuestion"
-                />
+                android:ems="10"
+                android:hint="Enter Question here"
+                android:maxLength="100" />
+
             <ImageView
+                android:id="@+id/addQuestionImg"
                 android:layout_width="40sp"
                 android:layout_height="40sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="7sp"
                 android:layout_toRightOf="@+id/inputQuestion"
-                android:id="@+id/addQuestionImg"
-                android:layout_marginLeft = "7sp"
-                android:layout_centerVertical = "true"
-                android:src="@drawable/ic_baseline_add_24"
-                />
+                android:src="@drawable/ic_baseline_add_24" />
 
 
         </RelativeLayout>

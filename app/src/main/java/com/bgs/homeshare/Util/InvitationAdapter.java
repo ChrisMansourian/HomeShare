@@ -68,13 +68,11 @@ public class InvitationAdapter extends BaseAdapter {
         distance.setText(String.valueOf(inv.property.getDistanceToCampus()) + " miles");
         squarefeet.setText(inv.property.getSquareFeet() + " square feet");
 
-        viewInvitations.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                InvitationManager.clickedInvitation = inv;
-                Intent intent = new Intent(context, ViewAnInvitationActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                context.startActivity(intent);
-            }
+        viewInvitations.setOnClickListener(v -> {
+            InvitationManager.clickedInvitation = inv;
+            Intent intent = new Intent(context, ViewAnInvitationActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            context.startActivity(intent);
         });
 
 

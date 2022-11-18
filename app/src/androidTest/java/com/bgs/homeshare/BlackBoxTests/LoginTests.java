@@ -1,45 +1,25 @@
 package com.bgs.homeshare.BlackBoxTests;
 
 import static androidx.test.espresso.Espresso.*;
-import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.anyOf;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-import android.view.View;
-import android.widget.HorizontalScrollView;
-import android.widget.ScrollView;
-
-import androidx.core.widget.NestedScrollView;
-import androidx.test.espresso.NoMatchingViewException;
-import androidx.test.espresso.UiController;
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.action.ScrollToAction;
+import androidx.test.espresso.*;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.espresso.matcher.RootMatchers;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import com.bgs.homeshare.HomeActivity;
-import com.bgs.homeshare.LoginActivity;
-import com.bgs.homeshare.MainActivity;
-import com.bgs.homeshare.Managers.UserManager;
-import com.bgs.homeshare.R;
-
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-import org.junit.Rule;
-import org.junit.Test;
+import com.bgs.homeshare.*;
+import com.bgs.homeshare.Managers.*;
+import org.junit.*;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
@@ -50,8 +30,7 @@ public class LoginTests {
     public ActivityScenarioRule<LoginActivity> activityRule =
             new ActivityScenarioRule<LoginActivity>(LoginActivity.class);
     @Rule
-    public IntentsTestRule<LoginActivity> intentsTestRule =
-            new IntentsTestRule<>(LoginActivity.class);
+    public IntentsTestRule<LoginActivity> intentsTestRule = new IntentsTestRule<>(LoginActivity.class);
 
     @Test
     public void LoginMissingFields()
