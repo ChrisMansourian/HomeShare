@@ -9,6 +9,7 @@
     tools:layout_editor_absoluteY="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutOuterInviteFrag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.InviteFragment">
@@ -52,13 +53,13 @@
         <TextView
             android:id="@+id/textViewTitleCapacity"
             android:layout_width="wrap_content"
-            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:layout_marginTop="20dp"
             android:gravity="right"
             android:text="Capacity:"
             android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitleRoomates" />
 
@@ -66,12 +67,12 @@
             android:id="@+id/textViewTitleUtilities"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:gravity="right"
             android:text="Utilities:"
             android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewSquareFeet" />
 
@@ -147,10 +148,10 @@
             android:layout_width="279dp"
             android:layout_height="27dp"
             android:layout_marginStart="16dp"
-            android:visibility="invisible"
             android:layout_marginTop="20dp"
             android:text="Amount"
             android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/textViewTitleRoomates"
             app:layout_constraintTop_toBottomOf="@+id/textViewRentContent" />
 
@@ -159,10 +160,10 @@
             android:layout_width="279dp"
             android:layout_height="27dp"
             android:layout_marginStart="12dp"
-            android:visibility="invisible"
             android:layout_marginTop="20dp"
             android:text="Amount"
             android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/textViewTitleCapacity"
             app:layout_constraintTop_toBottomOf="@+id/textViewRoomateContent" />
 
@@ -195,10 +196,10 @@
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="150dp"
             android:text="Delete Invite"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -211,12 +212,12 @@
             android:layout_height="match_parent"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="284dp"
+            android:orientation="vertical"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
-            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/textViewUtilitiesList" />
 
         <TextView
@@ -226,11 +227,11 @@
             android:layout_marginStart="63dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="63dp"
-            android:visibility="invisible"
             android:layout_marginBottom="38dp"
             android:gravity="center"
             android:text="Responses:"
             android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/listOfResponses"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
