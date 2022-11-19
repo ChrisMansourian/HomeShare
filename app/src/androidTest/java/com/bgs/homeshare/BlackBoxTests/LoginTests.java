@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 
 import androidx.test.espresso.*;
 import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -96,6 +97,56 @@ public class LoginTests {
                 .perform(ViewActions.click());
 
         onView(withText(username))
+                .check(matches(isDisplayed()));
+
+        onView(withText("hello1@gmail.com"))
+                .check(matches(isDisplayed()));
+
+        onView(withText("biology"))
+                .check(matches(isDisplayed()));
+
+        onView(withText("2023"))
+                .check(matches(isDisplayed()));
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+
+        }
+
+    }
+
+    @Test
+    public void CreateAccountMissingData()
+    {
+        onView(withId(R.id.imageView)).perform(ViewActions.click());
+
+        onView(withId(R.id.signupButton)).perform(ViewActions.click());
+
+        onView(withId(R.id.userNameTextSignUp))
+                .check(matches(isDisplayed()))
+                .perform(ViewActions.typeText("hello"))
+                .perform(ViewActions.closeSoftKeyboard());
+
+        onView(withId(R.id.passwordTextSignUp))
+                .check(matches(isDisplayed()))
+                .perform(ViewActions.typeText("password"))
+                .perform(ViewActions.closeSoftKeyboard());
+
+        onView(withId(R.id.signupScrollView)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.signupScrollView)).perform(ViewActions.swipeUp());
+
+        try{
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+
+        onView(withId(R.id.createAccountButtonSignUp))
+                .perform(ViewActions.click());
+
+        onView(withText("Some mandatory fields are still empty"))
                 .check(matches(isDisplayed()));
 
     }
