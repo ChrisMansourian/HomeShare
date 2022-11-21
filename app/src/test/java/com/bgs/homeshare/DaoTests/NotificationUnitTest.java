@@ -36,7 +36,7 @@ public class NotificationUnitTest {
 
         assertNotNull(notifications);
         assertTrue(notifications.size() > 0);
-        assertEquals(notifications.get(notifications.size()-1).getNotified(), -1);
+        assertEquals(notifications.get(0).getNotified(), -1);
 
 
         NotificationManager.GetNotifications(1);
