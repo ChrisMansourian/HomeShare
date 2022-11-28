@@ -119,7 +119,7 @@
             app:layout_constraintTop_toBottomOf="@+id/BathsText" />
 
         <TextView
-            android:id="@+id/Pool"
+            android:id="@+id/UtilitiesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="176dp"
@@ -130,70 +130,15 @@
             app:layout_constraintTop_toBottomOf="@+id/Utilities" />
 
         <TextView
-            android:id="@+id/ac"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="176dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="178dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Pool" />
-
-        <TextView
-            android:id="@+id/Laundry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="176dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="177dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ac" />
-
-        <TextView
-            android:id="@+id/DishWasher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="177dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="177dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Laundry" />
-
-        <TextView
-            android:id="@+id/Balcony"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="177dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="177dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DishWasher" />
-
-        <TextView
-            android:id="@+id/FirePlace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="177dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="177dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Balcony" />
-
-        <TextView
             android:id="@+id/CreatedByText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="177dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="177dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/FirePlace" />
+            app:layout_constraintTop_toBottomOf="@+id/Utilities" />
 
         <Button
             android:id="@+id/ViewCreatorButton"
@@ -226,7 +171,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/Questions"
-            tools:layout_editor_absoluteX="1dp" />
+            tools:layout_editor_absoluteX="0dp" />
 
         <Button
             android:id="@+id/RejectButton"
