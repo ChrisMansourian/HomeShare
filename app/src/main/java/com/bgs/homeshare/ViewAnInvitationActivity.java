@@ -3,25 +3,15 @@ package com.bgs.homeshare;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.content.*;
+import android.os.*;
+import android.view.*;
+import android.widget.*;
 
-import com.bgs.homeshare.Managers.InvitationManager;
-import com.bgs.homeshare.Managers.UserManager;
-import com.bgs.homeshare.Models.Invitation;
-import com.bgs.homeshare.Models.User;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import com.bgs.homeshare.Managers.*;
+import com.bgs.homeshare.Models.*;
+import java.text.*;
+import java.util.*;
 
 public class ViewAnInvitationActivity extends AppCompatActivity {
 

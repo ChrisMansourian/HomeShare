@@ -8,17 +8,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
+import android.os.*;
+import android.text.*;
+import android.view.*;
+import android.widget.*;
 
 import com.bgs.homeshare.Models.*;
 import com.bgs.homeshare.Managers.*;
@@ -279,18 +272,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void onCreateClick(View v){
         if(!anyNull()) {
-
             SignUpActivity.CreateAccountTask c = new SignUpActivity.CreateAccountTask();
             c.v = v;
             User user2 = new User(-1, password, null, null, null, null, null, null, null, null, null, null);
             c.execute(user, user2);
-        }
-        else{//ask for user to fill in all fields
-            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
-            alert.setTitle("Empty Fields");
-            alert.setMessage("Some mandatory fields are still empty");
-            alert.setPositiveButton("OK", null);
-            alert.show();
         }
     }
 
@@ -330,9 +315,71 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public boolean anyNull(){
-        if(user.getUserName() == null || user.getAcademicFocus() == null || user.getPersonalIntroduction() == null || user.getEmail() == null || user.getSchoolYear() == null || user.getProfileImage() == null || user.getDOB() == null || user.getPhoneNumber() == null || user.getPersonalityQuestion1() == null || user.getPersonalityQuestion2() == null || user.getPersonalityQuestion3() == null){
+        if(user.getUserName() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter a Valid UserName");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
+        else if(password == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter a Password");
+            alert.setPositiveButton("OK", null);
+            alert.show();
+            return true;
+        }
+        else if(user.getDOB() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Your Date of Birth");
+            alert.setPositiveButton("OK", null);
+            alert.show();
+            return true;
+        }
+        else if(user.getEmail() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter a Email");
+            alert.setPositiveButton("OK", null);
+            alert.show();
+            return true;
+        }
+        else if(user.getPhoneNumber() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Your Phone Number");
+            alert.setPositiveButton("OK", null);
+            alert.show();
+            return true;
+        }
+        else if(user.getAcademicFocus() == null) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter a Academic Focus");
+            alert.setPositiveButton("OK", null);
+            alert.show();
+            return true;
+        }
+        else if(user.getPersonalIntroduction() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter a Personal Introduction");
+            alert.setPositiveButton("OK", null);
+            alert.show();
+            return true;
+        }
+        else if(user.getProfileImage() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Select an Image");
+            alert.setPositiveButton("OK", null);
+            alert.show();
+            return true;
+        }
+
         return false;
     }
 
