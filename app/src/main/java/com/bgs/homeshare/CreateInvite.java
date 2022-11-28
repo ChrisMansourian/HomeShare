@@ -299,13 +299,6 @@ public class CreateInvite extends AppCompatActivity {
                 c.v = v;
                 c.execute(createInvite);
             }
-            else{//ask for user to fill in all fields
-                AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
-                alert.setTitle("Empty Fields");
-                alert.setMessage("Some mandatory fields are still empty");
-                alert.setPositiveButton("OK", null);
-                alert.show();
-            }
         });
     }
 
@@ -388,33 +381,78 @@ public class CreateInvite extends AppCompatActivity {
 
     private boolean anyNull(){
         if(createInvite.property.getStreetAddress1() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Valid Street Address");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
         if(createInvite.property.getCity() == null){
-            return true;
-        }
-        if(createInvite.property.getState() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Valid City");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
         if(createInvite.property.getRent() == 0){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Amount For Rent");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
         if(createInvite.property.getMaximumCapacity() == 0){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Maximum Capacity");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
         if(createInvite.property.getSquareFeet() == 0){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Square Footage");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
         if(createInvite.property.getNumOfBathrooms() == 0){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Number Of Bathrooms");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
         if(createInvite.property.getNumOfBedrooms() == 0){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter Number Of Bedrooms");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
         if(createInvite.getDateOfDeadline() == null){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Enter A Date Of Deadline");
+            alert.setPositiveButton("OK", null);
+            alert.show();
             return true;
         }
-        return (createInvite.getQuestions().size() < 2);
+        if(createInvite.getQuestions().size() < 2){
+            AlertDialog.Builder alert = new AlertDialog.Builder(CreateInvite.this);
+            alert.setTitle("Empty Fields");
+            alert.setMessage("Please Add at Least 2 Questions");
+            alert.setPositiveButton("OK", null);
+            alert.show();
+            return true;
+        }
+        return false;
     }
 
     private String getTodaysDate()
