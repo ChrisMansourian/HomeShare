@@ -234,6 +234,7 @@
         <item>squarefeet</item>
         <item>bedrooms</item>
         <item>bathrooms</item>
+        <item>rent</item>
     </string-array>
 
     <string-array name="invitation_sort_order_options">

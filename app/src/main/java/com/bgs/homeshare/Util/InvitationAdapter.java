@@ -59,6 +59,7 @@ public class InvitationAdapter extends BaseAdapter {
         TextView bathrooms = view.findViewById(R.id.BathroomsText);
         TextView distance = view.findViewById(R.id.DistanceText);
         TextView squarefeet = view.findViewById(R.id.SquareFeetText);
+        TextView rent = view.findViewById(R.id.RentText);
         Button viewInvitations = view.findViewById(R.id.ViewInvitationButton);
 
         address.setText(inv.property.getAddress());
@@ -67,6 +68,7 @@ public class InvitationAdapter extends BaseAdapter {
         bathrooms.setText(String.valueOf(inv.property.getNumOfBathrooms()) + " bath");
         distance.setText(String.valueOf(inv.property.getDistanceToCampus()) + " miles");
         squarefeet.setText(inv.property.getSquareFeet() + " square feet");
+        rent.setText("$" + inv.property.getRent());
 
         viewInvitations.setOnClickListener(v -> {
             InvitationManager.clickedInvitation = inv;
