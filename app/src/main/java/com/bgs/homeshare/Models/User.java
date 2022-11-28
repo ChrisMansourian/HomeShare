@@ -76,7 +76,7 @@ public class User {
     }
 
     public String getDOB() {
-        if(DOB.charAt(2) == '/'){
+        if(!DOB.equals("")){
             String [] date = DOB.split("/");
             String actualDate =  date[2].substring(0,4) + "-" + (new DecimalFormat("00")).format(Integer.valueOf(date[1])) + "-" + (new DecimalFormat("00")).format(Integer.valueOf(date[0]));
             return actualDate;

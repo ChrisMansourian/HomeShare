@@ -64,7 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerLanguages.setAdapter(adapter);
 
-        user =  new User(-1, null, null, null, null,null, null, null, null, null, null, null);
+        user =  new User(-1, null, "", null, null,null, null, null, null, null, null, null);
 
         EditText etValue = findViewById(R.id.userNameTextSignUp);
         etValue.addTextChangedListener(new TextWatcher() {
@@ -332,7 +332,7 @@ public class SignUpActivity extends AppCompatActivity {
             alert.show();
             return true;
         }
-        else if(user.getDOB() == null){
+        else if(user.getDOB().equals("")){
             AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
             alert.setTitle("Empty Fields");
             alert.setMessage("Please Enter Your Date of Birth");
