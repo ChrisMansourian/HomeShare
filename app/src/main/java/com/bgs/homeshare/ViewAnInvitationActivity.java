@@ -35,12 +35,7 @@ public class ViewAnInvitationActivity extends AppCompatActivity {
         TextView bedsText = (TextView) findViewById(R.id.BedsText);
         TextView bathsText = (TextView) findViewById(R.id.BathsText);
         TextView distanceText = (TextView) findViewById(R.id.DistanceToCampusText);
-        TextView pool = (TextView) findViewById(R.id.Pool);
-        TextView ac = (TextView) findViewById(R.id.ac);
-        TextView laundry = (TextView) findViewById(R.id.Laundry);
-        TextView dishwasher = (TextView) findViewById(R.id.DishWasher);
-        TextView firePlace = (TextView) findViewById(R.id.FirePlace);
-        TextView balcony = (TextView) findViewById(R.id.Balcony);
+        TextView utilitiesText = (TextView) findViewById(R.id.UtilitiesText);
         TextView roomatesNum = (TextView) findViewById(R.id.NumberOfRoomates);
         TextView deadlineText = (TextView) findViewById(R.id.DeadlineText);
 
@@ -55,12 +50,7 @@ public class ViewAnInvitationActivity extends AppCompatActivity {
         bedsText.setText(curr.property.getNumOfBedrooms() + " beds");
         bathsText.setText(curr.property.getNumOfBathrooms() + " baths");
         distanceText.setText(curr.property.getDistanceToCampus() + " miles");
-        pool.setText("Pool? " + (curr.property.getUtilities().getPool() == true ? "yes" : "no"));
-        ac.setText("AC? " + (curr.property.getUtilities().getAC() == true ? "yes" : "no"));
-        laundry.setText("Laundry? " + (curr.property.getUtilities().getLaundry() == true ? "yes" : "no"));
-        dishwasher.setText("Dish Washer? " + (curr.property.getUtilities().getDishwasher() == true ? "yes" : "no"));
-        firePlace.setText("Fire Place? " + (curr.property.getUtilities().getFireplace() == true ? "yes" : "no"));
-        balcony.setText("Balcony? " + (curr.property.getUtilities().getPool() == true ? "yes" : "no"));
+        utilitiesText.setText((curr.property.getUtilities().getUtilities() == "" ? "None" : curr.property.getUtilities().getUtilities()));
         roomatesNum.setText(curr.getNumOfRoomates() + " current roommate");
         deadlineText.setText(new SimpleDateFormat("yyyy-MM-dd").format(curr.getDateOfDeadline()));
 
