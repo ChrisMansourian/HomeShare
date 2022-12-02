@@ -65,3 +65,11 @@ Log Out:
 1. To log out click on the profile page in the navigation menu.
 2. Scroll to the bottom of the page.
 3. Click log out.
+
+Improved Capabilities Since 2.4:
+1. Fixed minor bugs regarding the users date of birth when signing up.
+2. Added the ability for the user to sort the invitations by rent.  The user now has the option to select "rent" as a sort option in the spinner and choose whether they want to sort in ascending or descending order.  The invitations are then displayed in the way the user selected.
+3. Modified the UI in the invitations page to display the utilities all in one line, and displaying "None" when there are no utilities.
+4. The invitations in the feed have been modified to now display the invitation's rent.
+5. Creating an invitation now displays specific warning messages to missing/invalid fields (i.e. "Please Enter Square Footage" if the square feet edit text is empty).  To see this, navigate to the create invite page and try to create a post while missing invitations.
+6. Signing up now displays specific warning messages for missing and invalid fields (i.e. "Please Select an Image" if the profile image has not yet been selected).  To see this change, go to the sign up page and try creating an account with fields that are missing.
